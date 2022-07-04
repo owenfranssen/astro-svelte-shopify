@@ -1,57 +1,9 @@
 ---
-//import { products, getProducts } from '../../store';
 import Layout from '../layouts/Layout.astro';
-//import Shopify from '../routes/index.svelte';
-//let productData = await getProducts();
-const query = `{
-  products(first:5) {
-    edges {
-      node {
-        id
-        title
-      }
-    }
-  }
-}`
-const endpoint = `https://${import.meta.env.API_ENDPOINT}/api/2022-07/graphql.json`;
-console.log(endpoint);
-
-const result = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': import.meta.env.API_TOKEN
-    },
-    body: JSON.stringify({ query })
-  })
-  .then( response => {
-    if (!response.ok) {
-      // make the promise be rejected if we didn't get a 2xx response
-      const err = new Error("Not 2xx response");
-      err.response = response;
-      throw err;
-    } else {
-      return response;
-    }
-  })
-  .then(response => response.json());
-
-if (result.errors) {
-  console.log({ errors: result.errors });
-} else if (!result || !result.data) {
-  console.log({ result });
-  return 'No results found.';
-}
-
-console.log({result});
-
-
-const products = result.data.products.edges;
-
-console.log({products});
-
-
-//let products = response.products.edges
+import ProductCard from '../components/ProductCard.astro';
+import { products, getProducts } from '../../store';
+const result = await getProducts();
+const products = result.products.edges;
 ---
 <Layout title="Welcome to Astro.">
 	<main>
@@ -59,5 +11,8 @@ console.log({products});
 
     <hr>
     <!-- <Shopify /> -->
+		{ products.map( product => {
+			return <ProductCard product={product.node} />
+		}) }
 	</main>
 </Layout>

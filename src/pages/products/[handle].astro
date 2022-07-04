@@ -1,0 +1,28 @@
+---
+// https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
+import { products, getProducts } from '../../../store';
+
+export async function getStaticPaths({paginate}) {
+	const result = await getProducts();
+	const products = result.products.edges;
+	return products.map( p => {
+		const product = p.node;
+		return {
+			params: {
+				handle: product.handle
+			},
+			props: { product },
+		};
+	} );
+}
+
+const { handle } = Astro.params;
+const { product } = Astro.props;
+
+console.log(product);
+
+---
+
+<h1>{ product.title }</h1>
+
+<p>{ product.description }</p>

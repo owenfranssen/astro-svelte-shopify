@@ -2,7 +2,13 @@
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		extend: {
+			gridTemplateRows: {
+				'[auto,auto,1fr]': 'auto auto 1fr',
+			},
+		},
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+	],
 }

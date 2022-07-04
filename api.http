@@ -1,0 +1,63 @@
+curl -X POST https://emeraldmtbstore.myshopify.com/api/2022-04/graphql.json \
+-H 'Content-Type: application/graphql' \
+-H 'X-Shopify-Storefront-Access-Token: 1bc7aa45dd38a8c8c9f13dab790158cd' \
+-d '
+{
+  products(first:5) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+
+###
+
+curl -X POST https://emeraldmtbstore.myshopify.com/api/2022-04/graphql.json \
+-H 'Content-Type: application/graphql' \
+-H 'X-Shopify-Storefront-Access-Token: 1bc7aa45dd38a8c8c9f13dab790158cd' \
+-d '
+{
+	     products(sortKey: TITLE, first: 100) {
+	      edges {
+	        node {
+	          id
+	          handle
+	          description
+	          title
+	          totalInventory
+	          productType
+	          variants(first: 5) {
+	            edges {
+	              node {
+	                id
+	                title
+	                quantityAvailable
+	                price
+	              }
+	            }
+	          }
+	          priceRange {
+	            maxVariantPrice {
+	              amount
+	              currencyCode
+	            }
+	            minVariantPrice {
+	              amount
+	              currencyCode
+	            }
+	          }
+	          images(first: 1) {
+	            edges {
+	              node {
+	                src
+	                altText
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+    }'

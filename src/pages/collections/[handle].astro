@@ -1,25 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import json from '../../config/collections.json';
 
 export async function getStaticPaths({paginate}) {
-	const result = await getProducts();
-	const products = result.products.edges;
-	return products.map( p => {
-		const product = p.node;
+	const collections = json.collections;
+	return collections.map( collection => {
 		return {
 			params: {
-				handle: product.handle
+				handle: collection.handle
 			},
-			props: { product },
+			props: { collection },
 		};
 	} );
 }
 
 const { handle } = Astro.params;
-const { product } = Astro.props;
+const { collection } = Astro.props;
 ---
 
-<Layout title={ product.title }>
+<Layout title={ collection.title }>
 	<main>
 		<div class="bg-white">
 			<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

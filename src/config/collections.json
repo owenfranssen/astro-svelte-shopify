@@ -1,12 +1,12 @@
 {
 	"collections": [
 		{
-			"name": "All",
+			"title": "All",
 			"handle": "all",
 			"filter": ""
 		},
 		{
-			"name": "Sample",
+			"title": "Sample",
 			"handle": "sample",
 			"filter": "tag:sample"
 		}

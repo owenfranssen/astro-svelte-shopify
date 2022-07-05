@@ -1,0 +1,15 @@
+.breadcrumbs {
+	@apply max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8;
+
+	.breadcrumb-item {
+		@apply flex items-center;
+	}
+
+	.breadcrumb--link {
+		@apply mr-2 text-sm font-medium text-gray-900;
+	}
+
+	.breadcrumb--separator {
+		@apply w-4 h-5 text-gray-300;
+	}
+}

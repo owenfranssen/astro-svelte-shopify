@@ -6,8 +6,8 @@ import Reviews from '../../components/product/Reviews.astro';
 import ProductForm from '../../components/product/ProductForm.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
-import { products, getProducts } from '../../routes/api/get-products';
-import { productDetails, getProductsDetails, getProductDetails } from '../../routes/api/get-product-details';
+import { getProducts } from '../../routes/api/get-products';
+import { getProductDetails } from '../../routes/api/get-product-details';
 
 export async function getStaticPaths({paginate}) {
 	const result = await getProducts();

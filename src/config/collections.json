@@ -1,0 +1,14 @@
+{
+	"collections": [
+		{
+			"name": "All",
+			"handle": "all",
+			"filter": ""
+		},
+		{
+			"name": "Sample",
+			"handle": "sample",
+			"filter": "tag:sample"
+		}
+	]
+}

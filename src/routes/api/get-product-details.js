@@ -7,46 +7,73 @@ export const getProductDetails = async (handle) => {
   try {
     const shopifyResponse = await postToShopify({
       query: `
-        query getProduct($handle: String!) {
-          product(handle: $handle) {
-            id
-            handle
-            description
-            title
-            totalInventory
-            variants(first: 20) {
-              edges {
-                node {
-                  id
-                  title
-                  quantityAvailable
-                  priceV2 {
-                    amount
-                    currencyCode
-                  }
-                }
-              }
-            }
-            priceRange {
-              maxVariantPrice {
-                amount
-                currencyCode
-              }
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            images(first: 20) {
-              edges {
-                node {
-                  src
-                  altText
-                }
-              }
-            }
-          }
-        }
+				query GetProduct($handle: String!) {
+					productByHandle(handle: $handle) {
+						handle
+						description
+						descriptionHtml
+						title
+						seo {
+							description
+							title
+						}
+						totalInventory
+						productType
+						priceRange {
+							maxVariantPrice {
+								amount
+								currencyCode
+							}
+							minVariantPrice {
+								amount
+								currencyCode
+							}
+						}
+						compareAtPriceRange {
+							maxVariantPrice {
+								amount
+								currencyCode
+							}
+							minVariantPrice {
+								amount
+								currencyCode
+							}
+						}
+						tags
+						availableForSale
+						featuredImage {
+							src
+							transformedSrc
+							id
+							width
+							height
+						}
+						images(first:10) {
+							edges {
+								node {
+									id
+									src
+									url
+									altText
+									width
+									height
+								}
+							}
+						}
+						variants(first: 10) {
+							edges {
+								node {
+									title
+									quantityAvailable
+									priceV2 {
+										amount
+										currencyCode
+									}
+								}
+							}
+						}
+					}
+				}
       `,
       variables: {
         handle: handle,

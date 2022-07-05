@@ -1,56 +1,56 @@
-<form class="mt-10">
+<form class="product-form">
   <!-- Colors -->
-  <div>
-    <h3 class="text-sm text-gray-900 font-medium">Color</h3>
+  <div class="product-form__variant">
+    <h3>Color</h3>
 
-    <fieldset class="mt-4">
+    <fieldset>
       <legend class="sr-only">Choose a color</legend>
-      <div class="flex items-center space-x-3">
+      <div class="product-form__variant-options product-form__variant-options--swatches">
         <!--
           Active and Checked: "ring ring-offset-1"
           Not Active and Checked: "ring-2"
         -->
-        <label class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400">
+        <label class="product-form__variant-option">
           <input type="radio" name="color-choice" value="White" class="sr-only" aria-labelledby="color-choice-0-label">
           <span id="color-choice-0-label" class="sr-only"> White </span>
-          <span aria-hidden="true" class="h-8 w-8 bg-white border border-black border-opacity-10 rounded-full"></span>
+          <span aria-hidden="true" class="swatch"></span>
         </label>
 
         <!--
           Active and Checked: "ring ring-offset-1"
           Not Active and Checked: "ring-2"
         -->
-        <label class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400">
+        <label class="product-form__variant-option">
           <input type="radio" name="color-choice" value="Gray" class="sr-only" aria-labelledby="color-choice-1-label">
           <span id="color-choice-1-label" class="sr-only"> Gray </span>
-          <span aria-hidden="true" class="h-8 w-8 bg-gray-200 border border-black border-opacity-10 rounded-full"></span>
+          <span aria-hidden="true" class="swatch bg-gray-200"></span>
         </label>
 
         <!--
           Active and Checked: "ring ring-offset-1"
           Not Active and Checked: "ring-2"
         -->
-        <label class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-900">
+        <label class="product-form__variant-option">
           <input type="radio" name="color-choice" value="Black" class="sr-only" aria-labelledby="color-choice-2-label">
           <span id="color-choice-2-label" class="sr-only"> Black </span>
-          <span aria-hidden="true" class="h-8 w-8 bg-gray-900 border border-black border-opacity-10 rounded-full"></span>
+          <span aria-hidden="true" class="swatch bg-gray-900"></span>
         </label>
       </div>
     </fieldset>
   </div>
 
   <!-- Sizes -->
-  <div class="mt-10">
+  <div class="product-form__variant">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm text-gray-900 font-medium">Size</h3>
-      <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size guide</a>
+      <h3>Size</h3>
+      <a href="#" class="button button--link">Size guide</a>
     </div>
 
-    <fieldset class="mt-4">
+    <fieldset>
       <legend class="sr-only">Choose a size</legend>
-      <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+      <div class="product-form__variant-options product-form__variant-options--grid">
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-gray-50 text-gray-200 cursor-not-allowed">
+        <label class="product-form__variant-option product-form__variant-option--not-available">
           <input type="radio" name="size-choice" value="XXS" disabled class="sr-only" aria-labelledby="size-choice-0-label">
           <span id="size-choice-0-label"> XXS </span>
 
@@ -62,7 +62,7 @@
         </label>
 
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+        <label class="product-form__variant-option group">
           <input type="radio" name="size-choice" value="XS" class="sr-only" aria-labelledby="size-choice-1-label">
           <span id="size-choice-1-label"> XS </span>
 
@@ -74,7 +74,7 @@
         </label>
 
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+        <label class="product-form__variant-option group">
           <input type="radio" name="size-choice" value="S" class="sr-only" aria-labelledby="size-choice-2-label">
           <span id="size-choice-2-label"> S </span>
 
@@ -86,7 +86,7 @@
         </label>
 
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+        <label class="product-form__variant-option group">
           <input type="radio" name="size-choice" value="M" class="sr-only" aria-labelledby="size-choice-3-label">
           <span id="size-choice-3-label"> M </span>
 
@@ -98,7 +98,7 @@
         </label>
 
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+        <label class="product-form__variant-option group">
           <input type="radio" name="size-choice" value="L" class="sr-only" aria-labelledby="size-choice-4-label">
           <span id="size-choice-4-label"> L </span>
 
@@ -110,33 +110,9 @@
         </label>
 
         <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+        <label class="product-form__variant-option group">
           <input type="radio" name="size-choice" value="XL" class="sr-only" aria-labelledby="size-choice-5-label">
           <span id="size-choice-5-label"> XL </span>
-
-          <!--
-            Active: "border", Not Active: "border-2"
-            Checked: "border-indigo-500", Not Checked: "border-transparent"
-          -->
-          <span class="absolute -inset-px rounded-md pointer-events-none" aria-hidden="true"></span>
-        </label>
-
-        <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
-          <input type="radio" name="size-choice" value="2XL" class="sr-only" aria-labelledby="size-choice-6-label">
-          <span id="size-choice-6-label"> 2XL </span>
-
-          <!--
-            Active: "border", Not Active: "border-2"
-            Checked: "border-indigo-500", Not Checked: "border-transparent"
-          -->
-          <span class="absolute -inset-px rounded-md pointer-events-none" aria-hidden="true"></span>
-        </label>
-
-        <!-- Active: "ring-2 ring-indigo-500" -->
-        <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
-          <input type="radio" name="size-choice" value="3XL" class="sr-only" aria-labelledby="size-choice-7-label">
-          <span id="size-choice-7-label"> 3XL </span>
 
           <!--
             Active: "border", Not Active: "border-2"
@@ -148,5 +124,5 @@
     </fieldset>
   </div>
 
-  <button type="submit" class="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
+  <button type="submit" class="button button--primary">Add to bag</button>
 </form>

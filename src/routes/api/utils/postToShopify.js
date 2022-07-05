@@ -1,6 +1,6 @@
 export const postToShopify = async ({ query, variables }) => {
 	try {
-		const url = `https://${import.meta.env.API_ENDPOINT}/api/2022-07/graphql.json`;
+		const url = import.meta.env.API_ENDPOINT;
 		// @ts-ignore
 		const result = await fetch(url, {
 			method: 'POST',

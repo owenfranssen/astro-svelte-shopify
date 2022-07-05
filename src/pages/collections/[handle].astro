@@ -18,7 +18,7 @@ const { handle } = Astro.params;
 const { collection } = Astro.props;
 ---
 
-<Layout title={ product.title }>
+<Layout title={ collection.title }>
 	<div class="bg-gray-50">
 		<div>
 			<!--
@@ -277,8 +277,8 @@ const { collection } = Astro.props;
 			<main>
 				<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 					<div class="py-24 text-center">
-						<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">New Arrivals</h1>
-						<p class="mt-4 max-w-3xl mx-auto text-base text-gray-500">Thoughtfully designed objects for the workspace, home, and travel.</p>
+						<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">{ collection.title }</h1>
+						<p class="mt-4 max-w-3xl mx-auto text-base text-gray-500">{ collection.description }</p>
 					</div>
 
 					<!-- Filters -->

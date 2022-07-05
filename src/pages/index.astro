@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { products, getProducts } from '../../store';
+import { products, getProducts } from '../routes/api/get-products.js';
 const result = await getProducts();
 const products = result.products.edges;
 ---

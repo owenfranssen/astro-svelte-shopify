@@ -8,11 +8,11 @@ module.exports = {
 			},
 			colors: {
 				primary: {
-					DEFAULT: 'rgb(var(--color-primary) / <alpha-value>',
-					light: 'rgb(var(--color-primary-light)/ <alpha-value>',
+					DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+					light: 'rgb(var(--color-primary-light)/ <alpha-value>)',
 				},
 				dark: {
-					DEFAULT: 'rgb(var(--color-dark) / <alpha-value>',
+					DEFAULT: 'rgb(var(--color-dark) / <alpha-value>)',
 				},
 			},
 			maxWidth: {

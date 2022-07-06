@@ -19,8 +19,12 @@ const { title } = Astro.props as Props;
 	<title>{title}</title>
 </head>
 <body>
-  <Header />
-	<slot />
-  <Footer />
+  <div class="bg-gray-50">
+    <div>
+      <Header />
+      <slot />
+      <Footer />
+    </div>
+  </div>
 </body>
 </html>

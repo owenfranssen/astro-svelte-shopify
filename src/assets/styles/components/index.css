@@ -1,4 +1,7 @@
 /* @import component level CSS files here to add them to global.css */
 
-@import './breadcrumbs';
-@import './product-form';
+@import "./breadcrumbs";
+@import "./footer";
+@import "./header";
+@import "./navigation";
+@import "./product-form";

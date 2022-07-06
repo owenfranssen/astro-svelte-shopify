@@ -1,0 +1,7 @@
+body > header {
+  @apply py-3 text-center;
+
+  a {
+    display: inline-block;
+  }
+}

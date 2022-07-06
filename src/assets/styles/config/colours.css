@@ -1,1 +1,7 @@
 /* Define global level colour CSS custom properties */
+
+:root {
+  --color-primary: 0 100 150;
+  --color-primary-light: 46 163 242;
+  --color-dark: 34 34 34;
+}

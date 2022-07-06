@@ -1,0 +1,7 @@
+body > footer {
+  @apply bg-neutral-900 text-white;
+
+  .content-wrapper {
+    @apply max-w-site w-full mx-auto;
+  }
+}

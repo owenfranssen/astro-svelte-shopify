@@ -1,4 +1,4 @@
-export const postToShopify = async ({ query, variables }) => {
+export const postToShopify = async ({query, variables}) => {
 	try {
 		const url = import.meta.env.API_ENDPOINT;
 		// @ts-ignore
@@ -6,15 +6,15 @@ export const postToShopify = async ({ query, variables }) => {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token': import.meta.env.API_TOKEN
+				'X-Shopify-Storefront-Access-Token': import.meta.env.API_TOKEN,
 			},
-			body: JSON.stringify({ query, variables })
+			body: JSON.stringify({query, variables}),
 		}).then((res) => res.json());
 
 		if (result.errors) {
-			console.log({ errors: result.errors });
+			console.log({errors: result.errors});
 		} else if (!result || !result.data) {
-			console.log({ result });
+			console.log({result});
 			return 'No results found.';
 		}
 

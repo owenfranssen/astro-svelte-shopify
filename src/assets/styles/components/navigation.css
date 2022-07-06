@@ -1,0 +1,23 @@
+body > nav {
+  @apply bg-dark text-white flex justify-center;
+
+  .nav__wrapper {
+    @apply max-w-[1440px] mx-auto w-full flex justify-between items-center;
+  }
+
+  .brand {
+    @apply text-xl;
+  }
+
+  .nav__menu {
+    @apply text-right;
+  }
+
+  .nav__list {
+    @apply flex justify-end;
+  }
+
+  .nav__item {
+    @apply list-none p-2 text-lg;
+  }
+}

@@ -1,0 +1,252 @@
+<!--
+    Mobile filter dialog
+
+    Off-canvas menu for mobile, show/hide based on off-canvas menu state.
+  -->
+  <div class="relative z-40 sm:hidden" role="dialog" aria-modal="true">
+    <!--
+      Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+
+      Entering: "transition-opacity ease-linear duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "transition-opacity ease-linear duration-300"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+    <div class="fixed inset-0 bg-black bg-opacity-25"></div>
+
+    <div class="fixed inset-0 flex z-40">
+      <!--
+        Off-canvas menu, show/hide based on off-canvas menu state.
+
+        Entering: "transition ease-in-out duration-300 transform"
+          From: "translate-x-full"
+          To: "translate-x-0"
+        Leaving: "transition ease-in-out duration-300 transform"
+          From: "translate-x-0"
+          To: "translate-x-full"
+      -->
+      <div class="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto">
+        <div class="px-4 flex items-center justify-between">
+          <h2 class="text-lg font-medium text-gray-900">Filters</h2>
+          <button type="button" class="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <span class="sr-only">Close menu</span>
+            <!-- Heroicon name: outline/x -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <form class="mt-4">
+          <div class="border-t border-gray-200 px-4 py-6">
+            <h3 class="-mx-2 -my-3 flow-root">
+              <!-- Expand/collapse question button -->
+              <button type="button" class="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400" aria-controls="filter-section-0" aria-expanded="false">
+                <span class="font-medium text-gray-900"> Category </span>
+                <span class="ml-6 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
+
+                    Heroicon name: solid/chevron-down
+
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg class="rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="pt-6" id="filter-section-0">
+              <div class="space-y-6">
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-0" name="category[]" value="tees" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500"> Tees </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-1" name="category[]" value="crewnecks" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-1" class="ml-3 text-sm text-gray-500"> Crewnecks </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-2" name="category[]" value="hats" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-3" name="category[]" value="bundles" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-3" class="ml-3 text-sm text-gray-500"> Bundles </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-4" name="category[]" value="carry" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-4" class="ml-3 text-sm text-gray-500"> Carry </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-category-5" name="category[]" value="objects" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-category-5" class="ml-3 text-sm text-gray-500"> Objects </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 px-4 py-6">
+            <h3 class="-mx-2 -my-3 flow-root">
+              <!-- Expand/collapse question button -->
+              <button type="button" class="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400" aria-controls="filter-section-1" aria-expanded="false">
+                <span class="font-medium text-gray-900"> Brand </span>
+                <span class="ml-6 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
+
+                    Heroicon name: solid/chevron-down
+
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg class="rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="pt-6" id="filter-section-1">
+              <div class="space-y-6">
+                <div class="flex items-center">
+                  <input id="filter-mobile-brand-0" name="brand[]" value="clothing-company" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-brand-0" class="ml-3 text-sm text-gray-500"> Clothing Company </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500"> Fashion Inc. </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-brand-2" name="brand[]" value="shoes-n-more" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-brand-2" class="ml-3 text-sm text-gray-500"> Shoes &#039;n More </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-brand-3" name="brand[]" value="supplies-n-stuff" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-brand-3" class="ml-3 text-sm text-gray-500"> Supplies &#039;n Stuff </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 px-4 py-6">
+            <h3 class="-mx-2 -my-3 flow-root">
+              <!-- Expand/collapse question button -->
+              <button type="button" class="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400" aria-controls="filter-section-2" aria-expanded="false">
+                <span class="font-medium text-gray-900"> Color </span>
+                <span class="ml-6 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
+
+                    Heroicon name: solid/chevron-down
+
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg class="rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="pt-6" id="filter-section-2">
+              <div class="space-y-6">
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-0" class="ml-3 text-sm text-gray-500"> White </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-1" name="color[]" value="black" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-1" class="ml-3 text-sm text-gray-500"> Black </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-2" name="color[]" value="grey" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-2" class="ml-3 text-sm text-gray-500"> Grey </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-3" name="color[]" value="blue" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-3" class="ml-3 text-sm text-gray-500"> Blue </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-4" name="color[]" value="olive" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-4" class="ml-3 text-sm text-gray-500"> Olive </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-color-5" name="color[]" value="tan" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-color-5" class="ml-3 text-sm text-gray-500"> Tan </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 px-4 py-6">
+            <h3 class="-mx-2 -my-3 flow-root">
+              <!-- Expand/collapse question button -->
+              <button type="button" class="px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400" aria-controls="filter-section-3" aria-expanded="false">
+                <span class="font-medium text-gray-900"> Sizes </span>
+                <span class="ml-6 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
+
+                    Heroicon name: solid/chevron-down
+
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg class="rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div class="pt-6" id="filter-section-3">
+              <div class="space-y-6">
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-0" name="sizes[]" value="xs" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-0" class="ml-3 text-sm text-gray-500"> XS </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-1" name="sizes[]" value="s" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-1" class="ml-3 text-sm text-gray-500"> S </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-2" name="sizes[]" value="m" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-2" class="ml-3 text-sm text-gray-500"> M </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-3" name="sizes[]" value="l" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-3" class="ml-3 text-sm text-gray-500"> L </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-4" name="sizes[]" value="xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-4" class="ml-3 text-sm text-gray-500"> XL </label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="filter-mobile-sizes-5" name="sizes[]" value="2xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                  <label for="filter-mobile-sizes-5" class="ml-3 text-sm text-gray-500"> 2XL </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

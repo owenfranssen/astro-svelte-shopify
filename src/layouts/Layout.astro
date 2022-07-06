@@ -1,27 +1,32 @@
 ---
+import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 import '../assets/styles/global.css';
 export interface Props {
 	title: string;
+  description?: string;
+  socialImage?: string;
+  socialImageAlt?: string;
 }
 
-const { title } = Astro.props as Props;
+const { title: pageTitle, description, socialImage, socialImageAlt } = Astro.props;
+const canonicalUrl = Astro.canonicalURL;
+const siteName = canonicalUrl.pathname;
+const title = `${pageTitle} - ${siteName}`;
+
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	<title>{title}</title>
+	<Head {title} {description} {canonicalUrl} {siteName} {socialImage} {socialImageAlt} />
 </head>
-<body>
+<body class="min-h-screen w-screen">
   <div class="bg-gray-50">
     <div>
-      <Header />
+      <Header currentPage={Astro.request.url.pathname} />
       <slot />
       <Footer />
     </div>

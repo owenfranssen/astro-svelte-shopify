@@ -6,16 +6,90 @@
     "dev": "TAILWIND_MODE=watch astro dev --host",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:prettier": "prettier -c -w \"src/**/*.{json,js,ts}\"",
+    "lint:eslint": "eslint --fix 'src/**/*.{js,ts}'",
+    "lint:stylelint": "stylelint --fix 'src/assets/styles/**/*.css'"
   },
   "devDependencies": {
     "@astrojs/svelte": "^0.2.0",
     "@astrojs/tailwind": "^0.2.2",
     "astro": "^1.0.0-beta.63",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-import": "^14.1.0",
+    "postcss-nested": "^5.0.6",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.1.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-prettier": "^2.0.0",
     "svelte": "^3.48.0"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.5.2"
+    "@tailwindcss/forms": "^0.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead",
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2021
+    },
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:import/recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "import",
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "import/first": "error",
+      "import/no-unresolved": 1
+    }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard"
+    ],
+    "rules": {
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "tailwind",
+            "apply",
+            "variants",
+            "responsive",
+            "screen",
+            "include"
+          ]
+        }
+      ],
+      "declaration-block-trailing-semicolon": null,
+      "no-descending-specificity": null,
+      "selector-class-pattern": null,
+      "max-line-length": null
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": false,
+    "tabWidth": 2,
+    "useTabs": true
   }
 }

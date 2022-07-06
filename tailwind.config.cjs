@@ -6,10 +6,22 @@ module.exports = {
 			gridTemplateRows: {
 				'[auto,auto,1fr]': 'auto auto 1fr',
 			},
+			colors: {
+				primary: {
+					DEFAULT: 'rgb(var(--color-primary) / <alpha-value>',
+					light: 'rgb(var(--color-primary-light)/ <alpha-value>',
+				},
+				dark: {
+					DEFAULT: 'rgb(var(--color-dark) / <alpha-value>',
+				},
+			},
+			maxWidth: {
+				site: 'var(--site-width)',
+			},
 		},
 	},
 	plugins: [
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/aspect-ratio'),
 	],
-}
+};

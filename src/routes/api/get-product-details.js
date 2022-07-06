@@ -1,12 +1,12 @@
-import { writable } from "svelte/store";
-import { postToShopify } from "./src/routes/api/utils/postToShopify";
+import {writable} from 'svelte/store';
+import {postToShopify} from './utils/postToShopify';
 
 export const productDetails = writable([]);
 
 export const getProductDetails = async (handle) => {
-  try {
-    const shopifyResponse = await postToShopify({
-      query: `
+	try {
+		const shopifyResponse = await postToShopify({
+			query: `
 				query GetProduct($handle: String!) {
 					productByHandle(handle: $handle) {
 						handle
@@ -75,14 +75,14 @@ export const getProductDetails = async (handle) => {
 					}
 				}
       `,
-      variables: {
-        handle: handle,
-      },
-    });
+			variables: {
+				handle: handle,
+			},
+		});
 
-    productDetails.set(shopifyResponse.productByHandle);
-    return shopifyResponse.productByHandle;
-  } catch (error) {
-    console.log(error);
-  }
+		productDetails.set(shopifyResponse.productByHandle);
+		return shopifyResponse.productByHandle;
+	} catch (error) {
+		console.log(error);
+	}
 };

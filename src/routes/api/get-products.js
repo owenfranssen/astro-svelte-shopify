@@ -1,13 +1,13 @@
-import { writable } from "svelte/store";
-import { postToShopify } from "./src/routes/api/utils/postToShopify";
+import {writable} from 'svelte/store';
+import {postToShopify} from './utils/postToShopify';
 
 export const products = writable([]);
 
 export const getProducts = async () => {
-  try {
-    // @ts-ignore
-    const shopifyResponse = await postToShopify({
-      query: `{
+	try {
+		// @ts-ignore
+		const shopifyResponse = await postToShopify({
+			query: `{
 	     products(sortKey: TITLE, first: 100) {
 	      edges {
 	        node {
@@ -50,10 +50,10 @@ export const getProducts = async () => {
 	    }
     }
 	  `,
-    });
-    products.set(shopifyResponse.products.edges);
-    return shopifyResponse;
-  } catch (error) {
-    console.log(error);
-  }
+		});
+		products.set(shopifyResponse.products.edges);
+		return shopifyResponse;
+	} catch (error) {
+		console.log(error);
+	}
 };

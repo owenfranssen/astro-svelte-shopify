@@ -41,13 +41,21 @@ export const getProductsInCollection = async (handle) => {
                       currencyCode
                     }
                   }
-                  images(first: 1) {
-                    edges {
-                      node {
+                  compareAtPriceRange {
+                    maxVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                    minVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  featuredImage {
                         src
                         altText
-                      }
-                    }
+                        width
+                        height
                   }
                 }
               }

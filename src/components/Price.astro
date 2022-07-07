@@ -1,0 +1,11 @@
+---
+const { price, compare } = Astro.props
+console.log({price});
+
+/*
+Compare minVariantPrice.amount tp maxVariantPrice.amount to check for range
+Also check compare at pricing for discounts
+*/
+---
+
+<p>{price.minVariantPrice.currencyCode}{price.minVariantPrice.amount}</p>

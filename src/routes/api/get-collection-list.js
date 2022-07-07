@@ -4,13 +4,12 @@ import {postToShopify} from './utils/postToShopify';
 export const collectionDetails = writable([]);
 
 export const getProductsInCollection = async (handle) => {
-	console.log({handle});
 	try {
 		// @ts-ignore
 		const shopifyResponse = await postToShopify({
-			query: `{
-        query GetCollection($handle: String!) {
-          collection(handle: 'sample') {
+			query: `
+        query Collection($handle: String) {
+          collection(handle: $handle) {
             id
             handle
             title
@@ -55,13 +54,11 @@ export const getProductsInCollection = async (handle) => {
             }
           }
         }
-      }
       `,
 			variables: {
-				handle: handle,
+				handle,
 			},
 		});
-		console.log(shopifyResponse);
 		collectionDetails.set(shopifyResponse.collection);
 		return shopifyResponse.collection;
 	} catch (error) {

@@ -10,14 +10,10 @@ import { getProductsInCollection } from '../../routes/api/get-collection-list.js
 export async function getStaticPaths({paginate}) {
 	const collections = json.collections;
 	return await Promise.all( collections.map( async (c) => {
-    console.log(c.handle);
-
     const collection = await getProductsInCollection(c.handle);
-    console.log('Awaited: ', await collection);
-
 		return {
 			params: {
-				collectionHandle: collection.handle
+				collectionHandle: await collection.handle
 			},
 			props: { collection },
 		};
@@ -26,9 +22,14 @@ export async function getStaticPaths({paginate}) {
 
 const { collectionHandle } = Astro.params;
 const { collection } = Astro.props;
+
+/*
+Uses a hard coded json config to define collections and handles
+If the starter plan DOES allow collections, change this to use a GraphQL collections query to use collections defined in Shopify
+*/
 ---
 
-<Layout title={ collection.title } description={ "lorum ipsum" }>
+<Layout title={ collection.title } description={ collection.description }>
   <MobileFilters />
 
   <main>

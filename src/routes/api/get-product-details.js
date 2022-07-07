@@ -4,7 +4,6 @@ import {postToShopify} from './utils/postToShopify';
 export const productDetails = writable([]);
 
 export const getProductDetails = async (handle) => {
-	console.log({handle});
 	try {
 		const shopifyResponse = await postToShopify({
 			query: `

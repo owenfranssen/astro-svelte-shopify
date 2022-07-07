@@ -9,14 +9,13 @@ export const getProductsInCollection = async (handle) => {
 		// @ts-ignore
 		const shopifyResponse = await postToShopify({
 			query: `{
-				query GetProductsInCollection($handle: String!) {
-          collectionByHandle(handle: $handle) {
+        query GetCollection($handle: String!) {
+          collection(handle: 'sample') {
             id
             handle
             title
             description
             descriptionHtml
-            productsCount
             image {
               id
               url
@@ -57,12 +56,15 @@ export const getProductsInCollection = async (handle) => {
           }
         }
       }
-	  `,
+      `,
+			variables: {
+				handle: handle,
+			},
 		});
-    console.log(shopifyResponse);
-		collectionDetails.set(shopifyResponse.collectionByHandle);
-		return shopifyResponse.collectionByHandle;
+		console.log(shopifyResponse);
+		collectionDetails.set(shopifyResponse.collection);
+		return shopifyResponse.collection;
 	} catch (error) {
-		console.log(error);
+		console.log('getProductsInCollection error: ', error);
 	}
 };

@@ -9,20 +9,23 @@ import { getProductsInCollection } from '../../routes/api/get-collection-list.js
 
 export async function getStaticPaths({paginate}) {
 	const collections = json.collections;
-	return collections.map( collection => {
+	return await Promise.all( collections.map( async (c) => {
+    console.log(c.handle);
+
+    const collection = await getProductsInCollection(c.handle);
+    console.log('Awaited: ', await collection);
+
 		return {
 			params: {
 				collectionHandle: collection.handle
 			},
 			props: { collection },
 		};
-	} );
+	} ));
 }
 
 const { collectionHandle } = Astro.params;
 const { collection } = Astro.props;
-
-const collectionDetails = await getProductsInCollection(collectionHandle);
 ---
 
 <Layout title={ collection.title } description={ "lorum ipsum" }>

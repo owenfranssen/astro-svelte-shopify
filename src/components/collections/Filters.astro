@@ -1,4 +1,7 @@
 <!-- Filters -->
+
+<!-- https://shopify.dev/api/examples/filter-products#combine-filters -->
+
 <section aria-labelledby="filter-heading" class="border-t border-gray-200 pt-6">
   <h2 id="filter-heading" class="sr-only">Product filters</h2>
 
@@ -13,7 +16,7 @@
           </svg>
         </button>
       </div>
-
+<!-- SORT ORDER -->
       <!--
         Dropdown menu, show/hide based on menu state.
 
@@ -39,7 +42,7 @@
         </div>
       </div>
     </div>
-
+<!-- Product Type -->
     <!-- Mobile filter dialog toggle, controls the 'mobileFilterDialogOpen' state. -->
     <button type="button" class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden">Filters</button>
 
@@ -68,38 +71,38 @@
         <div class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form class="space-y-4">
             <div class="flex items-center">
-              <input id="filter-category-0" name="category[]" value="tees" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-0" name="productType[]" value="tees" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-0" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Tees </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-category-1" name="category[]" value="crewnecks" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-1" name="productType[]" value="crewnecks" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-1" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Crewnecks </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-category-2" name="category[]" value="hats" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-2" name="productType[]" value="hats" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-2" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Hats </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-category-3" name="category[]" value="bundles" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-3" name="productType[]" value="bundles" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-3" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Bundles </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-category-4" name="category[]" value="carry" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-4" name="productType[]" value="carry" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-4" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Carry </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-category-5" name="category[]" value="objects" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-category-5" name="productType[]" value="objects" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-category-5" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Objects </label>
             </div>
           </form>
         </div>
       </div>
-
+<!-- Vendor -->
       <div id="menu" class="relative z-10 inline-block text-left">
         <div>
           <button type="button" class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
@@ -122,28 +125,28 @@
         <div class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form class="space-y-4">
             <div class="flex items-center">
-              <input id="filter-brand-0" name="brand[]" value="clothing-company" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-brand-0" name="productVendor[]" value="clothing-company" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-brand-0" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Clothing Company </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-brand-1" name="brand[]" value="fashion-inc" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-brand-1" name="productVendor[]" value="fashion-inc" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-brand-1" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Fashion Inc. </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-brand-2" name="brand[]" value="shoes-n-more" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-brand-2" name="productVendor[]" value="shoes-n-more" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-brand-2" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Shoes &#039;n More </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-brand-3" name="brand[]" value="supplies-n-stuff" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-brand-3" name="productVendor[]" value="supplies-n-stuff" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-brand-3" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Supplies &#039;n Stuff </label>
             </div>
           </form>
         </div>
       </div>
-
+<!-- Colour variants -->
       <div id="menu" class="relative z-10 inline-block text-left">
         <div>
           <button type="button" class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
@@ -166,38 +169,38 @@
         <div class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form class="space-y-4">
             <div class="flex items-center">
-              <input id="filter-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-0" name="variantOption[]" data-option-name="color" value="white" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-0" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> White </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-color-1" name="color[]" value="black" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-1" name="variantOption[]" data-option-name="color" value="black" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-1" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Black </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-color-2" name="color[]" value="grey" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-2" name="variantOption[]" data-option-name="color" value="grey" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-2" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Grey </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-color-3" name="color[]" value="blue" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-3" name="variantOption[]" data-option-name="color" value="blue" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-3" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Blue </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-color-4" name="color[]" value="olive" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-4" name="variantOption[]" data-option-name="color" value="olive" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-4" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Olive </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-color-5" name="color[]" value="tan" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-color-5" name="variantOption[]" data-option-name="color" value="tan" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-color-5" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> Tan </label>
             </div>
           </form>
         </div>
       </div>
-
+<!-- Size variants -->
       <div id="menu" class="relative z-10 inline-block text-left">
         <div>
           <button type="button" class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
@@ -220,32 +223,32 @@
         <div class="origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
           <form class="space-y-4">
             <div class="flex items-center">
-              <input id="filter-sizes-0" name="sizes[]" value="xs" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-0" name="variantOptions[]" data-option-name="size" value="xs" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-0" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> XS </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-sizes-1" name="sizes[]" value="s" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-1" name="variantOptions[]" data-option-name="size" value="s" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-1" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> S </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-sizes-2" name="sizes[]" value="m" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-2" name="variantOptions[]" data-option-name="size" value="m" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-2" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> M </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-sizes-3" name="sizes[]" value="l" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-3" name="variantOptions[]" data-option-name="size" value="l" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-3" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> L </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-sizes-4" name="sizes[]" value="xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-4" name="variantOptions[]" data-option-name="size" value="xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-4" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> XL </label>
             </div>
 
             <div class="flex items-center">
-              <input id="filter-sizes-5" name="sizes[]" value="2xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+              <input id="filter-sizes-5" name="variantOptions[]" data-option-name="size" value="2xl" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
               <label for="filter-sizes-5" class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap"> 2XL </label>
             </div>
           </form>

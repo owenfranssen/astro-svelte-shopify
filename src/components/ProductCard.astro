@@ -1,5 +1,6 @@
 ---
 import Price from './Price.astro';
+import Image from '../../components/Image.astro';
 const { product } = Astro.props
 
 console.log(product.featuredImage);
@@ -8,7 +9,7 @@ console.log(product.featuredImage);
 
 <a href="{`/products/${product.handle}`}" class="group">
   <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
-    <img src={product.featuredImage.src} alt={product.featuredImage.altText} height={product.featuredImage.height} width={product.featuredImage.width} class="w-full h-full object-center object-cover group-hover:opacity-75">
+    <Image image={product.featuredImage} class="w-full h-full object-center object-cover group-hover:opacity-75" />
   </div>
   <div class="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
     <h3>{ product.title }</h3>

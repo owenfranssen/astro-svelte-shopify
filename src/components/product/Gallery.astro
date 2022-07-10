@@ -1,5 +1,12 @@
-<!-- Image gallery -->
+---
+import Image from '../../components/Image.astro';
+const { images } = Astro.props
+---
+
 <div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+  { images?.edges.map( image => {
+    return <Image image={image.node} />
+  }) }
   <div class="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
     <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="Two each of gray, white, and black shirts laying flat." class="w-full h-full object-center object-cover">
   </div>

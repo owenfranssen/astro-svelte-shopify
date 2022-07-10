@@ -1,9 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
-import { products, getProducts } from '../routes/api/get-products.js';
-const result = await getProducts();
-const products = result.products.edges;
 ---
 <Layout title="Welcome to Astro.">
 	<main>
@@ -11,8 +7,10 @@ const products = result.products.edges;
 
     <hr>
     <!-- <Shopify /> -->
-		{ products.map( product => {
-			return <ProductCard product={product.node} />
-		}) }
+    <ul>
+      <li><a href="products/chevron/">Sample product</a></li>
+      <li><a href="products/sample/">Sample collection</a></li>
+    </ul>
+
 	</main>
 </Layout>

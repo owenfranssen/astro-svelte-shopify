@@ -3,8 +3,7 @@ export interface Props {
   image: object;
   cssClass?: string;
 }
-const { image, cssClass = '' } = Astro.props as Props;
-console.log({image});
+const { image, cssClass = null } = Astro.props as Props;
 
 ---
-<img src={image?.url} alt={image?.altText} height={image?.height} width={image?.width} class={cssClass}>
+<img src={image?.src} alt={image?.altText} height={image?.height} width={image?.width} class={cssClass}>

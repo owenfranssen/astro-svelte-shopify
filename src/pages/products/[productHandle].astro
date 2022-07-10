@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Gallery from '../../components/product/Gallery.astro';
 import Reviews from '../../components/product/Reviews.astro';
 import ProductForm from '../../components/product/ProductForm.astro';
+import Price from '../../components/Price.astro';
 import ProductGrid from '../../components/ProductGrid.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
@@ -46,7 +47,7 @@ console.log({product});
         <!-- Options -->
         <div class="mt-4 lg:mt-0 lg:row-span-3">
           <h2 class="sr-only">Product information</h2>
-          <p class="text-3xl text-gray-900">$192</p>
+          <Price price={product.priceRange} compare={product.compareAtPriceRange} />
 
           <Reviews />
 

@@ -11,6 +11,12 @@
 			"handle": "sample",
 			"filter": "tag:sample",
 			"description": "Thoughtfully designed objects for the workspace, home, and travel."
+		},
+		{
+			"title": "Frontpage",
+			"handle": "frontpage",
+			"filter": "tag:sample",
+			"description": "Thoughtfully designed objects for the workspace, home, and travel."
 		}
 	]
 }

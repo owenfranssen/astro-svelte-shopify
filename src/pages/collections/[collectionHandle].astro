@@ -7,13 +7,17 @@ import ProductCard from '../../components/ProductCard.astro';
 import json from '../../config/collections.json';
 import { getProductsInCollection } from '../../routes/api/get-collection-list.js';
 
+
+
 export async function getStaticPaths({paginate}) {
 	const collections = json.collections;
 	return await Promise.all( collections.map( async (c) => {
+		console.log(c.handle);
+
     const collection = await getProductsInCollection(c.handle);
 		return {
 			params: {
-				collectionHandle: await collection.handle
+				collectionHandle: c.handle
 			},
 			props: { collection },
 		};

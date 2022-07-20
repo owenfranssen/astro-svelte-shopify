@@ -60,6 +60,11 @@ export const getProductDetails = async (handle) => {
 								}
 							}
 						}
+            options {
+              id
+              name
+              values
+            }
 						variants(first: 10) {
 							edges {
 								node {

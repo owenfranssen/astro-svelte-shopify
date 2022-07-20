@@ -1,0 +1,28 @@
+---
+export interface Props {
+  option: object;
+}
+const { option } = Astro.props as Props;
+---
+<div>
+  <h3 class="text-sm text-gray-900 font-medium">{ option.name }</h3>
+
+  <fieldset class="mt-4">
+    <legend class="sr-only">Choose a { option.name }</legend>
+    <div class="flex items-center space-x-3">
+      <!--
+          Active and Checked: "ring ring-offset-1"
+          Not Active and Checked: "ring-2"
+        -->
+      { option.values.map( value => {
+          let colour = 'background-color: ' + value.toLowerCase();
+          return <label class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400">
+            <input type="radio" name="color-choice" value={ value } class="sr-only" aria-labelledby="color-choice-0-label">
+            <span id="color-choice-0-label" class="sr-only"> { value } </span>
+            <span aria-hidden="true" class="h-8 w-8 border border-black border-opacity-10 rounded-full" style={ colour }></span>
+          </label>
+        }
+      ) }
+    </div>
+  </fieldset>
+</div>

@@ -4,7 +4,13 @@ const { price, compare } = Astro.props
 /*
 Compare minVariantPrice.amount tp maxVariantPrice.amount to check for range
 Also check compare at pricing for discounts
+Format money
 */
+
+const formatMoney = amount => new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' }).format(amount);
+
 ---
 
-<p>{price.minVariantPrice.currencyCode}{price.minVariantPrice.amount}</p>
+<p data-current-price>{formatMoney(price.minVariantPrice.amount)}</p>
+
+<p data-compare-price class="line-through text-gray-400">{formatMoney(compare.minVariantPrice.amount)}</p>

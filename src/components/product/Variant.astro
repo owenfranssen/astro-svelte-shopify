@@ -4,9 +4,9 @@ export interface Props {
   index?: integer;
 }
 const { option, index } = Astro.props as Props;
+let label = `${option.name}-choice-`;
 ---
-{/* { index > 1 && 'class="mt-16"' } */}
-<div >
+<div class="mb-8 last:mb-0">
   <h3 class="text-sm text-gray-900 font-medium">{ option.name }</h3>
 
   <fieldset class="mt-4">
@@ -14,30 +14,35 @@ const { option, index } = Astro.props as Props;
     <div class="flex items-center space-x-3">
           <!-- Active: "ring-2 ring-indigo-500" -->
           <!-- disabled  -->
-      { option.values.map( value =>
-          <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-gray-50 text-gray-200 cursor-not-allowed">
-            <input type="radio" name="size-choice" value="{ value }" disabled class="sr-only" aria-labelledby="size-choice-0-label">
-            <span id="size-choice-0-label"> { value } </span>
-
+      { option.values.map( (value, index) => {
+					let option_label = `${label.toLowerCase()}${index}-label`;
+          return <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
+            <input type="radio" name="size-choice" value="{ value }" disabled class="sr-only" aria-labelledby={ option_label }>
+            <span id={ option_label }> { value } </span>
+						<!-- Below is for disabled only -->
             <span aria-hidden="true" class="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none">
               <svg class="absolute inset-0 w-full h-full text-gray-200 stroke-2" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
                 <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
               </svg>
             </span>
           </label>
+				}
       ) }
     </div>
   </fieldset>
 </div>
 
-<!-- Active: "ring-2 ring-indigo-500" -->
-<!--<label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
-          <input type="radio" name="size-choice" value="S" class="sr-only" aria-labelledby="size-choice-2-label">
-          <span id="size-choice-2-label"> S </span> -->
+{/*  Active: "ring-2 ring-indigo-500" */}
 
-          <!--
-            Active: "border", Not Active: "border-2"
-            Checked: "border-indigo-500", Not Checked: "border-transparent"
-          -->
-          <!--<span class="absolute -inset-px rounded-md pointer-events-none" aria-hidden="true"></span>
-        </label> -->
+{/* Disabled Option:
+<label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-gray-50 text-gray-200 cursor-not-allowed">
+		<input type="radio" name="size-choice" value="{ value }" disabled class="sr-only" aria-labelledby="size-choice-0-label">
+		<span id="size-choice-0-label"> { value } </span>
+
+		<span aria-hidden="true" class="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none">
+			<svg class="absolute inset-0 w-full h-full text-gray-200 stroke-2" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
+				<line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
+			</svg>
+		</span>
+	</label>
+*/}

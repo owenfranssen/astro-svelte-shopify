@@ -1,5 +1,10 @@
 ---
 import LayoutIndex from '../templates/Layout-index.astro';
+
+import Slideshow from '../organisms/Slideshow.astro';
+import Carousel from '../organisms/Carousel.astro';
+import Collections from '../organisms/Collections.astro';
+import Instagram from '../organisms/Instagram.astro';
 ---
 <LayoutIndex title="Welcome to Astro.">
 	<main>
@@ -14,21 +19,21 @@ import LayoutIndex from '../templates/Layout-index.astro';
       <li><a href="collections/frontpage/">Frontpage collection</a></li>
     </ul>
 
-    <section>
+    <Slideshow>
       Hero
-    </section>
+    </Slideshow>
 
-    <section>
+    <Carousel>
       Best sellers
-    </section>
+    </Carousel>
 
-    <section>
+    <Collections>
       Collections
-    </section>
+    </Collections>
 
-    <section>
+    <Instagram>
       instagram feed
-    </section>
+    </Instagram>
 
 	</main>
 </LayoutIndex>

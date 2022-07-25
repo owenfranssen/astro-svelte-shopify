@@ -1,7 +1,7 @@
 ---
-import Head from '../components/Head.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Head from '../organisms/Head.astro';
+import HeaderIndex from '../organisms/HeaderIndex.astro';
+import Footer from '../organisms/Footer.astro';
 
 import '../assets/styles/global.css';
 export interface Props {
@@ -25,11 +25,9 @@ const title = `${pageTitle} - ${siteName}`;
 </head>
 <body class="min-h-screen w-screen">
   <div class="bg-gray-50">
-    <div>
-      <Header currentPage={Astro.request.url.pathname} />
-      <slot />
-      <Footer />
-    </div>
+    <HeaderIndex currentPage={Astro.request.url.pathname} />
+    <slot />
+    <Footer />
   </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import LayoutIndex from '../templates/Layout-index.astro';
 ---
-<Layout title="Welcome to Astro.">
+<LayoutIndex title="Welcome to Astro.">
 	<main>
 		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
 
@@ -14,5 +14,27 @@ import Layout from '../layouts/Layout.astro';
       <li><a href="collections/frontpage/">Frontpage collection</a></li>
     </ul>
 
+    <section>
+      Hero
+    </section>
+
+    <section>
+      Best sellers
+    </section>
+
+    <section>
+      Collections
+    </section>
+
+    <section>
+      instagram feed
+    </section>
+
 	</main>
-</Layout>
+</LayoutIndex>
+
+<style>
+  main {
+    @apply pt-32;
+  }
+</style>

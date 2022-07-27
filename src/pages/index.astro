@@ -9,11 +9,8 @@ import Instagram from '../organisms/Instagram.astro';
 ---
 <LayoutIndex title="Welcome to Astro.">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-
-    <hr>
     <!-- <Shopify /> -->
-    <ul>
+    <ul class="flex justify-center py-4 space-x-8">
       <li><a href="products/chevron/">Sample product - Chevron T</a></li>
       <li><a href="products/5-panel-hat/">Sample product - 5 Panel Hat</a></li>
       <li><a href="collections/sample/">Sample collection</a></li>
@@ -24,11 +21,11 @@ import Instagram from '../organisms/Instagram.astro';
       Hero
     </Banner>
 
-    <Carousel>
+    <Carousel collection="frontpage" limit=4>
       Best sellers
     </Carousel>
 
-    <Collections>
+    <Collections collections={['apparel', 'tools', 'accessories']}>
       Collections
     </Collections>
 

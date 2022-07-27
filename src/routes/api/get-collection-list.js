@@ -3,12 +3,12 @@ import {postToShopify} from './utils/postToShopify';
 
 export const collectionDetails = writable([]);
 
-export const getProductsInCollection = async (handle) => {
+export const getProductsInCollection = async (handle, limit = 10) => {
 	try {
 		// @ts-ignore
 		const shopifyResponse = await postToShopify({
 			query: `
-        query Collection($handle: String) {
+        query Collection($handle: String!, $limit: Int) {
           collection(handle: $handle) {
             id
             handle
@@ -22,7 +22,7 @@ export const getProductsInCollection = async (handle) => {
               height
               width
             }
-            products(sortKey: TITLE, first: 10) {
+            products(sortKey: TITLE, first: $limit) {
               edges {
                 node {
                   id
@@ -65,6 +65,7 @@ export const getProductsInCollection = async (handle) => {
       `,
 			variables: {
 				handle,
+        limit
 			},
 		});
 		collectionDetails.set(shopifyResponse.collection);

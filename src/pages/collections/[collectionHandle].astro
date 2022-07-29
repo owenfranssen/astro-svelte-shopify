@@ -4,14 +4,14 @@ import Filters from '../../molecules/collections/Filters.astro';
 import MobileFilters from '../../molecules/collections/MobileFilters.astro';
 import ImageTextBanner from '../../molecules/ImageTextBanner.astro';
 import ProductCard from '../../molecules/ProductCard.astro';
-import json from '../../config/collections.json';
-import { getProductsInCollection } from '../../routes/api/get-collection-list.js';
+//import json from '../../config/collections.json';
+import { getCollections } from '../../routes/api/get-collections.js';
+import { getProductsInCollection } from '../../routes/api/get-products.js';
 
 export async function getStaticPaths({paginate}) {
-	const collections = json.collections;
+	const collections = await getCollections();
 	return await Promise.all( collections.map( async (c) => {
-		console.log(c.handle);
-
+		c = c.node;
     const collection = await getProductsInCollection(c.handle);
 		return {
 			params: {
@@ -24,11 +24,6 @@ export async function getStaticPaths({paginate}) {
 
 const { collectionHandle } = Astro.params;
 const { collection } = Astro.props;
-
-/*
-Uses a hard coded json config to define collections and handles
-If the starter plan DOES allow collections, change this to use a GraphQL collections query to use collections defined in Shopify
-*/
 ---
 
 <Layout title={ collection.title } description={ collection.description }>

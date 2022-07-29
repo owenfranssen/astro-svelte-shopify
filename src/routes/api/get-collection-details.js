@@ -22,6 +22,7 @@ export const getCollectionDetails = async (handle) => {
 							id
 							altText
 							url
+							src
 						}
 					}
 				}

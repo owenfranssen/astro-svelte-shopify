@@ -20,7 +20,7 @@ await Promise.all( collectionHandles.map( async (handle) => {
     <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
 			{ collections.length >= 1 && collections[0] &&
 				(<div class="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
-					<img src="https://tailwindui.com/img/ecommerce-images/home-page-03-featured-category.jpg" alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee." class="object-center object-cover group-hover:opacity-75">
+					<Image image={collections[0].image} cssClass="object-center object-cover group-hover:opacity-75" />
 					<div aria-hidden="true" class="bg-gradient-to-b from-transparent to-black opacity-50"></div>
 					<div class="p-6 flex items-end">
 						<div>
@@ -37,7 +37,7 @@ await Promise.all( collectionHandles.map( async (handle) => {
 			}
       { collections.length >= 2 && collections[1] &&
 				(<div class="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
-					<img src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg" alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters." class="object-center object-cover group-hover:opacity-75 sm:absolute sm:inset-0 sm:w-full sm:h-full">
+					<Image image={collections[1].image} cssClass="object-center object-cover group-hover:opacity-75 sm:absolute sm:inset-0 sm:w-full sm:h-full" />
 					<div aria-hidden="true" class="bg-gradient-to-b from-transparent to-black opacity-50 sm:absolute sm:inset-0"></div>
 					<div class="p-6 flex items-end sm:absolute sm:inset-0">
 						<div>
@@ -54,7 +54,7 @@ await Promise.all( collectionHandles.map( async (handle) => {
 			}
       { collections.length >= 3 && collections[2] &&
 				(<div class="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
-					<img src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg" alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk." class="object-center object-cover group-hover:opacity-75 sm:absolute sm:inset-0 sm:w-full sm:h-full">
+					<Image image={collections[2].image} cssClass="object-center object-cover group-hover:opacity-75 sm:absolute sm:inset-0 sm:w-full sm:h-full" />
 					<div aria-hidden="true" class="bg-gradient-to-b from-transparent to-black opacity-50 sm:absolute sm:inset-0"></div>
 					<div class="p-6 flex items-end sm:absolute sm:inset-0">
 						<div>

@@ -8,11 +8,11 @@ import Price from '../../atoms/Price.astro';
 import ProductGrid from '../../organisms/ProductGrid.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
-import { getProducts } from '../../routes/api/get-products';
+import { getAllProducts } from '../../routes/api/get-products';
 import { getProductDetails } from '../../routes/api/get-product-details';
 
 export async function getStaticPaths({paginate}) {
-	const result = await getProducts();
+	const result = await getAllProducts();
 	const products = result.products.edges;
 	return await Promise.all( products.map( async (p) => {
     const product = await getProductDetails(p.node.handle);

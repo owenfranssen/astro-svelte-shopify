@@ -1,0 +1,8 @@
+---
+const { type, cssClass } = Astro.props as Props;
+const style = `absolute z-10 rounded bg-${type || 'blue-700'} text-white p-2 ${cssClass || ''}`;
+/* For Tailwind JIT: bg-blue-700 bg-sale bg-new */
+---
+<span class={style}>
+	<slot />
+</span>

@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
+
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
 	theme: {
@@ -14,6 +16,10 @@ module.exports = {
 				dark: {
 					DEFAULT: 'rgb(var(--color-dark) / <alpha-value>)',
 				},
+				sale: {
+					DEFAULT: '#dc2626' //'rgb(var(--color-sale) / <alpha-value>)',
+				},
+				new: colors.blue
 			},
 			maxWidth: {
 				site: 'var(--site-width)',

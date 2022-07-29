@@ -1,0 +1,11 @@
+---
+import Tag from '../../atoms/Tag.astro';
+const { product } = Astro.props as Props;
+---
+{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && (<Tag type="sale">Sale</Tag>)}
+
+{/* product.publishedAt > currentdate - X days
+{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && (<Tag type="new">New</Tag>)}
+*/}
+
+<Tag type="sale">Sale</Tag>

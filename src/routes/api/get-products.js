@@ -32,6 +32,10 @@ export const getProductsInCollection = async (handle, limit = 10) => {
                   title
                   totalInventory
                   productType
+									publishedAt
+									updatedAt
+									createdAt
+									availableForSale
                   priceRange {
                     maxVariantPrice {
                       amount
@@ -91,6 +95,10 @@ export const getAllProducts = async () => {
 	          title
 	          totalInventory
 	          productType
+            publishedAt
+            updatedAt
+            createdAt
+            availableForSale
 	          variants(first: 5) {
 	            edges {
 	              node {

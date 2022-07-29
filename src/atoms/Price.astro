@@ -13,4 +13,4 @@ const formatMoney = amount => new Intl.NumberFormat('en-IE', { style: 'currency'
 
 <p data-current-price>{formatMoney(price.minVariantPrice.amount)}</p>
 
-<p data-compare-price class="line-through text-gray-400">{formatMoney(compare.minVariantPrice.amount)}</p>
+{compare.minVariantPrice.amount > 0 && (<p data-compare-price class="line-through text-gray-400">{formatMoney(compare.minVariantPrice.amount)}</p>)}

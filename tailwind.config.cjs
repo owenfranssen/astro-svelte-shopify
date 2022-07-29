@@ -19,7 +19,12 @@ module.exports = {
 				sale: {
 					DEFAULT: '#dc2626' //'rgb(var(--color-sale) / <alpha-value>)',
 				},
-				new: colors.blue
+				new: {
+					DEFAULT: '#0284c7' //'rgb(var(--color-new) / <alpha-value>)',
+				},
+				green: {
+					DEFAULT: '#059669'
+				}
 			},
 			maxWidth: {
 				site: 'var(--site-width)',

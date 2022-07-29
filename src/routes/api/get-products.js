@@ -62,6 +62,7 @@ export const getProductsInCollection = async (handle, limit = 10) => {
                         width
                         height
                   }
+									tags
                 }
               }
             }

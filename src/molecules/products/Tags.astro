@@ -1,11 +1,30 @@
 ---
 import Tag from '../../atoms/Tag.astro';
 const { product } = Astro.props as Props;
+
+const publishedDate = new Date(product.publishedAt);
+let compareDate = new Date();
+compareDate.setDate(compareDate.getDate()-21);
+
+/**
+ * Specify labels or tags in SHopify product admin
+ * Syntax: 'tag:Text:type'
+ *   - Prefix required: 'tag:'
+ *   - Text: Text to show on the label or tag
+ *   - Type: Predefined label type (new, sale, green), or Tailwind CSS colour (e.g. yellow-500)
+ */
 ---
-{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && (<Tag type="sale">Sale</Tag>)}
+<div class="absolute z-10 -top-3 -right-3 flex flex-col items-end space-y-2">
+	{/* Sale tag */}
+	{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && <Tag type="sale">Sale</Tag>}
 
-{/* product.publishedAt > currentdate - X days
-{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && (<Tag type="new">New</Tag>)}
-*/}
+	{/* New product tag */}
+	{ publishedDate.getTime() > compareDate.getTime() && <Tag type="new">New</Tag>}
 
-<Tag type="sale">Sale</Tag>
+	{ product.tags.filter( tag => tag.startsWith('tag:'))
+			.map( tag => {
+				const content = tag.split(':');
+				return <Tag type={content[2] || ''}>{content[1]}</Tag>
+		})
+	}
+</div>

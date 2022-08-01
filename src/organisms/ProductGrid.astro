@@ -1,5 +1,21 @@
 ---
-const { title, products } = Astro.props
+import {getProductsInCollection} from '../routes/api/get-products.js'
+export interface Props {
+  title: string;
+  products?: object;
+  collection?: string;
+}
+const { title, products = {}, collection = null } = Astro.props
+
+const getProducts = async (products, collection) => {
+  if(products.length > 0) {
+    return products;
+  }
+  if(collection.length > 0) {
+    return await getProductsInCollection(collection);
+  }
+  return {};
+}
 ---
 <div class="bg-white">
   <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">

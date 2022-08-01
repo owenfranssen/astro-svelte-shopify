@@ -16,10 +16,8 @@ const { product } = Astro.props
 
       <section aria-labelledby="information-heading" class="mt-4">
         <h2 id="information-heading" class="sr-only">Product information</h2>
-
-          <Price price={product.priceRange} compare={product.compareAtPriceRange} />
-
-          <Reviews product={ product } />
+        <Price price={product.priceRange} compare={product.compareAtPriceRange} />
+        <Reviews product={ product } />
 
         <div class="mt-4 space-y-6">
           <p class="text-base text-gray-500">{ product.description }</p>

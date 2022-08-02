@@ -1,0 +1,34 @@
+---
+import Price from '../atoms/Price.astro';
+import Image from '../atoms/Image.astro';
+import Tags from '../molecules/products/Tags.astro';
+import { productUrl } from '../routes/api/utils/makeUrl.js';
+const { product } = Astro.props
+
+/* TODO:
+Tags & labels
+New
+On sale
+Available/sold out
+*/
+
+---
+
+<div class="group relative">
+	<Tags product={product} />
+	<div class="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
+		<a href={productUrl(product.handle)}>
+			<Image image={product.featuredImage} cssClass="w-full h-full object-center object-cover" />
+		</a>
+	</div>
+	<h3 class="mt-4 text-sm text-gray-700">
+		<a href={productUrl(product.handle)}>
+			<span class="absolute inset-0"></span>
+			{product.title}
+		</a>
+	</h3>
+	<p class="mt-1 text-sm text-gray-500">Natural</p>
+	<p class="mt-1 text-sm font-medium text-gray-900">
+		<Price price={product.priceRange} compare={product.compareAtPriceRange} />
+	</p>
+</div>

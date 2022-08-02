@@ -27,6 +27,7 @@ const { product } = Astro.props;
 
 /* Featured products logic */
 const getFeaturedProducts = async (product) => {
+	// TODO:
   // Check metafields.product.custom.featured_products
   // if(products.length > 0) {
   //   return products;
@@ -50,6 +51,7 @@ const featuredProducts = await getFeaturedProducts(product);
       {product.images.edges.length <= 1 && <SingleImageLayout product={product} />}
       {product.images.edges.length > 1 && <GalleryLayout product={product} />}
 
+			{/* TODO: Should be hydrated - control products from Shopify without needing site rebuild */}
       <ProductGrid title="Our Favourites" products={featuredProducts} />
 		</div>
 	</main>

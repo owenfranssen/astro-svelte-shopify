@@ -6,7 +6,7 @@ import GalleryLayout from '../../molecules/products/details/galleryLayout.astro'
 import ProductGrid from '../../organisms/ProductGrid.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
-import { getAllProducts } from '../../routes/api/get-products';
+import { getProductsInCollection, getAllProducts } from '../../routes/api/get-products';
 import { getProductDetails } from '../../routes/api/get-product-details';
 
 export async function getStaticPaths({paginate}) {
@@ -25,6 +25,23 @@ export async function getStaticPaths({paginate}) {
 const { productHandle } = Astro.params;
 const { product } = Astro.props;
 
+/* Featured products logic */
+const getFeaturedProducts = async (product) => {
+  // Check metafields.product.custom.featured_products
+  // if(products.length > 0) {
+  //   return products;
+  // }
+
+  if(product.collections.edges.length > 0) {
+    const products =  await getProductsInCollection(product.collections.edges[0].node.handle);
+    return await products;
+  }
+  return [];
+}
+
+const featuredProducts = await getFeaturedProducts(product);
+
+console.log(await featuredProducts);
 ---
 
 <Layout title={ product.title }>
@@ -35,7 +52,7 @@ const { product } = Astro.props;
       {product.images.edges.length <= 1 && <SingleImageLayout product={product} />}
       {product.images.edges.length > 1 && <GalleryLayout product={product} />}
 
-      <ProductGrid title="Our Favourites" products={} />
+      <ProductGrid title="Our Favourites" products={featuredProducts.edges} />
 		</div>
 	</main>
 </Layout>

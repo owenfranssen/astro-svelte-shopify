@@ -17,6 +17,17 @@ export const getProductDetails = async (handle) => {
 							description
 							title
 						}
+            metafield(key: "featured_products", namespace: "custom") {
+              namespace
+              key
+            }
+            collections (first: 5) {
+              edges {
+                node {
+                  handle
+                }
+              }
+            }
 						totalInventory
 						productType
 						priceRange {

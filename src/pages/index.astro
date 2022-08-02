@@ -2,24 +2,18 @@
 import LayoutIndex from '../templates/Layout-index.astro';
 
 import Banner from '../organisms/Banner.astro';
-import Carousel from '../organisms/Carousel.astro';
+import FeaturedCollection from '../organisms/FeaturedCollection.astro';
 import Collections from '../organisms/Collections.astro';
 import LogoCloud from '../organisms/LogoCloud.astro';
 import Instagram from '../organisms/Instagram.astro';
 ---
 <LayoutIndex title="Welcome to Astro.">
 	<main>
-    <Banner>
-      Hero
-    </Banner>
+    <Banner />
 
-    <Carousel collection="frontpage" limit=4>
-      Best sellers
-    </Carousel>
+    <FeaturedCollection collection="frontpage" limit=4 />
 
-    <Collections collections={['apparel', 'tools', 'accessories']}>
-      Collections
-    </Collections>
+    <Collections collections={['apparel', 'tools', 'accessories']} />
 
     <LogoCloud brands={['united-by-blue', 'ursa-major', 'snow-peak']} />
 

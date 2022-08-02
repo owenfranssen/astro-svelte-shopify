@@ -12,7 +12,7 @@ export async function getStaticPaths({paginate}) {
 	const collections = await getCollections();
 	return await Promise.all( collections.map( async (c) => {
 		c = c.node;
-    const collection = await getProductsInCollection(c.handle);
+    const collection = await getProductsInCollection(c.handle, 12);
 		return {
 			params: {
 				collectionHandle: c.handle
@@ -24,6 +24,13 @@ export async function getStaticPaths({paginate}) {
 
 const { collectionHandle } = Astro.params;
 const { collection } = Astro.props;
+
+/**
+ * TODO:
+ * - Pagination
+ * - Lazy load:
+ *     - Show first page, load second pag eon scroll down. if more than 2 pages 'Show more...' button to load page 3, auto load page 4, etc etc
+ */
 ---
 
 <Layout title={ collection.title } description={ collection.description }>

@@ -3,19 +3,29 @@ import Image from '../../atoms/Image.astro';
 const { images } = Astro.props
 ---
 
-<div class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-  <div class="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+<div class:list={["mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:gap-x-8", (images.length < 4 ? "lg:grid-cols-2" : "lg:grid-cols-3")]}>
+  <div class:list={["hidden rounded-lg overflow-hidden lg:block", (images.length < 4 ? "aspect-square" : "aspect-w-3 aspect-h-4") ]}>
+		{/* If 2x image gallery aspect doesnt work with production images, try: `(images.length < 4 ? "aspect-w-3 aspect-h-4" : "aspect-w-3 aspect-h-4")` */}
     <Image image={images[0]?.node} cssClass="w-full h-full object-center object-cover" />
   </div>
-  <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-    <div class="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-      <Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
-    </div>
-    <div class="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-      <Image image={images[2]?.node} cssClass="w-full h-full object-center object-cover" />
-    </div>
-  </div>
-  <div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
-    <Image image={images[3]?.node} cssClass="w-full h-full object-center object-cover" />
-  </div>
+	{ images.length == 2 &&
+		<div class:list={["hidden rounded-lg overflow-hidden lg:block", "aspect-w-2 aspect-h-1" ]}>
+			<Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
+		</div>
+	}
+	{ images.length >= 3 &&
+		<div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+			<div class:list={["rounded-lg overflow-hidden", (images.length == 3 ? "aspect-w-2 aspect-h-1" : "aspect-w-3 aspect-h-2") ]}>
+				<Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
+			</div>
+			<div class:list={["rounded-lg overflow-hidden", (images.length == 3 ? "aspect-w-2 aspect-h-1" : "aspect-w-3 aspect-h-2") ]}>
+				<Image image={images[2]?.node} cssClass="w-full h-full object-center object-cover" />
+			</div>
+		</div>
+	}
+	{ images.length >= 4 &&
+		<div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+			<Image image={images[3]?.node} cssClass="w-full h-full object-center object-cover" />
+		</div>
+	}
 </div>

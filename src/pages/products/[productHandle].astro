@@ -33,15 +33,13 @@ const getFeaturedProducts = async (product) => {
   // }
 
   if(product.collections.edges.length > 0) {
-    const products =  await getProductsInCollection(product.collections.edges[0].node.handle);
-    return await products;
+    const products =  await getProductsInCollection(product.collections.edges[0].node.handle, 6);
+    return await products.products.edges;
   }
   return [];
 }
 
 const featuredProducts = await getFeaturedProducts(product);
-
-console.log(await featuredProducts);
 ---
 
 <Layout title={ product.title }>
@@ -52,7 +50,7 @@ console.log(await featuredProducts);
       {product.images.edges.length <= 1 && <SingleImageLayout product={product} />}
       {product.images.edges.length > 1 && <GalleryLayout product={product} />}
 
-      <ProductGrid title="Our Favourites" products={featuredProducts.edges} />
+      <ProductGrid title="Our Favourites" products={featuredProducts} />
 		</div>
 	</main>
 </Layout>

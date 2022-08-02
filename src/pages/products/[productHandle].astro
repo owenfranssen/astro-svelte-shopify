@@ -53,6 +53,8 @@ const featuredProducts = await getFeaturedProducts(product);
 
 			{/* TODO: Should be hydrated - control products from Shopify without needing site rebuild */}
       <ProductGrid title="Our Favourites" products={featuredProducts} />
+
+			{/* TODO: Secondary grid - alternbate style showing Recently Viewed products (based on cookie stored). Also Hydrated, update as products viewed per user */}
 		</div>
 	</main>
 </Layout>

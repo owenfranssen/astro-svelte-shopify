@@ -1,4 +1,4 @@
-<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+<div id="mini-cart" data-drawer-content class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
   <!--
     Background backdrop, show/hide based on slide-over state.
 
@@ -30,7 +30,7 @@
               <div class="flex items-start justify-between">
                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
                 <div class="ml-3 flex h-7 items-center">
-                  <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                  <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500"  data-drawer-control="mini-cart">
                     <span class="sr-only">Close panel</span>
                     <!-- Heroicon name: outline/x -->
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -120,3 +120,13 @@
     </div>
   </div>
 </div>
+
+<style>
+	[data-drawer-content] {
+		@apply translate-x-full opacity-0 pointer-events-none;
+	}
+
+	[data-drawer-content].display {
+		@apply transition-transform transition-opacity transform-none opacity-100 pointer-events-auto;
+	}
+	</style>

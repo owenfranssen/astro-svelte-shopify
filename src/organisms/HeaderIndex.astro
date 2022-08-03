@@ -1,6 +1,7 @@
 ---
 import MobileMenu from '../molecules/MobileMenu.astro';
 import Logo from '../atoms/Logo.astro';
+import CartDrawer from '../organisms/CartDrawer.astro';
 ---
 {/* Larger header for home page */}
 <div class="absolute w-full top-0">
@@ -8,6 +9,13 @@ import Logo from '../atoms/Logo.astro';
   <header class="relative">
     <nav aria-label="Top" class="bg-white shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <button type="button" class="bg-white p-2 rounded-md text-gray-400 lg:hidden" data-drawer-control="mobile-nav">
+          <span class="sr-only">Open menu</span>
+          <svg class="h-6 w-6" x-description="Heroicon name: outline/menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
         <div class="hidden h-full lg:flex">
           <!-- Flyout menus -->
           <div class="px-4 bottom-0 inset-x-0">
@@ -201,7 +209,7 @@ import Logo from '../atoms/Logo.astro';
 
             <!-- Cart -->
             <div class="ml-4 flow-root lg:ml-8">
-              <a href="#" class="group -m-2 p-2 flex items-center">
+              <a href="#" class="group -m-2 p-2 flex items-center" data-drawer-control="mini-cart">
                 <!-- Heroicon name: outline/shopping-bag -->
                 <svg class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -210,6 +218,8 @@ import Logo from '../atoms/Logo.astro';
                 <span class="sr-only">items in cart, view bag</span>
               </a>
             </div>
+
+            <CartDrawer />
           </div>
         </div>
       </div>

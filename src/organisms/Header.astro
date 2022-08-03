@@ -206,7 +206,7 @@ import CartDrawer from '../organisms/CartDrawer.astro';
             <!-- Mobile menu and search (lg-) -->
             <div class="flex-1 flex items-center lg:hidden">
               <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
-              <button type="button" class="-ml-2 bg-white p-2 rounded-md text-gray-400">
+              <button type="button" class="-ml-2 bg-white p-2 rounded-md text-gray-400" data-drawer-control="mobile-nav">
                 <span class="sr-only">Open menu</span>
                 <!-- Heroicon name: outline/menu -->
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -225,9 +225,9 @@ import CartDrawer from '../organisms/CartDrawer.astro';
             </div>
 
             <!-- Logo (lg-) -->
-            <a href="#" class="lg:hidden">
+            <a href="/" class="lg:hidden">
               <span class="sr-only">Workflow</span>
-              <img src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600" alt="" class="h-8 w-auto">
+              <Logo cssClass="h-8 w-auto" />
             </a>
 
             <div class="flex-1 flex items-center justify-end">

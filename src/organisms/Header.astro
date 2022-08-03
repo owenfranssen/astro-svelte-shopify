@@ -255,10 +255,7 @@ import CartDrawer from '../organisms/CartDrawer.astro';
                     <span class="sr-only">items in cart, view bag</span>
                   </a>
 
-									<div id="mini-cart" data-drawer-content class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-										<CartDrawer />
-									</div>
-
+									<CartDrawer />
                 </div>
               </div>
             </div>
@@ -268,13 +265,3 @@ import CartDrawer from '../organisms/CartDrawer.astro';
     </nav>
   </header>
 </div>
-
-<style>
-[data-drawer-content] {
-	@apply translate-x-full opacity-0 pointer-events-none;
-}
-
-[data-drawer-content].display {
-	@apply transition-transform transition-opacity transform-none opacity-100 pointer-events-auto;
-}
-</style>

@@ -1,6 +1,7 @@
 ---
-import MobileMenu from '../molecules/MobileMenu.astro';
 import Logo from '../atoms/Logo.astro';
+import MobileMenu from '../molecules/MobileMenu.astro';
+import CartDrawer from '../organisms/CartDrawer.astro';
 ---
 
 <div>
@@ -23,7 +24,7 @@ import Logo from '../atoms/Logo.astro';
           <div class="h-16 flex items-center justify-between">
             <!-- Logo (lg+) -->
             <div class="hidden lg:flex-1 lg:flex lg:items-center">
-              <a href="#">
+              <a href="/">
                 <span class="sr-only">Workflow</span>
 								<Logo cssClass="h-8 w-auto" />
               </a>
@@ -245,7 +246,7 @@ import Logo from '../atoms/Logo.astro';
 
                 <!-- Cart -->
                 <div class="ml-4 flow-root lg:ml-8">
-                  <a href="#" class="group -m-2 p-2 flex items-center">
+                  <a href="#" class="group -m-2 p-2 flex items-center" data-drawer-control="mini-cart">
                     <!-- Heroicon name: outline/shopping-bag -->
                     <svg class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -253,6 +254,11 @@ import Logo from '../atoms/Logo.astro';
                     <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span class="sr-only">items in cart, view bag</span>
                   </a>
+
+									<div id="mini-cart" data-drawer-content class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+										<CartDrawer />
+									</div>
+
                 </div>
               </div>
             </div>
@@ -262,3 +268,13 @@ import Logo from '../atoms/Logo.astro';
     </nav>
   </header>
 </div>
+
+<style>
+[data-drawer-content] {
+	@apply translate-x-full opacity-0 pointer-events-none;
+}
+
+[data-drawer-content].display {
+	@apply transition-transform transition-opacity transform-none opacity-100 pointer-events-auto;
+}
+</style>

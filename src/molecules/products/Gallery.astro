@@ -9,17 +9,17 @@ const { images } = Astro.props
  * if 5: show 3 at top, 2 below
  * else show 4 top, and remainder below
  *
- * Mobile layout - currently hidden?
+ * Mobile layout - stacked or scroll...
  */
 ---
 
 <div class:list={["mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:gap-x-8", (images.length < 4 ? "lg:grid-cols-2" : "lg:grid-cols-3")]}>
-  <div class:list={["hidden rounded-lg overflow-hidden lg:block", (images.length < 4 ? "aspect-square" : "aspect-w-3 aspect-h-4") ]}>
+  <div class:list={["rounded-lg overflow-hidden", (images.length < 4 ? "aspect-square" : "hidden lg:block aspect-w-3 aspect-h-4") ]}>
 		{/* If 2x image gallery aspect doesnt work with production images, try: `(images.length < 4 ? "aspect-w-3 aspect-h-4" : "aspect-w-3 aspect-h-4")` */}
     <Image image={images[0]?.node} cssClass="w-full h-full object-center object-cover" />
   </div>
 	{ images.length == 2 &&
-		<div class:list={["hidden rounded-lg overflow-hidden lg:block", "aspect-w-2 aspect-h-1" ]}>
+		<div class="rounded-lg overflow-hidden aspect-square">
 			<Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
 		</div>
 	}

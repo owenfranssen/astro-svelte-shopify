@@ -1,30 +1,10 @@
 <div id="mini-cart" data-drawer-content class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-  <!--
-    Background backdrop, show/hide based on slide-over state.
-
-    Entering: "ease-in-out duration-500"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "ease-in-out duration-500"
-      From: "opacity-100"
-      To: "opacity-0"
-  -->
-  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity uiOverlay"></div>
 
   <div class="fixed inset-0 overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
       <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-        <!--
-          Slide-over panel, show/hide based on slide-over state.
-
-          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-full"
-            To: "translate-x-0"
-          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-0"
-            To: "translate-x-full"
-        -->
-        <div class="pointer-events-auto w-screen max-w-md">
+        <div class="pointer-events-auto w-screen max-w-md uiDrawerContents">
           <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
             <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
               <div class="flex items-start justify-between">
@@ -123,10 +103,27 @@
 
 <style>
 	[data-drawer-content] {
-		@apply translate-x-full opacity-0 pointer-events-none;
+		@apply delay-500 opacity-0 pointer-events-none;
+
+    .uiOverlay {
+      @apply ease-in-out duration-500 opacity-0;
+    }
+
+    .uiDrawerContents {
+      @apply transform transition ease-in-out duration-500 sm:duration-700 translate-x-full;
+    }
 	}
 
 	[data-drawer-content].display {
-		@apply transition-transform transition-opacity transform-none opacity-100 pointer-events-auto;
+		@apply opacity-100 pointer-events-auto;
+    transition-delay: 0ms;
+
+    .uiOverlay {
+      @apply ease-in-out duration-500 opacity-100;
+    }
+
+    .uiDrawerContents {
+      @apply transform transition ease-in-out duration-500 sm:duration-700 translate-x-0;
+    }
 	}
 	</style>

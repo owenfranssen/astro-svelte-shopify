@@ -2,25 +2,83 @@
 import ColourVariant from './ColourVariant.astro';
 import QuantitySelector from './QuantitySelector.astro';
 import Variant from './Variant.astro';
+
+import Theme from '../../assets/scripts/theme-settings.js'
 export interface Props {
   product: object;
 }
 const { product } = Astro.props as Props;
+
+
+const formId = `product-form--${product.id}`;
 ---
 
-<form class="mt-10" data-product-form>
-  { product.options.map( (option, index) => {
+<form class="mt-10" id={formId} data-product-form>
+  { product.options.length > 1 && product.options.map( (option, index) => {
     if (option.name == 'Colour')
       return <ColourVariant option={ option } />
     else
       return <Variant option={ option } />
   }) }
+	{ product.options.length == 1 && <input type="hidden" name="" value="" /> }
 
 	<QuantitySelector />
 
-  <button type="submit" class="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
+  <button type="submit" class="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-300 disable:ring-gray-300" data-add-to-cart>{Theme.Settings.locale.product_form.add_to_cart}</button>
+
+	<span data-product-form-error></span>
+
+	{/* All variant selector for product ids to send to cart - also no-js fallback */}
+	<div class="product-form__input product-form__input--dropdown hidden no-js" id="all-variant-ids">
+		<label for="quantity-0" class="sr-only">Product variants</label>
+		<select name="id"
+				id="Variants-{{ section.id }}"
+				class="form__dropdown"
+				form={formId}
+				data-variant-selected>
+			{/*
+			{%- for variant in product.variants -%}
+				<option
+					{% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+					{% if variant.available == false %}disabled{% endif %}
+					value="{{ variant.id }}"
+				>
+					{{ variant.title }}
+					{%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+					- {{ variant.price | money | strip_html }}
+				</option>
+			{%- endfor -%}
+			*/}
+		</select>
+	</div>
+
+	{/* Master quantity input to send to cart - also no-js fallback */}
+	<div class="product-form__quantity-selector--dropdown product-form__input product-form__input--dropdown hidden no-js">
+		<label for="quantity-0" class="form__label{% unless form_settings.show_labels %} sr-only{% endunless %}">{Theme.Settings.locale.product_form.quantity}</label>
+		<select name="quantity"
+				class="form__dropdown"
+				id="quantity-0"
+				form="{{ form_id }}">
+			{ [...Array(10)].map(i => <option value={ i }>{ i }</option>)}
+			{/*
+			{%- assign range = (1..20) -%}
+			{%- if selected_variant.inventory_management != blank and selected_variant.inventory_quantity > 0 -%}
+				{%- assign range = (1..selected_variant.inventory_quantity) -%}
+			{%- elsif selected_variant.inventory_quantity > 0 -%}
+				{%- assign range = (0..0) -%}
+			{%- endif -%}
+			{%- for i in range -%}
+				<option value="{{ i }}">{{ i }}</option>
+			{%- endfor -%}
+			*/}
+		</select>
+	</div>
 </form>
 
 <script>
 	import '../../assets/scripts/product-form.js';
+
+	window.addEventListener('load', event => {
+		Theme.jsProductForm.init();
+	})
 </script>

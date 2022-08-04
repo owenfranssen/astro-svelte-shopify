@@ -37,5 +37,10 @@ const title = `${pageTitle} - ${siteName}`;
 </html>
 
 <script>
+	import Theme from '../assets/scripts/theme-settings.js';
 	import '../assets/scripts/drawers.js';
+
+	if (!window.hasOwnProperty('Theme')) {
+		window.Theme = Theme;
+	}
 </script>

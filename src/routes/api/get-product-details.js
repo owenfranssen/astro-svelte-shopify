@@ -9,6 +9,7 @@ export const getProductDetails = async (handle) => {
 			query: `
 				query GetProduct($handle: String!) {
 					productByHandle(handle: $handle) {
+						id
 						handle
 						description
 						descriptionHtml
@@ -79,6 +80,7 @@ export const getProductDetails = async (handle) => {
 						variants(first: 10) {
 							edges {
 								node {
+									id
 									title
 									quantityAvailable
 									priceV2 {

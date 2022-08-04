@@ -1,0 +1,12 @@
+input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    appearance: textfield;
+    min-width: 75px;
+  }
+}

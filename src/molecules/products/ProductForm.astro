@@ -1,13 +1,14 @@
 ---
-import Variant from './Variant.astro';
 import ColourVariant from './ColourVariant.astro';
+import QuantitySelector from './QuantitySelector.astro';
+import Variant from './Variant.astro';
 export interface Props {
   product: object;
 }
 const { product } = Astro.props as Props;
 ---
 
-<form class="mt-10">
+<form class="mt-10" data-product-form>
   { product.options.map( (option, index) => {
     if (option.name == 'Colour')
       return <ColourVariant option={ option } />
@@ -15,5 +16,11 @@ const { product } = Astro.props as Props;
       return <Variant option={ option } />
   }) }
 
+	<QuantitySelector />
+
   <button type="submit" class="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
 </form>
+
+<script>
+	import '../../assets/scripts/product-form.js';
+</script>

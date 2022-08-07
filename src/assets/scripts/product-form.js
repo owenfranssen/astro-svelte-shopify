@@ -9,6 +9,7 @@
  *     - https://shopify.dev/api/examples/cart
  */
 import Theme from './theme-settings.js';
+import Cart from '../../routes/api/cart.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -50,7 +51,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			});
 		},
 
-		addToCart(event) {
+		async addToCart(event) {
 			event.preventDefault();
 			this.form = event.target;
 			const button = this.form.querySelector('[data-add-to-cart]');
@@ -66,6 +67,33 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				console.log('Product Form: add to cart xhr request');
 				const formData = new URLSearchParams(new FormData(this.form)),
 					self = this;
+
+				const addToCart = await Cart.addItem({id, qty});
+
+				/*
+          const addToCart = async () => {
+            // add selected product to cart
+            try {
+              const addToCartResponse = await fetch('/api/add-to-cart', {
+                method: 'POST',
+                body: JSON.stringify({
+                  cartId: localStorage.getItem('cartId'),
+                  itemId: selectedProduct,
+                  quantity: quantity
+                })
+              });
+              const data = await addToCartResponse.json();
+
+              // save new cart to localStorage
+              localStorage.setItem('cartId', data.id);
+              localStorage.setItem('cart', JSON.stringify(data));
+              location.reload();
+
+            } catch (e) {
+              console.log(e);
+            }
+          };
+        */
 
 				fetch(Theme.Routes.cart_add, {
 					// TODO: replace route
@@ -102,7 +130,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			//this.updateMedia();
 
 			if (!this.currentVariant) {
-				this.toggleAddtocart(true, Theme.Settings.locale.product_form.unavailable);
+				this.toggleAddtocart(
+					true,
+					Theme.Settings.locale.product_form.unavailable
+				);
 				this.toggleQuantitySelector(true);
 			} else {
 				this.toggleAddtocart(
@@ -148,7 +179,8 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			if (addToCart != null) {
 				addToCart.disabled = disable;
 				addToCart.setAttribute('aria-disabled', disable);
-				addToCart.textContent = text ?? Theme.Settings.locale.product_form.add_to_cart;
+				addToCart.textContent =
+					text ?? Theme.Settings.locale.product_form.add_to_cart;
 			}
 		},
 
@@ -219,7 +251,8 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					),
 				].forEach(
 					(element) =>
-						(element.textContent = Theme.Settings.locale.product_form.unavailable)
+						(element.textContent =
+							Theme.Settings.locale.product_form.unavailable)
 				);
 				[
 					...document.querySelectorAll(`[data-product-sku="${productId}"]`),
@@ -242,7 +275,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				quantityInput.setAttribute('max', max);
 				if (max < 1) {
 					quantityInput.disabled = true;
-					this.toggleAddtocart(true, Theme.Settings.locale.product_form.sold_out);
+					this.toggleAddtocart(
+						true,
+						Theme.Settings.locale.product_form.sold_out
+					);
 				}
 				quantityInput.dispatchEvent(new Event('change', {bubbles: true}));
 			}

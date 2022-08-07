@@ -1,6 +1,7 @@
----
-const drawerId = "mini-cart";
----
+<script>
+  const drawerId = "mini-cart";
+</script>
+
 <div id={drawerId} data-drawer-content class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
   <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity uiOverlay" data-drawer-control={drawerId}></div>
 
@@ -105,7 +106,7 @@ const drawerId = "mini-cart";
 </div>
 
 <style>
-	[data-drawer-content] {
+	/* [data-drawer-content] {
 		@apply delay-500 opacity-0 pointer-events-none;
 
     .uiOverlay {
@@ -128,5 +129,5 @@ const drawerId = "mini-cart";
     .uiDrawerContents {
       @apply transform transition ease-in-out duration-500 sm:duration-700 translate-x-0;
     }
-	}
+	} */
 </style>

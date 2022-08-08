@@ -2,7 +2,7 @@
 import MobileMenu from '../molecules/MobileMenu.astro';
 import Navigation from '../molecules/Navigation.astro';
 import Logo from '../atoms/Logo.astro';
-import CartDrawer from '../organisms/CartDrawer.svelte';
+import CartDrawer from '../organisms/CartDrawer2.astro';
 ---
 {/* Larger header for home page */}
 <div class="absolute w-full top-0">
@@ -49,7 +49,7 @@ import CartDrawer from '../organisms/CartDrawer.svelte';
               </a>
             </div>
 
-            <CartDrawer client:visible />
+            <CartDrawer />
           </div>
         </div>
       </div>

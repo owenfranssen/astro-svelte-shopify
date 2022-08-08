@@ -16,7 +16,7 @@ const Theme = {
 		locale: {
 			product: {
 				available: 'In stock and ready to ship',
-				sold_out_out: 'Sold out'
+				sold_out: 'Sold out'
 			},
 			product_form: {
 				add_to_cart: 'Add to bag',

@@ -65,8 +65,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 
 			if (this.form !== null) {
 				console.log('Product Form: add to cart xhr request');
-				const formData = new URLSearchParams(new FormData(this.form)),
-					self = this;
+				const id = this.form.querySelector('select[name="id"]').value,
+					qty = this.form.querySelector('select[name="quantity"]').value;
+
+				console.log({id, qty});
 
 				const addToCart = await Cart.addItem({id, qty});
 
@@ -95,18 +97,18 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
           };
         */
 
-				fetch(Theme.Routes.cart_add, {
-					// TODO: replace route
-					method: 'POST',
-					body: formData,
-				})
-					.then(() => {
-						//Theme.jsCartCounter.update(); // TODO: Add Theme.jsCartCounter
-						//Theme.jsAjaxCart.onCartChange(); // TODO: Add Theme.jsAjaxCart
-						//Theme.jsAjaxCart.openCart();
-					})
-					.catch((error) => console.error(error))
-					.finally(() => self.toggleAddtocart(false));
+				// fetch(Theme.Routes.cart_add, {
+				// 	// TODO: replace route
+				// 	method: 'POST',
+				// 	body: formData,
+				// })
+				// 	.then(() => {
+				// 		//Theme.jsCartCounter.update(); // TODO: Add Theme.jsCartCounter
+				// 		//Theme.jsAjaxCart.onCartChange(); // TODO: Add Theme.jsAjaxCart
+				// 		//Theme.jsAjaxCart.openCart();
+				// 	})
+				// 	.catch((error) => console.error(error))
+				// 	.finally(() => self.toggleAddtocart(false));
 				// add any animations or class changes for completion. re-enable button if disabled.
 				return false;
 			}

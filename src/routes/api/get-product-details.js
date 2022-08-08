@@ -77,10 +77,12 @@ export const getProductDetails = async (handle) => {
               name
               values
             }
+						totalInventory
 						variants(first: 10) {
 							edges {
 								node {
 									id
+									availableForSale
 									title
 									quantityAvailable
 									priceV2 {

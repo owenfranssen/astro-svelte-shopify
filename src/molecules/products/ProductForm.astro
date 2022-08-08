@@ -9,7 +9,6 @@ export interface Props {
 }
 const { product } = Astro.props as Props;
 
-
 const formId = `product-form--${product.id}`;
 ---
 
@@ -36,19 +35,19 @@ const formId = `product-form--${product.id}`;
 				class="form__dropdown"
 				form={formId}
 				data-variant-selected>
-			{/*
-			{%- for variant in product.variants -%}
-				<option
-					{% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
-					{% if variant.available == false %}disabled{% endif %}
-					value="{{ variant.id }}"
-				>
-					{{ variant.title }}
-					{%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
-					- {{ variant.price | money | strip_html }}
-				</option>
-			{%- endfor -%}
-			*/}
+				{ product.variants.edges.map( variant => {
+						variant = variant.node;
+						const disabled = !variant.availableForSale ? 'disabled' : '';
+						return <option
+							{disabled.length > 0 && disabled}
+							value={variant.id}
+						>
+							{variant.title}
+							{ !variant.availableForSale && Theme.Settings.locale.product.sold_out }
+							- {variant.priceV2.currencyCode}{variant.priceV2.amount}
+						</option>
+					}
+				)}
 		</select>
 	</div>
 
@@ -59,7 +58,7 @@ const formId = `product-form--${product.id}`;
 				class="form__dropdown"
 				id="quantity-0"
 				form="{{ form_id }}">
-			{ [...Array(10)].map(i => <option value={ i }>{ i }</option>)}
+			{ [...Array(product.totalInventory)].map((i, index) => <option value={index+1}>{index+1}</option>)}
 			{/*
 			{%- assign range = (1..20) -%}
 			{%- if selected_variant.inventory_management != blank and selected_variant.inventory_quantity > 0 -%}

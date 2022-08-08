@@ -88,7 +88,7 @@ const Cart = {
 
 			return shopifyResponse;
 		} catch (error) {
-			console.log(error);
+			console.log('addItemToCart error: ', error);
 		}
 	},
 
@@ -152,9 +152,10 @@ const Cart = {
 					},
 				},
 			});
-			return shopifyResponse.collection;
+			console.log(await shopifyResponse);
+			return await shopifyResponse.createCart;
 		} catch (error) {
-			console.log('getProductsInCollection error: ', error);
+			console.log('createCartWithItem error: ', error);
 		}
 	},
 

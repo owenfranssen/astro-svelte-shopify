@@ -1,28 +1,6 @@
-import {postToShopify} from './utils/postToShopify';
+import {postToShopify} from './postToShopify';
 
 const Cart = {
-	addItem: async function ({itemId, quantity}) {
-		// cartid needs to be set/retrieved in/from a cookie/local storage?
-		const cartId = localStorage.getItem('cartId');
-		quantity = parseInt(quantity);
-		if (cartId) {
-			console.log('Adding item to an existing cart...');
-			const response = await this.addItemToCart({
-				cartId,
-				itemId,
-				quantity,
-			});
-			return JSON.stringify(response.cartLinesAdd.cart);
-		} else {
-			console.log('Creating new cart with item...');
-			const response = await this.createCartWithItem({
-				itemId,
-				quantity,
-			});
-			return JSON.stringify(response.cartCreate.cart);
-		}
-	},
-
 	addItemToCart: async function ({cartId, itemId, quantity}) {
 		try {
 			const shopifyResponse = postToShopify({
@@ -92,9 +70,8 @@ const Cart = {
 		}
 	},
 
-	createCartWithItem: async function ({itemId, quantity}) {
+	createCartWithItem: async function (itemId, quantity) {
 		try {
-			// @ts-ignore
 			const shopifyResponse = await postToShopify({
 				query: `
           mutation createCart($cartInput: CartInput) {
@@ -152,8 +129,7 @@ const Cart = {
 					},
 				},
 			});
-			console.log(await shopifyResponse);
-			return await shopifyResponse.createCart;
+			return shopifyResponse;
 		} catch (error) {
 			console.log('createCartWithItem error: ', error);
 		}
@@ -221,7 +197,69 @@ const Cart = {
     */
 	},
 
-	removeItemFromCart: function () {},
+	removeItemFromCart: async function (cartId, lineId) {
+		try {
+			const shopifyResponse = await postToShopify({
+				query: `
+					mutation removeItemFromCart($cartId: ID!, $lineIds: [ID!]!) {
+						cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+							cart {
+								id
+								lines(first: 10) {
+									edges {
+										node {
+											id
+											quantity
+											merchandise {
+												... on ProductVariant {
+													id
+													title
+													priceV2 {
+														amount
+														currencyCode
+													}
+													product {
+														title
+														handle
+													}
+												}
+											}
+										}
+									}
+								}
+								estimatedCost {
+									totalAmount {
+										amount
+										currencyCode
+									}
+									subtotalAmount {
+										amount
+										currencyCode
+									}
+									totalTaxAmount {
+										amount
+										currencyCode
+									}
+									totalDutyAmount {
+										amount
+										currencyCode
+									}
+								}
+							}
+						}
+					}
+				`,
+				variables: {
+					cartId,
+					lineIds: [lineId],
+				},
+			});
+
+			return shopifyResponse;
+		} catch (error) {
+			console.log('removeItemFromCart: ', error);
+		}
+	},
 };
 
 export default Cart;

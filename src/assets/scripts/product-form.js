@@ -9,7 +9,6 @@
  *     - https://shopify.dev/api/examples/cart
  */
 import Theme from './theme-settings.js';
-import Cart from '../../routes/api/cart.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -64,53 +63,24 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			// TODO: add micro-interactions
 
 			if (this.form !== null) {
-				console.log('Product Form: add to cart xhr request');
 				const id = this.form.querySelector('select[name="id"]').value,
 					qty = this.form.querySelector('select[name="quantity"]').value;
 
-				console.log({id, qty});
+				//const addToCart = await Cart.addItem(id, qty);
+				const addToCartResponse = await fetch('/api/add-to-cart', {
+					method: 'POST',
+					body: JSON.stringify({
+						cartId: localStorage.getItem('cartId'),
+						itemId: id,
+						quantity: qty,
+					}),
+				});
+				const data = await addToCartResponse.json();
 
-				const addToCart = await Cart.addItem({id, qty});
-
-				/*
-          const addToCart = async () => {
-            // add selected product to cart
-            try {
-              const addToCartResponse = await fetch('/api/add-to-cart', {
-                method: 'POST',
-                body: JSON.stringify({
-                  cartId: localStorage.getItem('cartId'),
-                  itemId: selectedProduct,
-                  quantity: quantity
-                })
-              });
-              const data = await addToCartResponse.json();
-
-              // save new cart to localStorage
-              localStorage.setItem('cartId', data.id);
-              localStorage.setItem('cart', JSON.stringify(data));
-              location.reload();
-
-            } catch (e) {
-              console.log(e);
-            }
-          };
-        */
-
-				// fetch(Theme.Routes.cart_add, {
-				// 	// TODO: replace route
-				// 	method: 'POST',
-				// 	body: formData,
-				// })
-				// 	.then(() => {
-				// 		//Theme.jsCartCounter.update(); // TODO: Add Theme.jsCartCounter
-				// 		//Theme.jsAjaxCart.onCartChange(); // TODO: Add Theme.jsAjaxCart
-				// 		//Theme.jsAjaxCart.openCart();
-				// 	})
-				// 	.catch((error) => console.error(error))
-				// 	.finally(() => self.toggleAddtocart(false));
-				// add any animations or class changes for completion. re-enable button if disabled.
-				return false;
+				// save cart to localStorage
+				localStorage.setItem('cartId', data.id);
+				localStorage.setItem('cart', JSON.stringify(data));
+				location.reload();
 			}
 		},
 

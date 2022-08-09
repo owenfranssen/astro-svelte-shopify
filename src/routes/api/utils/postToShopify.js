@@ -1,5 +1,5 @@
 export const postToShopify = async ({query, variables, api = 'storefront'}) => {
-	if(api == 'admin') {
+	if (api == 'admin') {
 		return postToShopifyAdminAPI({query, variables});
 	} else {
 		return postToShopifyStorefrontAPI({query, variables});

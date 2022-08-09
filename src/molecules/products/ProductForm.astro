@@ -9,10 +9,10 @@ export interface Props {
 }
 const { product } = Astro.props as Props;
 
-const formId = `product-form--${product.id}`;
+const formId = product.id;
 ---
 
-<form class="mt-10" id={formId} data-product-form>
+<form class="mt-10" data-product-form={formId}>
   { product.options.length > 1 && product.options.map( (option, index) => {
     if (option.name == 'Colour')
       return <ColourVariant option={ option } />
@@ -73,6 +73,8 @@ const formId = `product-form--${product.id}`;
 		</select>
 	</div>
 </form>
+
+<script type="application/json" data-product-id={formId} is:inline set:html={JSON.stringify(product.variants.edges)}></script>
 
 <script>
 	import '../../assets/scripts/product-form.js';

@@ -132,6 +132,34 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			}));
 		},
 
+		getVariantData() {
+			if (this.variantData) return this.variantData;
+			const variantData = JSON.parse(
+				document.querySelector(
+					`[type="application/json"][data-product-id="${
+						this.getForm().dataset.productForm
+					}"`
+				).textContent
+			);
+			// const inventoryData = JSON.parse(
+			// 	this.getForm()
+			// 		.querySelector(
+			// 			`[type="application/json"][data-product-stock="${
+			// 				this.getForm().dataset.id
+			// 			}"`
+			// 		)
+			// 		.textContent.replace('},]', '}]')
+			// );
+			for (const index in variantData) {
+				variantData[index] = {
+					...variantData[index],
+					// ...inventoryData[index],
+				};
+			}
+			console.log({variantData});
+			return (this.variantData = variantData);
+		},
+
 		setErrorMessage(message = false) {
 			this.errorMessage =
 				this.errorMessage ||
@@ -173,10 +201,9 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 
 		updateMasterId() {
 			this.currentVariant = this.getVariantData().find((variant) => {
-				return !variant.options
-					.map((option, index) => {
-						return this.selection[index] === option;
-					})
+				const options = variant.node.title.split(' / ');
+				return !options
+					.map((option, index) => this.selection[index] === option)
 					.includes(false);
 			});
 			if (this.currentVariant) {

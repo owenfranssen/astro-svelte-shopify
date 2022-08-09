@@ -13,7 +13,6 @@ import Theme from './theme-settings.js';
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
 		init() {
-			console.log('initialising Product Forms');
 			const forms = document.querySelectorAll('[data-product-form]');
 			if (forms != null) {
 				this.listen();
@@ -29,7 +28,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		listen() {
-			console.log('Product Form: event listeners');
 			document.addEventListener('submit', (event) => {
 				if (event.target.matches('[data-product-form]')) {
 					this.addToCart(event);

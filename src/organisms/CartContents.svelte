@@ -12,6 +12,7 @@
 <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
 	<div class="flow-root">
 		<ul role="list" class="-my-6 divide-y divide-gray-200">
+			<!--
 			{#each $items as item }
 				{#if item.quantity > 0}
 					<li class="flex py-6">
@@ -40,6 +41,7 @@
 					</li>
 				{/if}
 			{/each}
+			-->
 		</ul>
 	</div>
 </div>

@@ -20,14 +20,14 @@ export const getBrandsList = async (limit = 10) => {
 				}
 			`,
 			variables: {
-				limit
+				limit,
 			},
-			api: 'admin'
+			api: 'admin',
 		});
 		brands.set(shopifyResponse.shop.productVendors.edges);
 		return shopifyResponse;
 	} catch (error) {
-		console.log(error);
+		console.log('getBrandsList: ', error);
 	}
 };
 
@@ -58,12 +58,12 @@ export const getBrandDetails = async (handle) => {
 				}
 			`,
 			variables: {
-				handle
-			}
+				handle,
+			},
 		});
 		brands.set(shopifyResponse.collectionByHandle);
 		return shopifyResponse;
 	} catch (error) {
-		console.log(error);
+		console.log('getBranDetails: ', error);
 	}
 };

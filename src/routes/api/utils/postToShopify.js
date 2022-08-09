@@ -28,7 +28,7 @@ const postToShopifyStorefrontAPI = async ({query, variables}) => {
 
 		return result.data;
 	} catch (error) {
-		console.log(error);
+		console.log('postToShopifyStorefrontAPI: ', error);
 	}
 };
 
@@ -56,6 +56,6 @@ const postToShopifyAdminAPI = async ({query, variables}) => {
 
 		return result.data;
 	} catch (error) {
-		console.log(error);
+		console.log('postToShopifyAdminAPI: ', error);
 	}
 };

@@ -35,6 +35,6 @@ export const getCollectionDetails = async (handle) => {
 		collectionDetails.set(shopifyResponse.collectionByHandle);
 		return shopifyResponse.collectionByHandle;
 	} catch (error) {
-		console.log(error);
+		console.log('getCollectionDetails: ', error);
 	}
 };

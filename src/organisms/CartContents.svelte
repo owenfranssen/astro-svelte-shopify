@@ -6,6 +6,7 @@
 		const cart = JSON.parse(localStorage.getItem('cart'));
 		items = cart.lines.edges;
 
+		// TODO: remove console.log
 		console.log(items);
 	});
 
@@ -31,7 +32,6 @@
 	}
 </script>
 
-<!-- Svelete cart contents component -->
 <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
 	<div class="flow-root">
 		{#if items.length > 0}

@@ -12,7 +12,7 @@ if (!Theme.hasOwnProperty('jsQuantitySelector')) {
 		},
 
 		listen() {
-			console.log('QUantity Selector: event listeners')
+			console.log('Quantity Selector: event listeners');
 			document.addEventListener('click', (event) => {
 				if (
 					event.target.matches('[data-update-quantity]') ||

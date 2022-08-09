@@ -103,6 +103,6 @@ export const getProductDetails = async (handle) => {
 		productDetails.set(shopifyResponse.productByHandle);
 		return shopifyResponse.productByHandle;
 	} catch (error) {
-		console.log(error);
+		console.log('getProductDetails: ', error);
 	}
 };

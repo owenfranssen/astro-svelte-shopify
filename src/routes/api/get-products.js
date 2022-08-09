@@ -137,6 +137,6 @@ export const getAllProducts = async () => {
 		products.set(shopifyResponse.products.edges);
 		return shopifyResponse;
 	} catch (error) {
-		console.log(error);
+		console.log('getAllProducts: ', error);
 	}
 };

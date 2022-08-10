@@ -64,7 +64,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				const id = this.form.querySelector('select[name="id"]').value,
 					qty = this.form.querySelector('select[name="quantity"]').value;
 
-				//const addToCart = await Cart.addItem(id, qty);
 				const addToCartResponse = await fetch('/api/add-to-cart', {
 					method: 'POST',
 					body: JSON.stringify({
@@ -75,7 +74,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				});
 				const data = await addToCartResponse.json();
 
-				// save cart to localStorage
 				localStorage.setItem('cartId', data.id);
 				localStorage.setItem('cart', JSON.stringify(data));
 				location.reload();
@@ -90,13 +88,13 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		changeVariant(event) {
-			console.log('Product Form: change variant');
+			console.log('changeVariant()');
 			this.element = event.target;
 			this.getForm();
 			this.getSelection();
 			this.updateMasterId();
-			this.updateURL();
-			this.updateProductData();
+			// this.updateURL();
+			// this.updateProductData();
 			//this.updateMedia();
 
 			if (!this.currentVariant) {
@@ -107,12 +105,12 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				this.toggleQuantitySelector(true);
 			} else {
 				this.toggleAddtocart(
-					!this.currentVariant.available,
-					!this.currentVariant.available
+					!this.currentVariant.node.availableForSale,
+					!this.currentVariant.node.availableForSale
 						? Theme.Settings.locale.product_form.sold_out
 						: null
 				);
-				this.toggleQuantitySelector(!this.currentVariant.available);
+				this.toggleQuantitySelector(!this.currentVariant.node.availableForSale);
 				this.updateVariantInput();
 			}
 		},
@@ -156,7 +154,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					// ...inventoryData[index],
 				};
 			}
-			console.log({variantData});
 			return (this.variantData = variantData);
 		},
 
@@ -200,15 +197,29 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateMasterId() {
+			console.log(this.getVariantData());
 			this.currentVariant = this.getVariantData().find((variant) => {
 				const options = variant.node.title.split(' / ');
 				return !options
-					.map((option, index) => this.selection[index] === option)
+					.map(
+						(option, index) =>
+							!this.selection[index] || this.selection[index] === option
+					)
 					.includes(false);
 			});
 			if (this.currentVariant) {
-				this.getForm().querySelector('[name="id"]').value =
-					this.currentVariant.id;
+				console.log('Current variant: ', this.currentVariant);
+				const select = this.getForm().querySelector('[name="id"]');
+				let x = false;
+				Array.from(select.options).some((option) => {
+					if ((x = option.value == this.currentVariant.node.id)) {
+						select.value = option.value;
+						// TODO: remove console.logs
+						console.log(select.selectedIndex);
+						console.log(select.options[select.selectedIndex]);
+					}
+					return x;
+				});
 			}
 		},
 
@@ -234,6 +245,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateProductData() {
+			console.log('updateProductData()');
 			const productId = this.getForm().dataset.productId;
 			if (!this.currentVariant) {
 				[
@@ -268,7 +280,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			);
 			quantityInput.disabled = disabled;
 			if (!disabled) {
-				const max = this.currentVariant.inventory_quantity ?? 0;
+				const max = this.currentVariant.node.quantityAvailable ?? 0;
 				quantityInput.setAttribute('max', max);
 				if (max < 1) {
 					quantityInput.disabled = true;
@@ -300,17 +312,18 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateURL() {
-			if (!this.currentVariant) return;
-			window.history.replaceState(
-				{},
-				'',
-				`${this.getForm().dataset.productUrl}?variant=${this.currentVariant.id}`
-			);
+			// if (!this.currentVariant) return;
+			// console.log(this.currentVariant);
+			// window.history.replaceState(
+			// 	{},
+			// 	'',
+			// 	`${this.getForm().dataset.productUrl}?variant=${this.currentVariant.node.title}`
+			// );
 		},
 
 		updateVariantInput() {
 			const quantityInput = this.form.querySelector('[data-variant-selected]');
-			quantityInput.value = this.currentVariant.id;
+			quantityInput.value = this.currentVariant.node.title;
 			quantityInput.dispatchEvent(new Event('change', {bubbles: true}));
 		},
 	};

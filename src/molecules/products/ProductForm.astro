@@ -3,6 +3,7 @@ import ColourVariant from './ColourVariant.astro';
 import QuantitySelector from './QuantitySelector.astro';
 import Variant from './Variant.astro';
 
+import { productUrl } from '../../routes/api/utils/makeUrl.js';
 import Theme from '../../assets/scripts/theme-settings.js'
 export interface Props {
   product: object;
@@ -12,7 +13,7 @@ const { product } = Astro.props as Props;
 const formId = product.id;
 ---
 
-<form class="mt-10" data-product-form={formId}>
+<form class="mt-10" data-product-form={formId} data-product-url={productUrl(product.handle)}>
   { product.options.length > 1 && product.options.map( (option, index) => {
     if (option.name == 'Colour')
       return <ColourVariant option={ option } />
@@ -31,15 +32,13 @@ const formId = product.id;
 	<div class="product-form__input product-form__input--dropdown hidden no-js" id="all-variant-ids">
 		<label for="quantity-0" class="sr-only">Product variants</label>
 		<select name="id"
-				id="Variants-{{ section.id }}"
 				class="form__dropdown"
 				form={formId}
 				data-variant-selected>
-				{ product.variants.edges.map( variant => {
+				{ product.variants.edges.map( (variant, index) => {
 						variant = variant.node;
-						const disabled = !variant.availableForSale ? 'disabled' : '';
+						const disabled = !variant.availableForSale ? 'disabled' : "";
 						return <option
-							{disabled.length > 0 && disabled}
 							value={variant.id}
 						>
 							{variant.title}

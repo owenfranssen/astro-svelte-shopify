@@ -1,43 +1,17 @@
-.product-form {
-  @apply mt-10;
-
+form[data-product-form] {
   fieldset {
-    @apply mt-4;
-  }
+    input[type="radio"] {
+      & + label {
+        @apply ring-0;
+      }
 
-  &__variant {
-    & + & {
-      @apply mt-10;
-    }
-  }
-
-  &__variant-options {
-    &--swatches {
-      @apply flex items-center space-x-3;
-
-      .product-form__variant-option {
-        @apply -m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400;
-
-        &--active {
-          @apply ring-gray-900;
-        }
-
-        .swatch {
-          @apply h-8 w-8 border border-black border-opacity-10 rounded-full;
-        }
+      &:checked + label {
+        @apply ring-2;
       }
     }
 
-    &--grid {
-      @apply grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4;
-
-      .product-form__variant-option {
-        @apply relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer;
-
-        &--not-available {
-          @apply bg-gray-50 text-gray-200 cursor-not-allowed shadow-none;
-        }
-      }
+    input[type="radio"]:disabled + label {
+      @apply bg-gray-50 text-gray-200 cursor-not-allowed shadow-none;
     }
   }
 }

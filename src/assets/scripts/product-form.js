@@ -94,7 +94,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			this.getSelection();
 			this.updateMasterId();
 			// this.updateURL();
-			// this.updateProductData();
+			this.updateProductData();
 			//this.updateMedia();
 
 			if (!this.currentVariant) {
@@ -157,6 +157,13 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			return (this.variantData = variantData);
 		},
 
+		formatMoney(amount) {
+			return new Intl.NumberFormat('en-IE', {
+				style: 'currency',
+				currency: 'EUR',
+			}).format(amount);
+		},
+
 		setErrorMessage(message = false) {
 			this.errorMessage =
 				this.errorMessage ||
@@ -197,7 +204,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateMasterId() {
-			console.log(this.getVariantData());
 			this.currentVariant = this.getVariantData().find((variant) => {
 				const options = variant.node.title.split(' / ');
 				return !options
@@ -214,9 +220,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				Array.from(select.options).some((option) => {
 					if ((x = option.value == this.currentVariant.node.id)) {
 						select.value = option.value;
-						// TODO: remove console.logs
-						console.log(select.selectedIndex);
-						console.log(select.options[select.selectedIndex]);
 					}
 					return x;
 				});
@@ -224,29 +227,33 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updatePrice(productId) {
+			console.log('updatePrice()');
 			const currentVariant = this.currentVariant;
-			[
-				...document.querySelectorAll(`[data-product-price="${productId}"]`),
-			].forEach((element) => {
-				const onSale = currentVariant.compare_at_price > currentVariant.price;
-				element.querySelector('[data-price-current]').textContent =
-					Shopify.formatMoney(currentVariant.price);
+			console.log(currentVariant);
+			Array.from(
+				document.querySelectorAll(`[data-product-price="${productId}"]`)
+			).forEach((element) => {
+				console.log(element);
+				const compare_at = currentVariant.node.compareAtPriceV2?.amount ?? 0,
+					price = currentVariant.node.priceV2.amount,
+					onSale = compare_at > price;
+				element.querySelector('[data-current-price]').textContent =
+					this.formatMoney(price);
 				element
-					.querySelector('.price')
+					.querySelector('[data-current-price]')
 					.classList.toggle('price--on-sale', onSale);
 				element
-					.querySelector('.price__was-price')
+					.querySelector('[data-compare-price]')
 					.classList.toggle('hidden', !onSale);
 				if (onSale) {
-					element.querySelector('[data-price-compare]').textContent =
-						Shopify.formatMoney(currentVariant.compare_at_price);
+					element.querySelector('[data-compare-price]').textContent =
+						this.formatMoney(compare_at);
 				}
 			});
 		},
 
 		updateProductData() {
-			console.log('updateProductData()');
-			const productId = this.getForm().dataset.productId;
+			const productId = this.getForm().dataset.productForm;
 			if (!this.currentVariant) {
 				[
 					...document.querySelectorAll(`[data-product-price="${productId}"]`),
@@ -275,6 +282,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateQuantity(productId, disabled = false) {
+			console.log('updateQuantity()');
 			const quantityInput = this.getForm().querySelector(
 				`[data-quantity-select] [data-quantity-input]`
 			);
@@ -294,6 +302,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateStockMessage(productId) {
+			console.log('updateStockMessage()');
 			const currentVariant = this.currentVariant;
 			[
 				...document.querySelectorAll(

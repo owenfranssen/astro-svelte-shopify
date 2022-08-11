@@ -88,6 +88,10 @@ export const getProductDetails = async (handle) => {
 									priceV2 {
 										amount
 										currencyCode
+									},
+									compareAtPriceV2 {
+										amount
+										currencyCode
 									}
 								}
 							}

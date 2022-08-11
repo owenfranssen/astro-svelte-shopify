@@ -16,9 +16,9 @@ const formId = product.id;
 <form class="mt-10" data-product-form={formId} data-product-url={productUrl(product.handle)}>
   { product.options.length > 1 && product.options.map( (option, index) => {
     if (option.name == 'Colour')
-      return <ColourVariant option={ option } />
+      return <ColourVariant option={ option } optionIndex={index} />
     else
-      return <Variant option={ option } />
+      return <Variant option={ option } optionIndex={index} />
   }) }
 	{ product.options.length == 1 && <input type="hidden" name="" value="" /> }
 
@@ -37,7 +37,16 @@ const formId = product.id;
 				data-variant-selected>
 				{ product.variants.edges.map( (variant, index) => {
 						variant = variant.node;
-						const disabled = !variant.availableForSale ? 'disabled' : "";
+						if(!variant.availableForSale) {
+							return <option
+								value={variant.id}
+								disabled
+							>
+								{variant.title}
+								{ !variant.availableForSale && Theme.Settings.locale.product.sold_out }
+								- {variant.priceV2.currencyCode}{variant.priceV2.amount}
+							</option>
+						}
 						return <option
 							value={variant.id}
 						>

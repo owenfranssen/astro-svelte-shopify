@@ -93,8 +93,11 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			this.getForm();
 			this.getSelection();
 			this.updateMasterId();
-			// this.updateURL();
 			this.updateProductData();
+			this.updateVariantOptions(
+				element.target.closest('fieldset').datset.optionIndex
+			);
+			// this.updateURL();
 			//this.updateMedia();
 
 			if (!this.currentVariant) {
@@ -227,13 +230,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updatePrice(productId) {
-			console.log('updatePrice()');
 			const currentVariant = this.currentVariant;
-			console.log(currentVariant);
 			Array.from(
 				document.querySelectorAll(`[data-product-price="${productId}"]`)
 			).forEach((element) => {
-				console.log(element);
 				const compare_at = currentVariant.node.compareAtPriceV2?.amount ?? 0,
 					price = currentVariant.node.priceV2.amount,
 					onSale = compare_at > price;
@@ -273,16 +273,15 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				[
 					...document.querySelectorAll(`[data-product-sku="${productId}"]`),
 				].forEach((element) => (element.textContent = ''));
-				this.updateQuantity(productId, true);
+				this.updateQuantity(true);
 			} else {
 				this.updatePrice(productId);
 				this.updateStockMessage(productId);
-				this.updateQuantity(productId);
+				this.updateQuantity();
 			}
 		},
 
-		updateQuantity(productId, disabled = false) {
-			console.log('updateQuantity()');
+		updateQuantity(disabled = false) {
 			const quantityInput = this.getForm().querySelector(
 				`[data-quantity-select] [data-quantity-input]`
 			);
@@ -328,6 +327,35 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			// 	'',
 			// 	`${this.getForm().dataset.productUrl}?variant=${this.currentVariant.node.title}`
 			// );
+		},
+
+		updateVariantOptions(optionIndex) {
+			console.log('updateVariantOptions()');
+			const currentVariant = this.currentVariant;
+			console.log(optionIndex);
+			const options = this.getForm.querySelector(
+					`fieldset[data-option-index="${optionIndex}"]`
+				),
+				select = this.getForm().querySelector('[name="id"]');
+			Array.from(options.querySelectorAll('input')).forEach((option) => {
+				const searchFor = "";
+			});
+			/**
+			 * Check option index - colour index: 0, size, index: 1
+			 * check all other options (if size, check colours, etc)
+			 * for each current option + other options (green-small, green-largge, ...) check select#id matching options for availability
+			 */
+
+			/*
+			const select = this.getForm().querySelector('[name="id"]');
+				let x = false;
+				Array.from(select.options).some((option) => {
+					if ((x = option.value == this.currentVariant.node.id)) {
+						select.value = option.value;
+					}
+					return x;
+				});
+			*/
 		},
 
 		updateVariantInput() {

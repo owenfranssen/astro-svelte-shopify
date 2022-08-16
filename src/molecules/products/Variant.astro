@@ -21,16 +21,20 @@ let label = `${option.name}-choice-`;
           <!-- disabled  -->
       { option.values.map( (value, index) => {
 					let option_label = `${label.toLowerCase()}${index}-label`;
-          return <label class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer">
-            <input type="radio" name="size-choice" value="{ value }" disabled class="sr-only" aria-labelledby={ option_label } data-product-option>
-            <span id={ option_label }> { value } </span>
+          return (
+            <input type="radio" id={`input__${option_label}`} name="size-choice" value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
+						<label for={`input__${option_label}`} class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer hover:ring-2">
+							<span id={ option_label }> { value } </span>
+						</label>
+					)
+						{/*
 						<!-- Below is for disabled only -->
             <span aria-hidden="true" class="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none">
               <svg class="absolute inset-0 w-full h-full text-gray-200 stroke-2" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
                 <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
               </svg>
             </span>
-          </label>
+						*/}
 				}
       ) }
     </div>

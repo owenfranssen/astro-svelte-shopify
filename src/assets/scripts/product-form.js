@@ -95,7 +95,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			this.updateMasterId();
 			this.updateProductData();
 			this.updateVariantOptions(
-				element.target.closest('fieldset').datset.optionIndex
+				event.target.closest('fieldset').dataset.optionIndex
 			);
 			// this.updateURL();
 			//this.updateMedia();
@@ -259,7 +259,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					...document.querySelectorAll(`[data-product-price="${productId}"]`),
 				].forEach(
 					(element) =>
-						(element.querySelector('[data-price-current]').textContent = '')
+						(element.querySelector('[data-price-current]').textContent = '') // errors if only 1 option...
 				);
 				[
 					...document.querySelectorAll(
@@ -331,31 +331,24 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 
 		updateVariantOptions(optionIndex) {
 			console.log('updateVariantOptions()');
-			const currentVariant = this.currentVariant;
-			console.log(optionIndex);
-			const options = this.getForm.querySelector(
-					`fieldset[data-option-index="${optionIndex}"]`
+			const selectedOption = this.getForm().querySelector(
+					`input[data-product-option="${optionIndex}"]:checked`
 				),
-				select = this.getForm().querySelector('[name="id"]');
-			Array.from(options.querySelectorAll('input')).forEach((option) => {
-				const searchFor = "";
-			});
-			/**
-			 * Check option index - colour index: 0, size, index: 1
-			 * check all other options (if size, check colours, etc)
-			 * for each current option + other options (green-small, green-largge, ...) check select#id matching options for availability
-			 */
-
-			/*
-			const select = this.getForm().querySelector('[name="id"]');
-				let x = false;
-				Array.from(select.options).some((option) => {
-					if ((x = option.value == this.currentVariant.node.id)) {
-						select.value = option.value;
-					}
-					return x;
-				});
-			*/
+				options = this.getForm().querySelectorAll(
+					`fieldset[data-option-index]:not([data-option-index="${optionIndex}"]) input`
+				),
+				masterSelect = this.getForm().querySelector('[name="id"]');
+			for (let option of Array.from(options)) {
+				let searchFor = [selectedOption.value, option.value];
+				if (optionIndex > 0) {
+					searchFor = searchFor.reverse();
+				}
+				let searchString = searchFor.join(' / ');
+				Array.from(masterSelect.options)
+					.filter((item) => item.value.includes(searchString))
+					.forEach((item) => (option.disabled = item.disabled));
+			}
+			// TODO: does nothing yet, becase masterselect options are not disabled if unavailable.
 		},
 
 		updateVariantInput() {

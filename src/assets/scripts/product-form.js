@@ -19,7 +19,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 
 				document
 					.querySelectorAll(
-						'[data-product-option]:checked, select[data-product-option]'
+						'fieldset [data-product-option]:first-child, select[data-product-option]'
 					)
 					.forEach((option) =>
 						option.dispatchEvent(new Event('change', {bubbles: true}))
@@ -63,6 +63,12 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			if (this.form !== null) {
 				const id = this.form.querySelector('select[name="id"]').value,
 					qty = this.form.querySelector('select[name="quantity"]').value;
+
+          console.log(JSON.stringify({
+						cartId: localStorage.getItem('cartId'),
+						itemId: id,
+						quantity: qty,
+					}));
 
 				const addToCartResponse = await fetch('/api/add-to-cart', {
 					method: 'POST',

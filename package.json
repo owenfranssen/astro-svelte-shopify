@@ -15,7 +15,7 @@
   "devDependencies": {
     "@astrojs/svelte": "^0.2.0",
     "@astrojs/tailwind": "^0.2.2",
-    "astro": "^1.0.2",
+    "astro": "^1.0.6",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

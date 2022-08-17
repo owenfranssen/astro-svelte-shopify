@@ -11,7 +11,7 @@ let label = `${option.name}-choice-`;
  * If only single product, no variants, dont show variant selector
  */
 ---
-<div class="mb-8 last:mb-0">
+<div class="mb-8 last:mb-0" data-product-option-set>
   <h3 class="text-sm text-gray-900 font-medium">{ option.name }</h3>
 
   <fieldset class="mt-4" data-option-index={optionIndex}>
@@ -22,7 +22,7 @@ let label = `${option.name}-choice-`;
       { option.values.map( (value, index) => {
 					let option_label = `${label.toLowerCase()}${index}-label`;
           return (
-            <input type="radio" id={`input__${option_label}`} name="size-choice" value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
+            <input type="radio" id={`input__${option_label}`} name=`${option.name}-choice` value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
 						<label for={`input__${option_label}`} class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer hover:ring-2">
 							<span id={ option_label }> { value } </span>
 						</label>

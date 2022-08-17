@@ -25,6 +25,16 @@ export async function getStaticPaths({paginate}) {
 const { productHandle } = Astro.params;
 const { product } = Astro.props;
 
+const getSelectedOrFirstAvaialableVariant = (product) => {
+	for(let variant of product.variants.edges) {
+		if (variant.node.availableForSale) {
+			return variant.node;
+		}
+	}
+	return null;
+};
+const selectedOrFirstAvailableVariant = getSelectedOrFirstAvaialableVariant(product);
+
 /* Featured products logic */
 const getFeaturedProducts = async (product) => {
 	// TODO:
@@ -48,8 +58,8 @@ const featuredProducts = await getFeaturedProducts(product);
 		<div class="bg-white pt-6">
       <Breadcrumbs />
 
-      {product.images.edges.length <= 1 && <SingleImageLayout product={product} />}
-      {product.images.edges.length > 1 && <GalleryLayout product={product} />}
+      {product.images.edges.length <= 1 && <SingleImageLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}
+      {product.images.edges.length > 1 && <GalleryLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}
 
 			{/* TODO: Should be hydrated - control products from Shopify without needing site rebuild */}
       <ProductGrid title="Our Favourites" products={featuredProducts} />

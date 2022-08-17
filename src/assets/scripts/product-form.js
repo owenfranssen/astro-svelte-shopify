@@ -17,13 +17,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			if (forms != null) {
 				this.listen();
 
-				document
-					.querySelectorAll(
-						'fieldset [data-product-option]:first-child, select[data-product-option]'
-					)
-					.forEach((option) =>
-						option.dispatchEvent(new Event('change', {bubbles: true}))
-					);
+				Array.from(forms).forEach((form) => this.setInitialSelection(form));
 			}
 		},
 
@@ -61,14 +55,16 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			// TODO: add micro-interactions
 
 			if (this.form !== null) {
-				const id = this.form.querySelector('select[name="id"]').value,
+				const id = this.form.querySelector('select[name="id"]').value || this.form.querySelector('select[name="id"]').dataset.variantSelected,
 					qty = this.form.querySelector('select[name="quantity"]').value;
 
-          console.log(JSON.stringify({
+				console.log(
+					JSON.stringify({
 						cartId: localStorage.getItem('cartId'),
 						itemId: id,
 						quantity: qty,
-					}));
+					})
+				);
 
 				const addToCartResponse = await fetch('/api/add-to-cart', {
 					method: 'POST',
@@ -87,14 +83,12 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		changeQuantity(event) {
-			console.log('Product Form: change quantity');
 			this.form = event.target.closest('[data-product-form]');
 			this.getForm().querySelector('[name="quantity"]').value =
 				event.target.value;
 		},
 
 		changeVariant(event) {
-			console.log('changeVariant()');
 			this.element = event.target;
 			this.getForm();
 			this.getSelection();
@@ -185,6 +179,19 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			}
 		},
 
+		setInitialSelection(form) {
+			const masterSelect = form.querySelector('[name="id"]');
+			masterSelect.options[masterSelect.selectedIndex].textContent
+				.split('-')[0]
+				.split('/')
+				.map((value) => value.trim())
+				.forEach((option, index) => {
+					form.querySelector(
+						`fieldset[data-option-index="${index}"] input[value="${option}"]`
+					).checked = true;
+				});
+		},
+
 		toggleAddtocart(disable = true, text) {
 			const addToCart = this.getForm().querySelector('[data-add-to-cart]');
 			if (addToCart != null) {
@@ -223,15 +230,21 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					.includes(false);
 			});
 			if (this.currentVariant) {
-				console.log('Current variant: ', this.currentVariant);
-				const select = this.getForm().querySelector('[name="id"]');
-				let x = false;
-				Array.from(select.options).some((option) => {
-					if ((x = option.value == this.currentVariant.node.id)) {
-						select.value = option.value;
+				const masterSelect = this.getForm().querySelector('[name="id"]');
+				const validOptions = Array.from(masterSelect.options).filter(
+					(option) => {
+						const searchString = option.textContent
+							.split('-')[0]
+							.split('/')
+							.map((value) => value.trim())
+							.join(' / ');
+						return searchString == this.currentVariant.node.title;
 					}
-					return x;
-				});
+				);
+				if (validOptions.length) {
+					masterSelect.value = validOptions[0].value;
+					masterSelect.dataset.variantSelected = validOptions[0].value;
+				}
 			}
 		},
 
@@ -243,17 +256,17 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				const compare_at = currentVariant.node.compareAtPriceV2?.amount ?? 0,
 					price = currentVariant.node.priceV2.amount,
 					onSale = compare_at > price;
-				element.querySelector('[data-current-price]').textContent =
-					this.formatMoney(price);
-				element
-					.querySelector('[data-current-price]')
-					.classList.toggle('price--on-sale', onSale);
-				element
-					.querySelector('[data-compare-price]')
-					.classList.toggle('hidden', !onSale);
-				if (onSale) {
-					element.querySelector('[data-compare-price]').textContent =
-						this.formatMoney(compare_at);
+				const domCurrentPrice = element.querySelector('[data-current-price]'),
+					domComparePrice = element.querySelector('[data-compare-price]');
+				if (domCurrentPrice) {
+					domCurrentPrice.textContent = this.formatMoney(price);
+					domCurrentPrice.classList.toggle('price--on-sale', onSale);
+				}
+				if (domComparePrice) {
+					domComparePrice.classList.toggle('hidden', !onSale);
+					if (onSale) {
+						domComparePrice.textContent = this.formatMoney(compare_at);
+					}
 				}
 			});
 		},
@@ -265,7 +278,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					...document.querySelectorAll(`[data-product-price="${productId}"]`),
 				].forEach(
 					(element) =>
-						(element.querySelector('[data-price-current]').textContent = '') // errors if only 1 option...
+						(element.querySelector('[data-current-price]').textContent = '') // errors if only 1 option...
 				);
 				[
 					...document.querySelectorAll(
@@ -307,7 +320,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateStockMessage(productId) {
-			console.log('updateStockMessage()');
 			const currentVariant = this.currentVariant;
 			[
 				...document.querySelectorAll(
@@ -336,25 +348,34 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		updateVariantOptions(optionIndex) {
-			console.log('updateVariantOptions()');
-			const selectedOption = this.getForm().querySelector(
-					`input[data-product-option="${optionIndex}"]:checked`
-				),
-				options = this.getForm().querySelectorAll(
-					`fieldset[data-option-index]:not([data-option-index="${optionIndex}"]) input`
-				),
-				masterSelect = this.getForm().querySelector('[name="id"]');
-			for (let option of Array.from(options)) {
-				let searchFor = [selectedOption.value, option.value];
-				if (optionIndex > 0) {
-					searchFor = searchFor.reverse();
+			const selected = this.getForm().querySelector(
+				`fieldset[data-option-index="${optionIndex}"] [data-product-option]:checked, select[data-product-option="${optionIndex}"]`
+			).value;
+
+			let searchString = Array();
+			searchString[optionIndex] = selected;
+
+			const validMasterOptions = Array.from(
+				this.getForm().querySelector('select[name="id"]').options
+			).filter((option) => option.textContent.includes(selected));
+
+			const options = Array.from(
+				this.getForm().querySelectorAll(
+					`fieldset[data-option-index]:not([data-option-index="${optionIndex}"]) [data-product-option], select[data-option-index]:not([data-product-option="${optionIndex}"]) option`
+				)
+			);
+
+			for (let option of options) {
+				const index = option.closest('[data-option-index]').dataset.optionIndex;
+				searchString[index] = option.value;
+				option.disabled = !validMasterOptions.some((masterOption) =>
+					masterOption.textContent.includes(searchString.join(' / '))
+				);
+				if (option.disabled) {
+					option.checked = false;
+					option.selected = false;
 				}
-				let searchString = searchFor.join(' / ');
-				Array.from(masterSelect.options)
-					.filter((item) => item.value.includes(searchString))
-					.forEach((item) => (option.disabled = item.disabled));
 			}
-			// TODO: does nothing yet, becase masterselect options are not disabled if unavailable.
 		},
 
 		updateVariantInput() {

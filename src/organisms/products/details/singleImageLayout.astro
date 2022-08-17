@@ -4,7 +4,7 @@ import Price from '../../../atoms/Price.astro';
 import ProductForm from '../../../molecules/products/ProductForm.astro';
 import Reviews from '../../../molecules/products/Reviews.astro';
 
-const { product } = Astro.props
+const { product, selectedOrFirstAvailableVariant } = Astro.props
 ---
 <div class="bg-white">
   <div class="max-w-2xl mx-auto pt-6 pb-16 px-4 sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
@@ -45,7 +45,7 @@ const { product } = Astro.props
       <section aria-labelledby="options-heading">
         <h2 id="options-heading" class="sr-only">Product options</h2>
 
-        <ProductForm product={ product }/>
+        <ProductForm product={ product } selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant}/>
       </section>
     </div>
   </div>

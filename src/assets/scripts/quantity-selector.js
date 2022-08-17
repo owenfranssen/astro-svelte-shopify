@@ -12,7 +12,6 @@ if (!Theme.hasOwnProperty('jsQuantitySelector')) {
 		},
 
 		listen() {
-			console.log('Quantity Selector: event listeners');
 			document.addEventListener('click', (event) => {
 				if (
 					event.target.matches('[data-update-quantity]') ||
@@ -77,7 +76,6 @@ if (!Theme.hasOwnProperty('jsQuantitySelector')) {
 		},
 
 		updateQuantity(event) {
-			console.log('Quantity Selector: update quantity');
 			const quantitySelect = event.target.closest('[data-quantity-select]'),
 				input = quantitySelect.querySelector('[data-quantity-input]'),
 				value = parseInt(input.value),

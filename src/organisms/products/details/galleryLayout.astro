@@ -4,7 +4,7 @@ import ProductForm from '../../../molecules/products/ProductForm.astro';
 import Price from '../../../atoms/Price.astro';
 import Reviews from '../../../molecules/products/Reviews.astro';
 
-const { product } = Astro.props
+const { product, selectedOrFirstAvailableVariant } = Astro.props
 ---
 
 <Gallery images={product.images.edges} />
@@ -30,7 +30,7 @@ const { product } = Astro.props
       <p class="ml-2 text-sm text-gray-500">In stock and ready to ship</p>
     </div>
 
-    <ProductForm product={ product }/>
+    <ProductForm product={ product } selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant}/>
   </div>
 
   <div class="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">

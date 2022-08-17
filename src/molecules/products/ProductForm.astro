@@ -8,7 +8,7 @@ import Theme from '../../assets/scripts/theme-settings.js'
 export interface Props {
   product: object;
 }
-const { product } = Astro.props as Props;
+const { product, selectedOrFirstAvailableVariant } = Astro.props as Props;
 
 const formId = product.id;
 ---
@@ -29,31 +29,31 @@ const formId = product.id;
 	<span data-product-form-error></span>
 
 	{/* All variant selector for product ids to send to cart - also no-js fallback */}
-	<div class="product-form__input product-form__input--dropdown hidden no-js" id="all-variant-ids">
+	<div class="product-form__input product-form__input--dropdown xhidden no-js" id="all-variant-ids">
 		<label for="quantity-0" class="sr-only">Product variants</label>
 		<select name="id"
 				class="form__dropdown"
 				form={formId}
 				data-variant-selected>
-				{ product.variants.edges.map( (variant, index) => {
+				{ product.variants.edges.map( (variant) => {
 						variant = variant.node;
-						if(!variant.availableForSale) {
+						if(variant.availableForSale) {
+							if(variant.id == selectedOrFirstAvailableVariant.id) {
+								return <option
+									value={variant.id}
+									selected
+								>
+									{variant.title}
+									- {variant.priceV2.currencyCode}{variant.priceV2.amount}
+								</option>
+							}
 							return <option
 								value={variant.id}
-								disabled
 							>
 								{variant.title}
-								{ !variant.availableForSale && Theme.Settings.locale.product.sold_out }
 								- {variant.priceV2.currencyCode}{variant.priceV2.amount}
 							</option>
 						}
-						return <option
-							value={variant.id}
-						>
-							{variant.title}
-							{ !variant.availableForSale && Theme.Settings.locale.product.sold_out }
-							- {variant.priceV2.currencyCode}{variant.priceV2.amount}
-						</option>
 					}
 				)}
 		</select>

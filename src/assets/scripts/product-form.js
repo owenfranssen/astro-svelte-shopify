@@ -79,6 +79,11 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				localStorage.setItem('cartId', data.id);
 				localStorage.setItem('cart', JSON.stringify(data));
 				location.reload();
+
+				// TODO:
+				// * update cart count
+				// * cart open
+				// * cart content update
 			}
 		},
 

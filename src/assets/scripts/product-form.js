@@ -391,7 +391,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				// 		});
 				// 	}
 				// } else {
-					console.log(searchString);
+				//	console.log(searchString);
 					option.disabled = !validMasterOptions.some((masterOption) =>
 						masterOption.textContent.includes(searchString.join(' / '))
 					);

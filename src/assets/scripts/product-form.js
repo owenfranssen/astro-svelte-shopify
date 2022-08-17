@@ -55,7 +55,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			// TODO: add micro-interactions
 
 			if (this.form !== null) {
-				const id = this.form.querySelector('select[name="id"]').value || this.form.querySelector('select[name="id"]').dataset.variantSelected,
+				const id =
+						this.form.querySelector('select[name="id"]').value ||
+						this.form.querySelector('select[name="id"]').dataset
+							.variantSelected,
 					qty = this.form.querySelector('select[name="quantity"]').value;
 
 				console.log(
@@ -370,12 +373,29 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				)
 			);
 
+      const optionCount = parseInt(this.getForm().dataset.productOptionCount);
+
 			for (let option of options) {
 				const index = option.closest('[data-option-index]').dataset.optionIndex;
 				searchString[index] = option.value;
-				option.disabled = !validMasterOptions.some((masterOption) =>
-					masterOption.textContent.includes(searchString.join(' / '))
-				);
+				// if (optionCount > index) {
+        //   console.log(option);
+				// 	for (let i = index + 1; i < optionCount; i++) {
+        //     console.log({i});
+				// 		Array.from(`fieldset[data-option-index=${i}]`).forEach((o) => {
+				// 			searchString[i] = o.value;
+				// 			console.log(searchString);
+				// 			option.disabled = !validMasterOptions.some((masterOption) =>
+				// 				masterOption.textContent.includes(searchString.join(' / '))
+				// 			);
+				// 		});
+				// 	}
+				// } else {
+					console.log(searchString);
+					option.disabled = !validMasterOptions.some((masterOption) =>
+						masterOption.textContent.includes(searchString.join(' / '))
+					);
+				//}
 				if (option.disabled) {
 					option.checked = false;
 					option.selected = false;

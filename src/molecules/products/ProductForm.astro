@@ -13,7 +13,7 @@ const { product, selectedOrFirstAvailableVariant } = Astro.props as Props;
 const formId = product.id;
 ---
 
-<form class="mt-10" data-product-form={formId} data-product-url={productUrl(product.handle)}>
+<form class="mt-10" data-product-form={formId} data-product-url={productUrl(product.handle)} data-product-option-count={product.options.length}>
   { product.options.length > 1 && product.options.map( (option, index) => {
     if (option.name == 'Colour')
       return <ColourVariant option={ option } optionIndex={index} />

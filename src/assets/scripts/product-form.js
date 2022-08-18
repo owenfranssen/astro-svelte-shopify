@@ -9,6 +9,7 @@
  *     - https://shopify.dev/api/examples/cart
  */
 import Theme from './theme-settings.js';
+import {count} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -59,7 +60,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						this.form.querySelector('select[name="id"]').value ||
 						this.form.querySelector('select[name="id"]').dataset
 							.variantSelected,
-					qty = this.form.querySelector('select[name="quantity"]').value;
+					qty = parseInt(this.form.querySelector('select[name="quantity"]').value);
 
 				console.log(
 					JSON.stringify({
@@ -69,25 +70,33 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					})
 				);
 
-				const addToCartResponse = await fetch('/api/add-to-cart', {
-					method: 'POST',
-					body: JSON.stringify({
-						cartId: localStorage.getItem('cartId'),
-						itemId: id,
-						quantity: qty,
-					}),
-				});
-				const data = await addToCartResponse.json();
+				try {
+					const addToCartResponse = await fetch('/api/add-to-cart', {
+						method: 'POST',
+						body: JSON.stringify({
+							cartId: localStorage.getItem('cartId'),
+							itemId: id,
+							quantity: qty,
+						}),
+					});
+					const data = await addToCartResponse.json();
 
-				localStorage.setItem('cartId', data.id);
-				localStorage.setItem('cart', JSON.stringify(data));
-				location.reload();
+					// Update cart count
+					count.increment(qty);
+
+					localStorage.setItem('cartId', data.id);
+					localStorage.setItem('cart', JSON.stringify(data));
+					this.toggleAddtocart(false);
+				} catch (error) {
+					this.setErrorMessage(error);
+					console.error('addToCart: ', error);
+				}
 
 				// TODO:
-				// * update cart count
 				// * cart open
 				// * cart content update
 			}
+			return false;
 		},
 
 		changeQuantity(event) {
@@ -373,15 +382,15 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				)
 			);
 
-      const optionCount = parseInt(this.getForm().dataset.productOptionCount);
+			const optionCount = parseInt(this.getForm().dataset.productOptionCount);
 
 			for (let option of options) {
 				const index = option.closest('[data-option-index]').dataset.optionIndex;
 				searchString[index] = option.value;
 				// if (optionCount > index) {
-        //   console.log(option);
+				//   console.log(option);
 				// 	for (let i = index + 1; i < optionCount; i++) {
-        //     console.log({i});
+				//     console.log({i});
 				// 		Array.from(`fieldset[data-option-index=${i}]`).forEach((o) => {
 				// 			searchString[i] = o.value;
 				// 			console.log(searchString);
@@ -392,9 +401,9 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 				// 	}
 				// } else {
 				//	console.log(searchString);
-					option.disabled = !validMasterOptions.some((masterOption) =>
-						masterOption.textContent.includes(searchString.join(' / '))
-					);
+				option.disabled = !validMasterOptions.some((masterOption) =>
+					masterOption.textContent.includes(searchString.join(' / '))
+				);
 				//}
 				if (option.disabled) {
 					option.checked = false;

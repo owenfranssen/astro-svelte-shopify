@@ -1,5 +1,6 @@
 <script>
 	import {onMount} from 'svelte';
+	import {count} from '../assets/scripts/stores.js';
 
 	let items = [];
 	onMount(() => {
@@ -28,7 +29,8 @@
 
 		localStorage.setItem('cartId', removeItemFromCart.id);
 		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
-		location.reload();
+		count.decrement(1); // TODO: should be quantity of removed items, min 1
+		/*location.reload();*/
 	}
 </script>
 
@@ -62,7 +64,7 @@
 									<p class="text-gray-500">Qty {item.quantity}</p>
 
 									<div class="flex">
-										<button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+										<button type="button" class="font-medium text-indigo-600 hover:text-indigo-500" on:click={removeItem}>Remove</button>
 									</div>
 								</div>
 							</div>

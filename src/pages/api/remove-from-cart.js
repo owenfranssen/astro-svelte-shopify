@@ -1,7 +1,8 @@
 import Cart from '../../routes/api/utils/cart.js';
 
-export async function post(request) {
-	const {cartId, lineId} = JSON.parse(request.body);
+export async function post({params, request}) {
+	const data = await request.json();
+	const {cartId, lineId} = data;
 
 	try {
 		const shopifyResponse = await Cart.removeItemFromCart({

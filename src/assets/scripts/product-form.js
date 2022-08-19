@@ -9,7 +9,7 @@
  *     - https://shopify.dev/api/examples/cart
  */
 import Theme from './theme-settings.js';
-import {count} from './stores.js';
+import {cartItems} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -81,8 +81,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					});
 					const data = await addToCartResponse.json();
 
-					// Update cart count
-					count.increment(qty);
+          cartItems.set(data.lines.edges);
 
 					localStorage.setItem('cartId', data.id);
 					localStorage.setItem('cart', JSON.stringify(data));

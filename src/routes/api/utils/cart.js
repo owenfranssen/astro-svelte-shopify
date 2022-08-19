@@ -197,7 +197,7 @@ const Cart = {
     */
 	},
 
-	removeItemFromCart: async function (cartId, lineId) {
+	removeItemFromCart: async function ({cartId, lineId}) {
 		try {
 			const shopifyResponse = await postToShopify({
 				query: `

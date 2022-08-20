@@ -7,9 +7,11 @@
  *     - update images
  * - Add to cart
  *     - https://shopify.dev/api/examples/cart
+ *
+ * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems} from './stores.js';
+import {cartItems, addToast} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -60,7 +62,9 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						this.form.querySelector('select[name="id"]').value ||
 						this.form.querySelector('select[name="id"]').dataset
 							.variantSelected,
-					qty = parseInt(this.form.querySelector('select[name="quantity"]').value);
+					qty = parseInt(
+						this.form.querySelector('select[name="quantity"]').value
+					);
 
 				console.log(
 					JSON.stringify({
@@ -80,12 +84,11 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						}),
 					});
 					const data = await addToCartResponse.json();
-
-          cartItems.set(data.lines.edges);
-
+					cartItems.set(data.lines.edges);
 					localStorage.setItem('cartId', data.id);
 					localStorage.setItem('cart', JSON.stringify(data));
 					this.toggleAddtocart(false);
+					addToast({ message: 'Added to cart', type: 'cart', timeout: 3000 }); // addToast({ message, type, dismissible, timeout })
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);

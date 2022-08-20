@@ -3,6 +3,7 @@ import Head from '../organisms/Head.astro';
 import Header from '../organisms/Header.astro';
 import HeaderIndex from '../organisms/HeaderIndex.astro';
 import Footer from '../organisms/Footer.astro';
+import Toasts from '../molecules/Toasts.svelte';
 
 import '../assets/styles/global.css';
 export interface Props {
@@ -33,6 +34,7 @@ const title = `${pageTitle} - ${siteName}`;
       <Footer />
     </div>
   </div>
+  <Toasts client:visible />
 </body>
 </html>
 

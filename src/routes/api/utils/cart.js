@@ -197,6 +197,26 @@ const Cart = {
     */
 	},
 
+	getCheckoutUrl: async function ({cartId}) {
+		try {
+			const shopifyResponse = await postToShopify({
+				query: `
+					query checkoutURL(cartId: $cartId) {
+						cart(id: $cartId) {
+							checkoutUrl
+						}
+					}
+				`,
+				variables: {
+					cartId,
+				},
+			});
+			return shopifyResponse;
+		} catch (error) {
+			console.log('removeItemFromCart: ', error);
+		}
+	},
+
 	removeItemFromCart: async function ({cartId, lineId}) {
 		try {
 			const shopifyResponse = await postToShopify({

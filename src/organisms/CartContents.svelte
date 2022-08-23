@@ -2,9 +2,19 @@
 	import {cartItems} from '../assets/scripts/stores.js';
   import {productUrl} from '../routes/api/utils/makeUrl.js';
 
-	const itemTotal = (price, quantity) => {
+	const cartTotal = (items, code='EUR') => {
+		let totalPrice = 0;
+		items.forEach(i => totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity);
+		return formatMoney(totalPrice, code);
+	}
+
+	const itemTotal = (price, quantity, code) => {
 		const totalPrice = Number(price) * Number(quantity);
-		return totalPrice.toFixed(2);
+		return formatMoney(totalPrice, code);
+	}
+
+	const formatMoney = (amount, code) => {
+		return new Intl.NumberFormat('en-IE', { style: 'currency', currency: code }).format(amount);
 	}
 
 	const removeItem = async (event) => {
@@ -20,7 +30,6 @@
 		localStorage.setItem('cartId', removeItemFromCart.id);
 		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
     cartItems.set(removeItemFromCart.lines.edges);
-		/*location.reload();*/
 	}
 </script>
 
@@ -42,8 +51,7 @@
                       <a href={productUrl(item.merchandise.product.handle)}> {item.merchandise.product.title} </a>
                     </h3>
                     <p class="ml-4">
-                      {item.merchandise.priceV2.currencyCode}
-                      {itemTotal(item.merchandise.priceV2.amount, item.quantity)}
+                      {itemTotal(item.merchandise.priceV2.amount, item.quantity, item.merchandise.priceV2.currencyCode)}
                     </p>
                   </div>
                   {#if item.merchandise.title != item.merchandise.product.title}
@@ -74,6 +82,6 @@
 <div class="border-t border-gray-200 pt-6 px-4 sm:px-6">
 	<div class="flex justify-between text-base font-medium text-gray-900">
 		<p>Subtotal</p>
-		<p>$262.00</p>
+		<p>{cartTotal($cartItems)}</p>
 	</div>
 </div>

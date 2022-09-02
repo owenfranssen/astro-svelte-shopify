@@ -136,69 +136,7 @@ const Cart = {
 		}
 	},
 
-	getContents: function () {
-		/*
-      query {
-        cart(
-          id: "gid://shopify/Cart/1"
-        ) {
-          id
-          createdAt
-          updatedAt
-          lines(first: 10) {
-            edges {
-              node {
-                id
-                quantity
-                merchandise {
-                  ... on ProductVariant {
-                    id
-                  }
-                }
-                attributes {
-                  key
-                  value
-                }
-              }
-            }
-          }
-          attributes {
-            key
-            value
-          }
-          cost {
-            totalAmount {
-              amount
-              currencyCode
-            }
-            subtotalAmount {
-              amount
-              currencyCode
-            }
-            totalTaxAmount {
-              amount
-              currencyCode
-            }
-            totalDutyAmount {
-              amount
-              currencyCode
-            }
-          }
-          buyerIdentity {
-            email
-            phone
-            customer {
-              id
-            }
-            countryCode
-          }
-        }
-      }
-
-    */
-	},
-
-	getCheckoutUrl: async function ({cartId}) {
+	getCheckoutUrl: async function (cartId) {
 		try {
 			const shopifyResponse = await postToShopify({
 				query: `
@@ -212,9 +150,10 @@ const Cart = {
 					cartId,
 				},
 			});
+
 			return shopifyResponse;
 		} catch (error) {
-			console.log('removeItemFromCart: ', error);
+			console.log('getCheckoutUrl: ', error);
 		}
 	},
 

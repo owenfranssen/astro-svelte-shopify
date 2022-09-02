@@ -5,16 +5,12 @@ export async function post({params, request}) {
 	let {cartId, itemId, quantity} = data;
 	quantity = parseInt(quantity);
 
-	console.log('Calling add to cart API', data);
-
 	if (cartId) {
 		const shopifyResponse = await Cart.addItemToCart({
 			cartId,
 			itemId,
 			quantity,
 		});
-
-		console.log('Response: ', shopifyResponse.cartLinesAdd.cart);
 
 		return {
 			statusCode: 200,

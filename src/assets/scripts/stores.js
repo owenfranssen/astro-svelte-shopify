@@ -43,15 +43,3 @@ export const addToast = (toast) => {
 export const dismissToast = (id) => {
 	toasts.update((all) => all.filter((t) => t.id !== id));
 };
-
-/**
- * Checkout link
- */
- function createCheckoutLink() {
-	const {subscribe, update} = writable('#');
-	return {
-		subscribe,
-		set: (link) => update((old) => link),
-	};
-}
-export const checkoutLink = createCheckoutLink();

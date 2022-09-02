@@ -72,7 +72,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						body: JSON.stringify({
 							cartId: localStorage.getItem('cartId'),
 							itemId: id,
-							quantity: qty,
+							quantity: qty, // TODO: if item already in cart, increase qty
 						}),
 					});
 					const data = await addToCartResponse.json();

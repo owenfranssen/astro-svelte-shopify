@@ -88,7 +88,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					localStorage.setItem('cartId', data.id);
 					localStorage.setItem('cart', JSON.stringify(data));
 					this.toggleAddtocart(false);
-					addToast({ message: 'Added to cart', type: 'cart', timeout: 3000 }); // addToast({ message, type, dismissible, timeout })
+					addToast({message: 'Added to cart', type: 'cart', timeout: 3000}); // addToast({ message, type, dismissible, timeout })
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);
@@ -199,16 +199,21 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 		},
 
 		setInitialSelection(form) {
-			const masterSelect = form.querySelector('[name="id"]');
-			masterSelect.options[masterSelect.selectedIndex].textContent
-				.split('-')[0]
-				.split('/')
-				.map((value) => value.trim())
-				.forEach((option, index) => {
-					form.querySelector(
-						`fieldset[data-option-index="${index}"] input[value="${option}"]`
-					).checked = true;
-				});
+			if (form) {
+				const masterSelect = form.querySelector('[name="id"]');
+				masterSelect.options[masterSelect.selectedIndex].textContent
+					.split('-')[0]
+					.split('/')
+					.map((value) => value.trim())
+					.forEach((option, index) => {
+						const input = form.querySelector(
+							`fieldset[data-option-index="${index}"] input[value="${option}"]`
+						);
+						if (input) {
+							input.checked = true;
+						}
+					});
+			}
 		},
 
 		toggleAddtocart(disable = true, text) {

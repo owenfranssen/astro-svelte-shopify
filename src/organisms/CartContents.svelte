@@ -4,7 +4,9 @@
 
 	const cartTotal = (items, code='EUR') => {
 		let totalPrice = 0;
-		items.forEach(i => totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity);
+		if(items) {
+			items.forEach(i => totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity);
+		}
 		return formatMoney(totalPrice, code);
 	}
 

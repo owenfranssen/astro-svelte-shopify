@@ -13,12 +13,12 @@
     "lint:stylelint": "stylelint --fix 'src/assets/styles/**/*.css'"
   },
   "devDependencies": {
+    "@astrojs/image": "^0.4.0",
     "@astrojs/svelte": "^0.2.0",
     "@astrojs/tailwind": "^0.2.2",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
-    "astro": "^1.0.7",
-    "astro-image": "^0.0.6",
+    "astro": "^1.1.3",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",

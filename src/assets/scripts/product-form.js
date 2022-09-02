@@ -11,7 +11,7 @@
  * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems, addToast} from './stores.js';
+import {cartItems, addToast, checkoutLink} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -66,14 +66,6 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						this.form.querySelector('select[name="quantity"]').value
 					);
 
-				console.log(
-					JSON.stringify({
-						cartId: localStorage.getItem('cartId'),
-						itemId: id,
-						quantity: qty,
-					})
-				);
-
 				try {
 					const addToCartResponse = await fetch('/api/add-to-cart', {
 						method: 'POST',
@@ -84,19 +76,24 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						}),
 					});
 					const data = await addToCartResponse.json();
+					console.log(await data);
 					cartItems.set(data.lines.edges);
 					localStorage.setItem('cartId', data.id);
 					localStorage.setItem('cart', JSON.stringify(data));
+					// object doesnt contain checkout url... use getCheckoutUrl() ?
+					//checkoutLink.set(data.checkoutUrl);
+					//localStorage.setItem('checkoutLink', data.checkoutUrl);
 					this.toggleAddtocart(false);
 					addToast({message: 'Added to cart', type: 'cart', timeout: 3000}); // addToast({ message, type, dismissible, timeout })
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);
+					checkoutLink.set('#');
 				}
 
 				// TODO:
 				// * cart open
-				// * cart content update
+				// * cart contents update - setting cartItems should do this?
 			}
 			return false;
 		},

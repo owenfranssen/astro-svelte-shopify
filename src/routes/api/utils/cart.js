@@ -63,14 +63,14 @@ const Cart = {
 					],
 				},
 			});
-
-			return shopifyResponse;
+			return await shopifyResponse;
 		} catch (error) {
 			console.log('addItemToCart error: ', error);
 		}
 	},
 
 	createCartWithItem: async function (itemId, quantity) {
+		console.log('CreatCartWithItem(): ', itemId, quantity);
 		try {
 			const shopifyResponse = await postToShopify({
 				query: `
@@ -129,7 +129,8 @@ const Cart = {
 					},
 				},
 			});
-			return shopifyResponse;
+			console.log(await shopifyResponse);
+			return await shopifyResponse;
 		} catch (error) {
 			console.log('createCartWithItem error: ', error);
 		}

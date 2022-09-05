@@ -11,7 +11,7 @@
  * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems, addToast, checkoutLink} from './stores.js';
+import {cartItems, addToast} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {

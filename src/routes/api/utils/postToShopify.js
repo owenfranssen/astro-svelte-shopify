@@ -6,7 +6,7 @@ export const postToShopify = async ({query, variables, api = 'storefront'}) => {
 	}
 };
 
-const postToShopifyStorefrontAPI = async ({query, variables}) => {
+export const postToShopifyStorefrontAPI = async ({query, variables}) => {
 	try {
 		const url = import.meta.env.API_ENDPOINT;
 		// @ts-ignore
@@ -32,7 +32,7 @@ const postToShopifyStorefrontAPI = async ({query, variables}) => {
 	}
 };
 
-const postToShopifyAdminAPI = async ({query, variables}) => {
+export const postToShopifyAdminAPI = async ({query, variables}) => {
 	const url = import.meta.env.ADMIN_API_ENDPOINT;
 	const options = {
 		method: 'POST',

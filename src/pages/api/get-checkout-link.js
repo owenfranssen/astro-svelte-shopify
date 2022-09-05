@@ -7,12 +7,12 @@ export async function post({params, request}) {
 	if (cartId) {
 		const shopifyResponse = await Cart.getCheckoutUrl(cartId);
 
-		console.log('Response: ', shopifyResponse.cart);
-
-		return {
+		console.log('Get Checkout Response: ', shopifyResponse.cart);
+		const response = {
 			statusCode: 200,
 			body: JSON.stringify(shopifyResponse.cart),
 		};
+		return response;
 	} else {
 		return '#';
 	}

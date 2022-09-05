@@ -1,4 +1,4 @@
-import {postToShopify} from './postToShopify';
+import {postToShopify, postToShopifyStorefrontAPI} from './postToShopify';
 
 const Cart = {
 	addItemToCart: async function ({cartId, itemId, quantity}) {
@@ -138,14 +138,15 @@ const Cart = {
 
 	getCheckoutUrl: async function (cartId) {
 		try {
-			const shopifyResponse = await postToShopify({
-				query: `
-					query checkoutURL(cartId: $cartId) {
+			const query = `
+					query checkoutURL($cartId: ID!) {
 						cart(id: $cartId) {
 							checkoutUrl
 						}
 					}
-				`,
+				`;
+			const shopifyResponse = await postToShopifyStorefrontAPI({
+				query: query,
 				variables: {
 					cartId,
 				},

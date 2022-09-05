@@ -13,9 +13,26 @@ import Theme from './theme-settings.js';
 if (!Theme.hasOwnProperty('jsCartDrawer')) {
 	('use strict');
 
-	Theme.jscartDrawer = {
+	Theme.jsCartDrawer = {
 		init() {
 			console.log('Cart drawer: initialising');
+		},
+
+		async getCheckoutLink() {
+			try {
+				const shopifyResponse = fetch('/api/get-checkout-link', {
+					method: 'POST',
+					body: JSON.stringify({
+						cartId: localStorage.getItem('cartId'),
+					}),
+				}).then((response) => response.text());
+				let url = await shopifyResponse;
+				return url;
+			} catch (error) {
+				this.setErrorMessage(error);
+				console.error('getCheckoutLink: ', error);
+				return '#';
+			}
 		},
 	};
 }

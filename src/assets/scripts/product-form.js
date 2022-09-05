@@ -11,7 +11,7 @@
  * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems, addToast} from './stores.js';
+import {cartItems, addToast, checkoutLink} from './stores.js';
 
 if (!Theme.hasOwnProperty('jsProductForm')) {
 	Theme.jsProductForm = {
@@ -56,6 +56,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			this.toggleAddtocart(true);
 
 			// TODO: add micro-interactions
+      // TODO: 'typerror, data is null' when adding to cart product with no variants
 
 			if (this.form !== null) {
 				const id =
@@ -76,10 +77,10 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						}),
 					});
 					const data = await addToCartResponse.json();
-					console.log(await data);
 					cartItems.set(data.lines.edges);
 					localStorage.setItem('cartId', data.id);
 					localStorage.setItem('cart', JSON.stringify(data));
+          checkoutLink.set(Theme.jsCartDrawer.getCheckoutLink());
 					// object doesnt contain checkout url... use getCheckoutUrl() ?
 					//checkoutLink.set(data.checkoutUrl);
 					//localStorage.setItem('checkoutLink', data.checkoutUrl);
@@ -274,8 +275,8 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			Array.from(
 				document.querySelectorAll(`[data-product-price="${productId}"]`)
 			).forEach((element) => {
-				const compare_at = currentVariant.node.compareAtPriceV2?.amount ?? 0,
-					price = currentVariant.node.priceV2.amount,
+				const compare_at = currentVariant.node?.compareAtPriceV2.amount ?? 0,
+					price = currentVariant.node?.priceV2.amount ?? 0,
 					onSale = compare_at > price;
 				const domCurrentPrice = element.querySelector('[data-current-price]'),
 					domComparePrice = element.querySelector('[data-compare-price]');

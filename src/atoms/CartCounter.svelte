@@ -1,12 +1,18 @@
 <script>
 	import {onMount} from 'svelte';
-	import {cartItems} from '../assets/scripts/stores.js';
+	import {cartItems, checkoutLink} from '../assets/scripts/stores.js';
+import Theme from '../assets/scripts/theme-settings.js';
 
-  onMount(() => {
+  onMount(async () => {
     if(!$cartItems) {
       const data = localStorage.getItem('cart');
       if(data) {
         cartItems.set(JSON.parse(data).lines.edges);
+      }
+
+      const cartId = localStorage.getItem('cartId');
+      if(cartId) {
+        checkoutLink.set(await Theme.jsCartDrawer.getCheckoutLink());
       }
     }
   })

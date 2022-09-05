@@ -151,10 +151,9 @@ const Cart = {
 					cartId,
 				},
 			});
-
-			return shopifyResponse;
+			return shopifyResponse.cart.checkoutUrl ?? '';
 		} catch (error) {
-			console.log('getCheckoutUrl: ', error);
+			console.log('getCheckoutUrl() error: ', error);
 		}
 	},
 

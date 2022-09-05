@@ -14,6 +14,19 @@ function createCartItems() {
 export const cartItems = createCartItems();
 
 /**
+ * Get checkout url
+ */
+
+function createCheckoutLink() {
+	const {subscribe, set, update} = writable('#');
+	return {
+		subscribe,
+		set: (url) => update((old) => url),
+	};
+}
+export const checkoutLink = createCheckoutLink();
+
+/**
  * Toast notifications
  * https://svelte.dev/repl/0091c8b604b74ed88bb7b6d174504f50?version=3.35.0
  */

@@ -5,7 +5,9 @@
 	const cartTotal = (items, code='EUR') => {
 		let totalPrice = 0;
 		if(items) {
-			items.forEach(i => { totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity });
+			items.forEach(i => {
+				totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity
+			});
 		}
 		return formatMoney(totalPrice, code);
 	}
@@ -38,13 +40,17 @@
 <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
 	<div class="flow-root">
     {#if $cartItems.length > 0}
-      <ul role="list" class="-my-6 divide-y divide-gray-200">
+      <ul class="-my-6 divide-y divide-gray-200">
         {#each $cartItems as { node: item } }
           {#if item.quantity > 0}
             <li class="flex py-6">
-              <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
-              </div>
+							{#if item.image}
+								<div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+									<img src={item.image.url} alt={item.image.altText} class="h-full w-full object-cover object-center">
+								</div>
+							{:else}
+								<div class="h-24 w-24 flex-shrink-0"></div>
+							{/if}
 
               <div class="ml-4 flex flex-1 flex-col">
                 <div>

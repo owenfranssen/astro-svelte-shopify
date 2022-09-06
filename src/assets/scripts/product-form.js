@@ -77,13 +77,13 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						}),
 					});
 					const data = await addToCartResponse.json();
-					cartItems.set(data.lines.edges);
-					localStorage.setItem('cartId', data.id);
-					localStorage.setItem('cart', JSON.stringify(data));
-          checkoutLink.set(Theme.jsCartDrawer.getCheckoutLink());
-					// object doesnt contain checkout url... use getCheckoutUrl() ?
-					//checkoutLink.set(data.checkoutUrl);
-					//localStorage.setItem('checkoutLink', data.checkoutUrl);
+					if(!localStorage.getItem('cartId')) {
+						localStorage.setItem('cartId', data.id);
+						localStorage.setItem('cart', JSON.stringify(data));
+						localStorage.setItem('checkoutUrl', data.checkoutUrl);
+						cartItems.set(data.lines.edges);
+						checkoutLink.set(data.checkoutUrl);
+					}
 					this.toggleAddtocart(false);
 					addToast({message: 'Added to cart', type: 'cart', timeout: 3000}); // addToast({ message, type, dismissible, timeout })
 				} catch (error) {

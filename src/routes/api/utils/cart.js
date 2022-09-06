@@ -18,6 +18,7 @@ const Cart = {
                         ... on ProductVariant {
                           id
                           title
+													image
                           priceV2 {
                             amount
                             currencyCode
@@ -70,7 +71,6 @@ const Cart = {
 	},
 
 	createCartWithItem: async function (itemId, quantity) {
-		console.log('CreatCartWithItem(): ', itemId, quantity);
 		try {
 			const shopifyResponse = await postToShopify({
 				query: `
@@ -80,13 +80,24 @@ const Cart = {
                 id
                 createdAt
                 updatedAt
+								checkoutUrl
                 lines(first: 10) {
                   edges {
                     node {
                       id
+											quantity
                       merchandise {
                         ... on ProductVariant {
                           id
+													title
+                          priceV2 {
+                            amount
+                            currencyCode
+                          }
+                          product {
+                            title
+                            handle
+                          }
                         }
                       }
                     }
@@ -129,7 +140,7 @@ const Cart = {
 					},
 				},
 			});
-			console.log(await shopifyResponse);
+			console.log('New cart: ', shopifyResponse.cartCreate);
 			return await shopifyResponse;
 		} catch (error) {
 			console.log('createCartWithItem error: ', error);

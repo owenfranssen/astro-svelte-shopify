@@ -191,6 +191,10 @@ const Cart = {
 												... on ProductVariant {
 													id
 													title
+													image {
+														url
+														altText
+													}
 													priceV2 {
 														amount
 														currencyCode

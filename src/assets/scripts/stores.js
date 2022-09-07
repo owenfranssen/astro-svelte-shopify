@@ -1,7 +1,7 @@
 import {writable} from 'svelte/store';
 
 /**
- * Cart & cart counter
+ * Cart
  */
 
 function createCartItems() {
@@ -11,7 +11,9 @@ function createCartItems() {
 		set: (items) => update((old) => items),
 	};
 }
-export const cartItems = createCartItems();
+export const cartItems = writable(
+	JSON.parse(localStorage.getItem('cart'))?.lines.edges ?? []
+);
 
 /**
  * Get checkout url

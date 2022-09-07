@@ -1,40 +1,40 @@
 <script>
-	import {cartItems} from '../assets/scripts/stores.js';
-  import {productUrl} from '../routes/api/utils/makeUrl.js';
+import {cartItems} from '../assets/scripts/stores.js';
+import {productUrl} from '../routes/api/utils/makeUrl.js';
 
-	const cartTotal = (items, code='EUR') => {
-		let totalPrice = 0;
-		if(items) {
-			items.forEach(i => {
-				totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity
-			});
+const cartTotal = (items, code='EUR') => {
+	let totalPrice = 0;
+	if(items) {
+		for(const i of items) {
+			totalPrice += i.node.merchandise.priceV2.amount * i.node.quantity
 		}
-		return formatMoney(totalPrice, code);
 	}
+	return formatMoney(totalPrice, code);
+}
 
-	const itemTotal = (price, quantity, code) => {
-		const totalPrice = Number(price) * Number(quantity);
-		return formatMoney(totalPrice, code);
-	}
+const itemTotal = (price, quantity, code) => {
+	const totalPrice = Number(price) * Number(quantity);
+	return formatMoney(totalPrice, code);
+}
 
-	const formatMoney = (amount, code) => {
-		return new Intl.NumberFormat('en-IE', { style: 'currency', currency: code }).format(amount);
-	}
+const formatMoney = (amount, code) => {
+	return new Intl.NumberFormat('en-IE', { style: 'currency', currency: code }).format(amount);
+}
 
-	const removeItem = async (event) => {
-		const removeItemFromCart = await fetch('/api/remove-from-cart', {
-			method: 'POST',
-			body: JSON.stringify({
-				cartId: localStorage.getItem('cartId'),
-				lineId: event.target.dataset.lineId
-			})
+const removeItem = async (event) => {
+	const removeItemFromCart = await fetch('/api/remove-from-cart', {
+		method: 'POST',
+		body: JSON.stringify({
+			cartId: localStorage.getItem('cartId'),
+			lineId: event.target.dataset.lineId
 		})
-			.then((res) => res.json());
+	})
+		.then((res) => res.json());
 
-		localStorage.setItem('cartId', removeItemFromCart.id);
-		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
-    cartItems.set(removeItemFromCart.lines.edges);
-	}
+	localStorage.setItem('cartId', removeItemFromCart.id);
+	localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
+	cartItems.set(removeItemFromCart.lines.edges);
+}
 </script>
 
 <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">

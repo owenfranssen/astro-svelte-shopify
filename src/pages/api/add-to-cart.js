@@ -25,3 +25,10 @@ export async function post({params, request}) {
 		};
 	}
 }
+
+export async function get() {
+	return {
+		statusCode: 200,
+		body: '',
+	};
+}

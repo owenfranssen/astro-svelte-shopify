@@ -17,3 +17,10 @@ export async function post({params, request}) {
 		console.log('remove-from-cart.js: ', error);
 	}
 }
+
+export async function get() {
+	return {
+		statusCode: 200,
+		body: '',
+	};
+}

@@ -1,0 +1,31 @@
+---
+import ProductCard from '../molecules/ProductCardSquare.astro';
+export interface Props {
+  title: string;
+  products?: object;
+}
+const { title, products } = Astro.props;
+/**
+ * TODO:
+ * Load products from localstorage recently viewed
+ *  - hydrate product cards so updated as vistors navvigate
+ * Add slideshow/carousel for products > 3
+ */
+---
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-baseline sm:justify-between">
+      <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">{ title || "Our Favorites" }</h2>
+      <a href="#" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">Browse all favorites<span aria-hidden="true"> &rarr;</span></a>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
+			{/* TODO: Hydrate this section */}
+      { products.map( product => <ProductCard product={product.node} /> )}
+    </div>
+
+    <div class="mt-6 sm:hidden">
+      <a href="#" class="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Browse all favorites<span aria-hidden="true"> &rarr;</span></a>
+    </div>
+  </div>
+</div>

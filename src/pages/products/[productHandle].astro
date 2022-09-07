@@ -3,7 +3,8 @@ import Layout from '../../templates/Layout.astro';
 import Breadcrumbs from '../../molecules/Breadcrumbs.astro';
 import SingleImageLayout from '../../organisms/products/details/singleImageLayout.astro';
 import GalleryLayout from '../../organisms/products/details/galleryLayout.astro';
-import ProductGrid from '../../organisms/ProductGrid.astro';
+import FeaturedProducts from '../../organisms/FeaturedProducts.astro';
+import RecentlyViewed from '../../organisms/RecentlyViewed.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
 import { getProductsInCollection, getAllProducts } from '../../routes/api/get-products';
@@ -62,9 +63,10 @@ const featuredProducts = await getFeaturedProducts(product);
       {product.images.edges.length > 1 && <GalleryLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}
 
 			{/* TODO: Should be hydrated - control products from Shopify without needing site rebuild */}
-      <ProductGrid title="Our Favourites" products={featuredProducts} />
+      <FeaturedProducts title="Our Favourites" products={featuredProducts} />
 
 			{/* TODO: Secondary grid - alternbate style showing Recently Viewed products (based on cookie stored). Also Hydrated, update as products viewed per user */}
+      <RecentlyViewed title="Recently Viewed" />
 		</div>
 	</main>
 </Layout>

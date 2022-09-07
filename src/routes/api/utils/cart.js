@@ -147,7 +147,6 @@ const Cart = {
 					},
 				},
 			});
-			console.log('New cart: ', shopifyResponse.cartCreate);
 			return await shopifyResponse;
 		} catch (error) {
 			console.log('createCartWithItem error: ', error);
@@ -236,6 +235,69 @@ const Cart = {
 			return shopifyResponse;
 		} catch (error) {
 			console.log('removeItemFromCart: ', error);
+		}
+	},
+
+	updateItemInCart: async function ({cartId, itemId, quantity}) {
+		try {
+			const shopifyResponse = await postToShopify({
+				query: `
+					mutation updateItemInCart($cartId: ID!, $lines: [CartLineUpdateInput!]!){
+						cartLinesUpdate(
+							cartId: $cartId,
+							lines: $lines,
+						) {
+							cart {
+								id
+								lines(first: 10) {
+									edges {
+										node {
+											id
+											quantity
+											merchandise {
+												... on ProductVariant {
+													id
+												}
+											}
+										}
+									}
+								}
+								cost {
+									totalAmount {
+										amount
+										currencyCode
+									}
+									subtotalAmount {
+										amount
+										currencyCode
+									}
+									totalTaxAmount {
+										amount
+										currencyCode
+									}
+									totalDutyAmount {
+										amount
+										currencyCode
+									}
+								}
+							}
+						}
+					}
+        `,
+				variables: {
+					cartId,
+					lines: [
+						{
+							id: itemId,
+							quantity,
+						},
+					],
+				},
+			});
+			console.log(shopifyResponse.cartLinesUpdate.cart.lines.edges);
+			return await shopifyResponse;
+		} catch (error) {
+			console.log('updateItemInCart error: ', error);
 		}
 	},
 };

@@ -58,13 +58,14 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			// TODO: add micro-interactions to add to cart button
 
 			if (this.form !== null) {
-				const id =
+				let id =
 						this.form.querySelector('select[name="id"]').value ||
 						this.form.querySelector('select[name="id"]').dataset
 							.variantSelected,
 					qty = parseInt(
 						this.form.querySelector('select[name="quantity"]').value
-					);
+					),
+					update = false;
 
 				try {
 					const addToCartResponse = await fetch('/api/add-to-cart', {
@@ -72,29 +73,25 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 						body: JSON.stringify({
 							cartId: localStorage.getItem('cartId'),
 							itemId: id,
-							quantity: qty, // TODO: if item already in cart, increase qty
+							quantity: qty,
+							update: update,
 						}),
 					});
 					const data = await addToCartResponse.json();
-					if(!localStorage.getItem('cartId')) {
+					if (!localStorage.getItem('cartId')) {
 						localStorage.setItem('cartId', data.id);
 						localStorage.setItem('checkoutUrl', data.checkoutUrl);
 						checkoutLink.set(data.checkoutUrl);
 					}
-					console.log({data});
 					localStorage.setItem('cart', JSON.stringify(data));
 					cartItems.set(data.lines.edges);
 					this.toggleAddtocart(false);
-					addToast({message: 'Added to cart', type: 'cart', timeout: 3000}); // addToast({ message, type, dismissible, timeout })
+					addToast({message: 'Added to cart', type: 'cart', timeout: 3000});
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);
 					checkoutLink.set('#');
 				}
-
-				// TODO:
-				// * cart open
-				// * cart contents update - setting cartItems should do this?
 			}
 			return false;
 		},

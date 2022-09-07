@@ -5,7 +5,7 @@ export interface Props {
   min?: integer;
   max?: integer;
 }
-const { min, max } = Astro.props as Props;
+const { min, max, product } = Astro.props as Props;
 ---
 
 <div class="mb-8 last:mb-0">
@@ -29,7 +29,7 @@ const { min, max } = Astro.props as Props;
 					value="1"
 					size="2"
 					min="1"
-					max="{% if selected_variant.inventory_management != blank and selected_variant.inventory_policy != 'continue' %}{% if selected_variant.inventory_quantity > 0 %}{{ selected_variant.inventory_quantity }}{% else %}1{% endif %}{% else %}10000{% endif %}" />
+					max={product.totalInventory} />
 			<button class="group inset-y-0 left-0 flex items-center first:border-r last:border-l px-3 disabled:bg-gray-50 disabled:text-gray-200 disabled:cursor-not-allowed disabled:shadow-none"
 					type="button"
 					data-update-quantity="plus"

@@ -22,7 +22,7 @@ const formId = product.id;
   }) }
 	{ product.options.length == 1 && <input type="hidden" name="" value="" /> }
 
-	<QuantitySelector />
+	<QuantitySelector product={product} />
 
   <button type="submit" class="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-300 disable:ring-gray-300" data-add-to-cart>{Theme.Settings.locale.product_form.add_to_cart}</button>
 
@@ -65,19 +65,8 @@ const formId = product.id;
 		<select name="quantity"
 				class="form__dropdown"
 				id="quantity-0"
-				form="{{ form_id }}">
+				form={formId}>
 			{ [...Array(product.totalInventory)].map((i, index) => <option value={index+1}>{index+1}</option>)}
-			{/*
-			{%- assign range = (1..20) -%}
-			{%- if selected_variant.inventory_management != blank and selected_variant.inventory_quantity > 0 -%}
-				{%- assign range = (1..selected_variant.inventory_quantity) -%}
-			{%- elsif selected_variant.inventory_quantity > 0 -%}
-				{%- assign range = (0..0) -%}
-			{%- endif -%}
-			{%- for i in range -%}
-				<option value="{{ i }}">{{ i }}</option>
-			{%- endfor -%}
-			*/}
 		</select>
 	</div>
 </form>

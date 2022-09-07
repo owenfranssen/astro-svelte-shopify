@@ -16,6 +16,8 @@ import Theme from '../assets/scripts/theme-settings.js';
       }
     }
   })
+
+	// TODO: counter shows line count, not quantity count
 </script>
 
 <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800" data-cart-count>{$cartItems.length ?? 0}</span>

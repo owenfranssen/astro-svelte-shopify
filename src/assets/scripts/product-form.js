@@ -55,8 +55,7 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 			this.setErrorMessage();
 			this.toggleAddtocart(true);
 
-			// TODO: add micro-interactions
-      // TODO: 'typerror, data is null' when adding to cart product with no variants
+			// TODO: add micro-interactions to add to cart button
 
 			if (this.form !== null) {
 				const id =
@@ -79,11 +78,12 @@ if (!Theme.hasOwnProperty('jsProductForm')) {
 					const data = await addToCartResponse.json();
 					if(!localStorage.getItem('cartId')) {
 						localStorage.setItem('cartId', data.id);
-						localStorage.setItem('cart', JSON.stringify(data));
 						localStorage.setItem('checkoutUrl', data.checkoutUrl);
-						cartItems.set(data.lines.edges);
 						checkoutLink.set(data.checkoutUrl);
 					}
+					console.log({data});
+					localStorage.setItem('cart', JSON.stringify(data));
+					cartItems.set(data.lines.edges);
 					this.toggleAddtocart(false);
 					addToast({message: 'Added to cart', type: 'cart', timeout: 3000}); // addToast({ message, type, dismissible, timeout })
 				} catch (error) {

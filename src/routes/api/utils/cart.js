@@ -18,7 +18,10 @@ const Cart = {
                         ... on ProductVariant {
                           id
                           title
-													image
+													image {
+														url
+														altText
+													}
                           priceV2 {
                             amount
                             currencyCode
@@ -90,6 +93,10 @@ const Cart = {
                         ... on ProductVariant {
                           id
 													title
+													image {
+														url
+														altText
+													}
                           priceV2 {
                             amount
                             currencyCode

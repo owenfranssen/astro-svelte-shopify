@@ -40,7 +40,7 @@ const title = `${pageTitle} - ${siteName}`;
 
 <script>
 	import Theme from '../assets/scripts/theme-settings.js';
-	if (!window.hasOwnProperty('Theme')) {
+	if (!Object.prototype.hasOwnProperty.call(window, 'Theme')) {
 		window.Theme = Theme;
 	}
 	import '../assets/scripts/drawers.js';

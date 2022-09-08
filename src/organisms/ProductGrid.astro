@@ -1,6 +1,6 @@
 ---
 import FeaturedProducts from '../molecules/FeaturedProducts.astro';
-import RecentlyViewed from '../molecules/RecentlyViewed.astro';
+import RecentlyViewed from '../molecules/RecentlyViewed.svelte';
 export interface Props {
   title: string;
   products?: object;
@@ -12,7 +12,6 @@ const { title, products } = Astro.props;
  *  - hydrate product cards so updated as vistors navigate
  * Add slideshow/carousel for products > 3
  */
-console.log('ProductGrid: ', products);
 ---
 <div class="bg-white">
   <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">

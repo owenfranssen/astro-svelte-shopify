@@ -54,7 +54,7 @@ const featuredProducts = await getFeaturedProducts(product);
 ---
 
 <Layout title={ product.title }>
-	<main>
+	<main data-product-handle={productHandle}>
 		<div class="bg-white pt-6">
       <Breadcrumbs />
 
@@ -69,3 +69,14 @@ const featuredProducts = await getFeaturedProducts(product);
 		</div>
 	</main>
 </Layout>
+
+<script>
+	import '../../assets/scripts/recently-viewed.js';
+</script>
+
+<script is:inline>
+window.addEventListener('load', () => {
+	const handle = document.querySelector('main').dataset.productHandle;
+	Theme.jsRecentlyViewed.addItem(handle);
+});
+</script>

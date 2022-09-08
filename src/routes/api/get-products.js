@@ -106,7 +106,10 @@ export const getAllProducts = async () => {
 	                id
 	                title
 	                quantityAvailable
-	                price
+	                price {
+										amount
+										currencyCode
+									}
 	              }
 	            }
 	          }

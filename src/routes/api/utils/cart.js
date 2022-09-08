@@ -298,7 +298,6 @@ const Cart = {
 					],
 				},
 			});
-			console.log(shopifyResponse.cartLinesUpdate.cart.lines.edges);
 			return await shopifyResponse;
 		} catch (error) {
 			console.log('updateItemInCart error: ', error);

@@ -13,7 +13,7 @@
 import Theme from './theme-settings.js';
 import {cartItems, addToast, checkoutLink} from './stores.js';
 
-if (!Theme.hasOwnProperty('jsProductForm')) {
+if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 	Theme.jsProductForm = {
 		init() {
 			const forms = document.querySelectorAll('[data-product-form]');

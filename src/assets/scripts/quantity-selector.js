@@ -4,7 +4,7 @@
  */
 import Theme from './theme-settings.js';
 
-if (!Theme.hasOwnProperty('jsQuantitySelector')) {
+if (!Object.prototype.hasOwnProperty.call(Theme, 'jsQuantitySelector')) {
 	Theme.jsQuantitySelector = {
 		init() {
 			this.listen();

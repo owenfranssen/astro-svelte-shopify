@@ -10,7 +10,7 @@
  */
 import Theme from './theme-settings.js';
 
-if (!Theme.hasOwnProperty('jsCartDrawer')) {
+if (!Object.prototype.hasOwnProperty.call(Theme, 'jsCartDrawer')) {
 	('use strict');
 
 	Theme.jsCartDrawer = {

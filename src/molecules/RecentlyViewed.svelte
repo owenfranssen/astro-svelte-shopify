@@ -14,7 +14,7 @@ let items = [];
  * Add slideshow/carousel for products > 3
  */
 
-onMount( () => {
+onMount( async () => {
 	if(!$recentlyViewedItems.includes(productHandle)) {
 		let tempArray = Array.from($recentlyViewedItems);
 		tempArray.unshift(productHandle);
@@ -23,13 +23,16 @@ onMount( () => {
 		console.log('already in list');
 	}
 
-	items = $recentlyViewedItems.map( item => {
-		console.log({item});
-		/* Fetch product data by handle */
-		return item
-	});
-
-	console.log(items);
+	items = await Promise.all( $recentlyViewedItems.map( async (item) => {
+    /* Fetch product data by handle */
+    const response = await fetch('/api/get-product', {
+      method: 'POST',
+      body: JSON.stringify({
+        product: item,
+      }),
+    }).then((res) => res.json());
+    return await response;
+	}) );
 });
 
 // window.addEventListener('load', () => {
@@ -37,11 +40,7 @@ onMount( () => {
 // 	Theme.jsRecentlyViewed.addItem(handle);
 // });
 </script>
-<!--
-{/* TODO: Hydrate this section */}
--->
-{#each items as item}
-	abc {item}
+
+{#each items as item, index}
 	<ProductCard product={item} />
-	{item.handle}
 {/each}

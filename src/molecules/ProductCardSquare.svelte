@@ -14,11 +14,6 @@ const publishedDate = new Date(product.publishedAt);
 let compareDate = new Date();
 compareDate.setDate(compareDate.getDate()-21);
 
-/* TODO:
-Tags & labels:
-- Available/sold out
-*/
-
 /**
  * Markup duplicated in:
  * - ./ProductCardSquare.astro
@@ -27,6 +22,8 @@ Tags & labels:
  * - ../atoms/Tag.astro
  * - ../molecules/products/Tags.astro
  */
+
+console.log(product);
 </script>
 
 <div class="group relative">
@@ -43,7 +40,7 @@ Tags & labels:
 		{ product.tags.filter( tag => tag.startsWith('tag:'))
 				.map( tag => {
 					const content = tag.split(':');
-					return showTag({content: content[1], type: content[1]});
+					return showTag({content: content[1]});
 			})
 		}
 	</div>

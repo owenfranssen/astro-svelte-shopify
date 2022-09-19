@@ -26,6 +26,9 @@ module.exports = {
 				green: {
 					DEFAULT: 'rgb(8 150 121 / <alpha-value>)',
 				},
+				red: {
+					DEFAULT: 'rgb(150 51 15 / <alpha-value>)',
+				},
 			},
 			maxWidth: {
 				site: 'var(--site-width)',

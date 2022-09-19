@@ -3,14 +3,6 @@ import {writable} from 'svelte/store';
 /**
  * Cart
  */
-
-function createCartItems() {
-	const {subscribe, set, update} = writable(0);
-	return {
-		subscribe,
-		set: (items) => update((old) => items),
-	};
-}
 export const cartItems = writable(
 	JSON.parse(localStorage.getItem('cart'))?.lines.edges ?? []
 );
@@ -18,7 +10,6 @@ export const cartItems = writable(
 /**
  * Get checkout url
  */
-
 function createCheckoutLink() {
 	const {subscribe, set, update} = writable('#');
 	return {
@@ -29,10 +20,14 @@ function createCheckoutLink() {
 export const checkoutLink = createCheckoutLink();
 
 /**
+ * Product form error message
+ */
+export const formError = writable('');
+
+/**
  * Toast notifications
  * https://svelte.dev/repl/0091c8b604b74ed88bb7b6d174504f50?version=3.35.0
  */
-
 export const toasts = writable([]);
 
 export const addToast = (toast) => {

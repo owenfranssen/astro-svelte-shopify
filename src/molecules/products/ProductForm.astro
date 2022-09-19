@@ -1,5 +1,6 @@
 ---
 import AddButton from '../../atoms/AddToBagButton.astro';
+import ProductFormError from '../../atoms/ProductFormError.svelte';
 import ColourVariant from './ColourVariant.astro';
 import QuantitySelector from './QuantitySelector.astro';
 import Variant from './Variant.astro';
@@ -27,7 +28,7 @@ const formId = product.id;
 
 	<AddButton label={Theme.Settings.locale.product_form.add_to_cart} />
 
-	<span data-product-form-error></span>
+	<ProductFormError client:only />
 
 	{/* All variant selector for product ids to send to cart - also no-js fallback */}
 	<div class="product-form__input product-form__input--dropdown hidden no-js" id="all-variant-ids">

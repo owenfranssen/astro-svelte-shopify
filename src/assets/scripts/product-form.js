@@ -11,7 +11,7 @@
  * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems, addToast, checkoutLink} from './stores.js';
+import {cartItems, addToast, checkoutLink, formError} from './stores.js';
 
 if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 	Theme.jsProductForm = {
@@ -72,6 +72,8 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 					),
 					update = false;
 
+				this.setErrorMessage('');
+
 				try {
 					const addToCartResponse = await fetch('/api/add-to-cart', {
 						method: 'POST',
@@ -88,11 +90,20 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 						localStorage.setItem('checkoutUrl', data.checkoutUrl);
 						checkoutLink.set(data.checkoutUrl);
 					}
-					localStorage.setItem('cart', JSON.stringify(data));
-					cartItems.set(data.lines.edges);
+					const oldCart = localStorage.getItem('cart');
+					if (oldCart == JSON.stringify(data)) {
+						console.log('No changes saved - max qty reached');
+						this.setErrorMessage(
+							'All available items are in your shopping bag'
+						);
+						button.dispatchEvent(this.addToCartFailed);
+					} else {
+						localStorage.setItem('cart', JSON.stringify(data));
+						cartItems.set(data.lines.edges);
+						button.dispatchEvent(this.addToCartSuccess);
+						addToast({message: 'Added to cart', type: 'cart', timeout: 3000});
+					}
 					this.toggleAddtocart(false);
-					button.dispatchEvent(this.addToCartSuccess);
-					addToast({message: 'Added to cart', type: 'cart', timeout: 3000});
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);
@@ -194,8 +205,8 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 				this.getForm().querySelector('[data-product-form-error]');
 			if (this.errorMessage != null) {
 				this.errorMessage.toggleAttribute('hidden', !message);
-				if (message) {
-					this.errorMessage.textContent = message;
+				if (message !== false) {
+					formError.set(message);
 				}
 			}
 		},

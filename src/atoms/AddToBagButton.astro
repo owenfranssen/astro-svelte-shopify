@@ -9,20 +9,22 @@ const { label } = Astro.props as Props;
 import '../assets/styles/global.css';
 ---
 
-<button class="button__add-to-cart mt-10 w-full bg-primary border border-transparent rounded-lg py-3 px-8 relative min-h-[2.5rem] flex items-center justify-center text-white text-base font-medium text-white disabled:bg-primary-100 disable:ring-primary-300" data-add-to-cart>
-	<span class="default">{label}</span>
+<button class="button__add-to-cart mt-10 w-full bg-primary border border-transparent rounded-lg py-3 px-8 relative min-h-[3.5rem] flex items-center justify-center text-white text-base font-medium text-white disabled:bg-primary-100 disable:ring-primary-300" data-add-to-cart>
+	<span class="default"><Icon name="bag"/>&nbsp;{label}</span>
 	<span class="success"><Icon name="check"/></span>
+	<span class="failed"><Icon name="cross"/></span>
 	<span class="dots"></span>
 </button>
 
 <style>
 .button__add-to-cart span {
-	@apply absolute;
+	@apply absolute inline-flex justify-center items-center w-full;
 	transition: opacity 0.1s ease-out;
 }
-.dots, .success,
+.dots, .success, .failed,
 .loading .default,
-.complete .default {
+.complete .default,
+.incomplete .default  {
 	@apply opacity-0;
 }
 .loading .dots {
@@ -36,6 +38,13 @@ import '../assets/styles/global.css';
 	@apply bg-green;
 }
 .complete .success {
+	@apply opacity-100;
+	transition: background-color 0.2s 0.1s ease-in, opacity 0.2s 0.1s ease-in;
+}
+.incomplete {
+	@apply bg-red;
+}
+.incomplete .failed {
 	@apply opacity-100;
 	transition: background-color 0.2s 0.1s ease-in, opacity 0.2s 0.1s ease-in;
 }
@@ -68,6 +77,12 @@ document.querySelectorAll('[data-add-to-cart]').forEach(button => {
 		button.classList.remove('loading');
 		button.classList.add('complete');
 		setTimeout(() => { button.classList.remove('complete'); }, 2000);
+	});
+	button.addEventListener('e__cart_add_fail', e => {
+		console.log('e__cart_add_fail');
+		button.classList.remove('loading');
+		button.classList.add('incomplete');
+		setTimeout(() => { button.classList.remove('incomplete'); }, 2000);
 	});
 });
 </script>

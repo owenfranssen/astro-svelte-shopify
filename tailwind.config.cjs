@@ -10,11 +10,11 @@ module.exports = {
 			},
 			colors: {
 				primary: {
-					DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
-					light: 'rgb(var(--color-primary-light)/ <alpha-value>)',
+					DEFAULT: 'rgb(0 100 150 / <alpha-value>)',
+					light: 'rgb(46 163 242 / <alpha-value>)',
 				},
 				dark: {
-					DEFAULT: 'rgb(var(--color-dark) / <alpha-value>)',
+					DEFAULT: 'rgb(34 34 34 / <alpha-value>)',
 				},
 				sale: {
 					DEFAULT: '#dc2626' //'rgb(var(--color-sale) / <alpha-value>)',

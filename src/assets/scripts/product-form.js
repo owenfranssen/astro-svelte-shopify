@@ -16,6 +16,9 @@ import {cartItems, addToast, checkoutLink} from './stores.js';
 if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 	Theme.jsProductForm = {
 		init() {
+			this.addToCartStart = new Event('e__cart_add_start');
+			this.addToCartSuccess = new Event('e__cart_add_success');
+			this.addToCartFailed = new Event('e__cart_add_fail');
 			const forms = document.querySelectorAll('[data-product-form]');
 			if (forms != null) {
 				this.listen();
@@ -55,6 +58,8 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			this.setErrorMessage();
 			this.toggleAddtocart(true);
 
+			button.dispatchEvent(this.addToCartStart);
+
 			// TODO: add micro-interactions to add to cart button
 
 			if (this.form !== null) {
@@ -86,11 +91,13 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 					localStorage.setItem('cart', JSON.stringify(data));
 					cartItems.set(data.lines.edges);
 					this.toggleAddtocart(false);
+					button.dispatchEvent(this.addToCartSuccess);
 					addToast({message: 'Added to cart', type: 'cart', timeout: 3000});
 				} catch (error) {
 					this.setErrorMessage(error);
 					console.error('addToCart: ', error);
 					checkoutLink.set('#');
+					button.dispatchEvent(this.addToCartFail);
 				}
 			}
 			return false;

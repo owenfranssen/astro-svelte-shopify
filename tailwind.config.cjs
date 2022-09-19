@@ -11,7 +11,8 @@ module.exports = {
 			colors: {
 				primary: {
 					DEFAULT: 'rgb(0 100 150 / <alpha-value>)',
-					light: 'rgb(46 163 242 / <alpha-value>)',
+					300: 'rgb(46 163 242 / <alpha-value>)',
+					100: 'rgb(100 130 150 / <alpha-value>)',
 				},
 				dark: {
 					DEFAULT: 'rgb(34 34 34 / <alpha-value>)',

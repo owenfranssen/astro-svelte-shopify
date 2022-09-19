@@ -223,8 +223,9 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			if (addToCart != null) {
 				addToCart.disabled = disable;
 				addToCart.setAttribute('aria-disabled', disable);
-				addToCart.textContent =
-					text ?? Theme.Settings.locale.product_form.add_to_cart;
+				if (text)
+					addToCart.querySelector('.default').textContent =
+						text ?? Theme.Settings.locale.product_form.add_to_cart;
 			}
 		},
 

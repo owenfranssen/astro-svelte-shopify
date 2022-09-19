@@ -4,8 +4,9 @@ import RecentlyViewed from '../molecules/RecentlyViewed.svelte';
 export interface Props {
   title: string;
   products?: object;
+	productHandle?: object;
 }
-const { title, products } = Astro.props;
+const { title, products, productHandle } = Astro.props;
 /**
  * TODO:
  * Load products from localstorage recently viewed
@@ -23,7 +24,7 @@ const { title, products } = Astro.props;
     <div class="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
 			{/* TODO: Hydrate this section */}
       {products && <FeaturedProducts products={products} />}
-			{!products && <RecentlyViewed />}
+			{!products && <RecentlyViewed productHandle={productHandle} client:load />}
     </div>
 
     <div class="mt-6 sm:hidden">

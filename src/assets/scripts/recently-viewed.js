@@ -5,16 +5,13 @@
  *
  */
 import Theme from './theme-settings.js';
+import {recentlyViewedItems} from './stores.js';
 
 if (!Object.prototype.hasOwnProperty.call(Theme, 'jsRecentlyViewed')) {
 	('use strict');
 
 	Theme.jsRecentlyViewed = {
-		init() {
-			console.log('Recently viewed: initialising');
-		},
-
-		addItem() {
+		addItem(item) {
 			/**
 			 * Get product handle
 			 * get cookie or localstorage
@@ -22,6 +19,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsRecentlyViewed')) {
 			 * remove duplicates
 			 * return json
 			 */
+			recentlyViewedItems.set($recentlyViewedItems.unshift(item));
 		},
 
 		getItems() {

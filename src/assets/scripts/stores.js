@@ -53,3 +53,18 @@ export const addToast = (toast) => {
 export const dismissToast = (id) => {
 	toasts.update((all) => all.filter((t) => t.id !== id));
 };
+
+/**
+ * Recent items
+ */
+function createRecentlyViewedItems() {
+	const {subscribe, set} = writable(JSON.parse(localStorage.getItem('recentlyViewedItems')) ?? []);
+	return {
+		subscribe,
+		set: (obj) => {
+			localStorage.setItem('recentlyViewedItems', JSON.stringify(obj));
+			set(obj);
+		},
+	};
+}
+export const recentlyViewedItems = createRecentlyViewedItems();

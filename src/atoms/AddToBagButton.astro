@@ -9,7 +9,7 @@ const { label } = Astro.props as Props;
 import '../assets/styles/global.css';
 ---
 
-<button class="button__add-to-cart mt-10 w-full bg-primary border border-transparent rounded-md py-3 px-8 relative min-h-[2.5rem] flex items-center justify-center text-white text-base font-medium text-white disabled:bg-primary-100 disable:ring-primary-300" data-add-to-cart>
+<button class="button__add-to-cart mt-10 w-full bg-primary border border-transparent rounded-lg py-3 px-8 relative min-h-[2.5rem] flex items-center justify-center text-white text-base font-medium text-white disabled:bg-primary-100 disable:ring-primary-300" data-add-to-cart>
 	<span class="default">{label}</span>
 	<span class="success"><Icon name="check"/></span>
 	<span class="dots"></span>
@@ -17,34 +17,26 @@ import '../assets/styles/global.css';
 
 <style>
 .button__add-to-cart span {
-	position: absolute;
+	@apply absolute;
 	transition: opacity 0.1s ease-out;
 }
-.dots, .success {
-	opacity: 0;
-}
-
+.dots, .success,
 .loading .default,
 .complete .default {
-	opacity: 0;
+	@apply opacity-0;
 }
 .loading .dots {
+	@apply bg-white opacity-100 relative rounded-lg h-4 w-4;
   animation: flash 0.5s ease-out infinite alternate;
-  background-color: #fff;
-  border-radius: 50%;
   box-shadow: 32px 0 #fff, -32px 0 #fff;
-  height: 16px;
-	opacity: 1;
-  position: relative;
 	transition: opacity 0.2s 0.1s ease-in;
-  width: 16px;
 }
 
 .complete {
 	@apply bg-green;
 }
 .complete .success {
-	opacity: 1;
+	@apply opacity-100;
 	transition: background-color 0.2s 0.1s ease-in, opacity 0.2s 0.1s ease-in;
 }
 

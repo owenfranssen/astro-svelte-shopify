@@ -18,14 +18,14 @@ module.exports = {
 					DEFAULT: 'rgb(34 34 34 / <alpha-value>)',
 				},
 				sale: {
-					DEFAULT: '#dc2626' //'rgb(var(--color-sale) / <alpha-value>)',
+					DEFAULT: 'rgb(150 51 15 / <alpha-value>)',
 				},
 				new: {
-					DEFAULT: '#0284c7' //'rgb(var(--color-new) / <alpha-value>)',
+					DEFAULT: 'rgb(46 163 242 / <alpha-value>)',
 				},
 				green: {
-					DEFAULT: '#059669'
-				}
+					DEFAULT: 'rgb(8 150 121 / <alpha-value>)',
+				},
 			},
 			maxWidth: {
 				site: 'var(--site-width)',

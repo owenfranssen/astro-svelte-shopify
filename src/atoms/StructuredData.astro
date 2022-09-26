@@ -1,0 +1,218 @@
+---
+import { productDetails } from '../routes/api/get-product-details';
+
+export interface Props {
+  data: object;
+  type?: string;
+}
+const { data, type } = Astro.props as Props;
+const SiteName = 'Emerald MTB Store',
+	currentPath = Astro.url.pathname.slice(1),
+	currentTemplate = currentPath.includes('products') ? 'product' : currentPath.includes('collections') ? 'collection' : 'page';
+
+const breadcrumbs = (data) => {
+	let json = []
+	switch(currentTemplate) {
+		case 'product':
+			if (data.collections.size >= 1) {
+				json.push({
+						"@type": "ListItem",
+						"position": 1,
+						"item": {
+							"@id": `${Astro.site.href}collections`,
+							"name": "Collections"
+						}
+					});
+				json.push({
+						"@type": "ListItem",
+						"position": 2,
+						"item": {
+							"@id": `${Astro.site.href}collections/${data.handle}`,
+							"name": data.collections.first.title
+						}
+					});
+			}
+			else {
+				json.push({
+						"@type": "ListItem",
+						"position": 1,
+						"item": {
+							"@id": `${Astro.site.href}products`,
+							"name": "Products"
+						}
+					});
+				json.push({
+						"@type": "ListItem",
+						"position": "{% if product.collections.size >= 1 %}3{% else %}2{% endif %}",
+						"item": {
+							"@id": `${Astro.site.href}products/${data.handle}`,
+							"name": data.title
+						}
+					});
+			}
+			break;
+		case 'collection':
+			json.push({
+							"@type": "ListItem",
+							"position": 1,
+							"item": {
+								"@id": `${Astro.site.href}collections`,
+								"name": "Collections"
+							}
+						});
+			json.push({
+							"@type": "ListItem",
+							"position": 2,
+							"item": {
+								"@id": `${Astro.site.href}collections/${data.handle}`,
+								"name": data.title
+							}
+						});
+
+						// {% if current_page != 1 %}
+						// 	{% if current_tags %}
+						// 		{% assign position = 4 %}
+						// 	{% else %}
+						// 		{% assign position = 3 %}
+						// 	{% endif %}
+						// 	,
+						// 	{
+						// 		"@type": "ListItem",
+						// 		"position": {{ position }},
+						// 		"item": {
+						// 			"@id": `${Astro.site.href}collections?page={{ current_page }}",
+						// 			"name": {{ 'structured_data.breadcrumbs.page' | t: page: current_page | json }}
+						// 		}
+						// 	}
+						// {% endif %}
+			break;
+		case 'search':
+					// 	{
+					// 		"@type": "ListItem",
+					// 		"position": 1,
+					// 		"item": {
+					// 			"@id": `${Astro.site.href}search",
+					// 			"name": {{ 'structured_data.breadcrumbs.search' | t | json }}
+					// 		}
+					// 	}
+					// 	{% if search.performed %}
+					// 		{
+					// 			"@type": "ListItem",
+					// 			"position": 2,
+					// 			"item": {
+					// 				"@id": `${Astro.site.href}search?q={{ search.terms }}",
+					// 				"name": {{ search.terms | json }}
+					// 			}
+					// 		}
+					// 		{% if current_page != 1 %}
+					// 			{
+					// 				"@type": "ListItem",
+					// 				"position": 3,
+					// 				"item": {
+					// 					"@id": `${Astro.site.href}search?page={{ current_page }}&q={{ search.terms }}",
+					// 					"name": {{ 'structured_data.breadcrumbs.page' | t: page: current_page | json }}
+					// 				}
+					// 			}
+					// 		{% endif %}
+					// 	{% endif %}
+
+					// {% endcase %}
+			break;
+	};
+	return json;
+};
+
+const getSchema = (data, type) => {
+	switch(type) {
+		case "breadcrumb":
+			return JSON.stringify({
+				"@context": "http://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": breadcrumbs(data)
+			});
+
+		case "collection":
+			return JSON.stringify({});
+
+		case "page":
+			return JSON.stringify({
+				"@context": "http://schema.org",
+				"@type": "Article",
+				"articleBody": 'Page content',
+				"mainEntityOfPage": {
+					"@type": "WebPage",
+					"@id": `${Astro.site.href}/${data.handle}`
+				},
+				"headline": data.title,
+				"description": "Page excerpt",
+				// {%- if article_image -%}
+				// 	{%- assign image_size = article_image.width | append: 'x' -%}
+				// 	"image": [
+				// 		{{ article_image | img_url: image_size | prepend: "https:" | json }}
+				// 	],
+				// {%- endif -%}
+				"datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}",
+				"dateCreated": "{{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}",
+				"dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}",
+				"author": {
+					"@type": "Person",
+					"name": "{{ article.author | json }}"
+				},
+				"publisher": {
+					"@type": "Organization",
+					// {%- if page_image -%}
+					// 	{%- assign image_size = page_image.width | append: 'x' -%}
+					// 	"logo": {
+					// 		"@type": "ImageObject",
+					// 		"height": {{ page_image.height | json }},
+					// 		"url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
+					// 		"width": {{ page_image.width | json }}
+					// 	},
+					// {%- endif -%}
+					"name": SiteName
+				}
+			});
+
+		case "product":
+			return JSON.stringify({
+				"@context": "http://schema.org/",
+				"@type": "Product",
+				name: data.title,
+				url: `${Astro.site.href}products/${data.handle}`,
+				image: [ data.featuredImage.src ],
+				description: data.description,
+				sku: data.sku,
+				brand: {
+					"@type": "Brand",
+					name: data.vendor
+				},
+				offers: JSON.stringify(Array.from(data.variants).forEach( variant => {
+					return {
+							"@type" : "Offer",
+							sku: variant.sku,
+							availability: `http://schema.org/${variant.available ? "InStock" : "OutOfStock"}`,
+							price: variant.price,
+							priceCurrency: 'EUR',
+							url: `${Astro.site.href}${variant.url}`,
+							seller: {
+								"@type": "Organization",
+								name: SiteName
+							}
+						}
+					}))
+				});
+
+		default:
+			return JSON.stringify({
+				"@context": "http://schema.org",
+				"@type": "WebSite",
+				"name": SiteName,
+				"url": Astro.site.href
+			});
+	}
+};
+
+const json = getSchema(data, type);
+---
+
+<script type="application/ld+json" set:html={json}></script>

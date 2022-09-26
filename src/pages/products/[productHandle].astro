@@ -1,4 +1,5 @@
 ---
+import StructuredData from '../../atoms/StructuredData.astro';
 import Layout from '../../templates/Layout.astro';
 import Breadcrumbs from '../../molecules/Breadcrumbs.astro';
 import SingleImageLayout from '../../organisms/products/details/singleImageLayout.astro';
@@ -69,3 +70,5 @@ const featuredProducts = await getFeaturedProducts(product);
 		</div>
 	</main>
 </Layout>
+
+<StructuredData data={product} type="product" />

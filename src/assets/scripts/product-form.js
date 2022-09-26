@@ -92,7 +92,6 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 					}
 					const oldCart = localStorage.getItem('cart');
 					if (oldCart == JSON.stringify(data)) {
-						console.log('No changes saved - max qty reached');
 						this.setErrorMessage(
 							'All available items are in your shopping bag'
 						);

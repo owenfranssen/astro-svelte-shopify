@@ -22,8 +22,6 @@ compareDate.setDate(compareDate.getDate()-21);
  * - ../atoms/Tag.astro
  * - ../molecules/products/Tags.astro
  */
-
-console.log(product);
 </script>
 
 <div class="group relative">

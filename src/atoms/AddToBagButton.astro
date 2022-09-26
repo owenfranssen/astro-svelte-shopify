@@ -69,17 +69,14 @@ import '../assets/styles/global.css';
 <script>
 document.querySelectorAll('[data-add-to-cart]').forEach(button => {
 	button.addEventListener('e__cart_add_start', e => {
-		console.log('e__cart_add_start');
 		button.classList.add('loading');
 	});
 	button.addEventListener('e__cart_add_success', e => {
-		console.log('e__cart_add_success');
 		button.classList.remove('loading');
 		button.classList.add('complete');
 		setTimeout(() => { button.classList.remove('complete'); }, 2000);
 	});
 	button.addEventListener('e__cart_add_fail', e => {
-		console.log('e__cart_add_fail');
 		button.classList.remove('loading');
 		button.classList.add('incomplete');
 		setTimeout(() => { button.classList.remove('incomplete'); }, 2000);

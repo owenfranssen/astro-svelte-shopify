@@ -25,6 +25,11 @@ export const checkoutLink = createCheckoutLink();
 export const formError = writable('');
 
 /**
+ * Product form selected variant
+ */
+export const selectedVariant = writable({});
+
+/**
  * Toast notifications
  * https://svelte.dev/repl/0091c8b604b74ed88bb7b6d174504f50?version=3.35.0
  */

@@ -20,7 +20,7 @@ onMount( async () => {
 		tempArray.unshift(productHandle);
 		recentlyViewedItems.set(tempArray);
 	} else {
-		console.log('already in list');
+		// console.log('The current product is already in the recently viewed list');
 	}
 
 	items = await Promise.all( $recentlyViewedItems.map( async (item) => {

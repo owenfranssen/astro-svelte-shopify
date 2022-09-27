@@ -1,10 +1,12 @@
 ---
 import Gallery from '../../../molecules/products/Gallery.astro';
 import ProductForm from '../../../molecules/products/ProductForm.astro';
+import ProductStockStatus from '../../../molecules/products/ProductStockStatus.svelte';
 import Price from '../../../atoms/Price.astro';
 import Reviews from '../../../molecules/products/Reviews.astro';
 
-const { product, selectedOrFirstAvailableVariant } = Astro.props
+const { product, selectedOrFirstAvailableVariant } = Astro.props;
+
 ---
 
 <Gallery images={product.images.edges} />
@@ -22,13 +24,7 @@ const { product, selectedOrFirstAvailableVariant } = Astro.props
 
     <Reviews product={ product } />
 
-    <div class="mt-6 flex items-center">
-      <!-- Heroicon name: solid/check -->
-      <svg class="flex-shrink-0 w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-      </svg>
-      <p class="ml-2 text-sm text-gray-500">In stock and ready to ship</p>
-    </div>
+    <ProductStockStatus inStock={product.availableForSale} client:load/>
 
     <ProductForm product={ product } selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant}/>
   </div>

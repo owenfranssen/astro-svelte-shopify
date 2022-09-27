@@ -11,7 +11,13 @@
  * TODO: set quantity selector state on first page load
  */
 import Theme from './theme-settings.js';
-import {cartItems, addToast, checkoutLink, formError} from './stores.js';
+import {
+	cartItems,
+	addToast,
+	checkoutLink,
+	formError,
+	selectedVariant,
+} from './stores.js';
 
 if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 	Theme.jsProductForm = {
@@ -213,23 +219,30 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 		setInitialSelection(form) {
 			if (form) {
 				const masterSelect = form.querySelector('[name="id"]');
-				masterSelect.options[masterSelect.selectedIndex].textContent
-					.split('-')[0]
-					.split('/')
-					.map((value) => value.trim())
-					.forEach((option, index) => {
-						const input = form.querySelector(
-							`fieldset[data-option-index="${index}"] input[value="${option}"]`
-						);
-						if (input) {
-							input.checked = true;
-						}
-					});
+				if (masterSelect.options.length > 0) {
+					masterSelect.options[masterSelect.selectedIndex].textContent
+						.split('-')[0]
+						.split('/')
+						.map((value) => value.trim())
+						.forEach((option, index) => {
+							const input = form.querySelector(
+								`fieldset[data-option-index="${index}"] input[value="${option}"]`
+							);
+							if (input) {
+								input.checked = true;
+							}
+						});
+					selectedVariant.set(masterSelect.value);
+				} else {
+					this.toggleAddtocart(true, '', form);
+				}
 			}
 		},
 
-		toggleAddtocart(disable = true, text) {
-			const addToCart = this.getForm().querySelector('[data-add-to-cart]');
+		toggleAddtocart(disable = true, text, form) {
+			const addToCart = (form || this.getForm()).querySelector(
+				'[data-add-to-cart]'
+			);
 			if (addToCart != null) {
 				addToCart.disabled = disable;
 				addToCart.setAttribute('aria-disabled', disable);
@@ -281,6 +294,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 				if (validOptions.length) {
 					masterSelect.value = validOptions[0].value;
 					masterSelect.dataset.variantSelected = validOptions[0].value;
+					selectedVariant.set(masterSelect.value);
 				}
 			}
 		},
@@ -290,7 +304,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			Array.from(
 				document.querySelectorAll(`[data-product-price="${productId}"]`)
 			).forEach((element) => {
-				const compare_at = currentVariant.node?.compareAtPriceV2.amount ?? 0,
+				const compare_at = currentVariant.node?.compareAtPriceV2?.amount ?? 0,
 					price = currentVariant.node?.priceV2.amount ?? 0,
 					onSale = compare_at > price;
 				const domCurrentPrice = element.querySelector('[data-current-price]'),

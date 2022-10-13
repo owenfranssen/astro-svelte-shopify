@@ -30,7 +30,7 @@ compareDate.setDate(compareDate.getDate()-21);
 
 <div class="group relative">
 	<!-- ../atoms/Tags.astro -->
-	<div class="absolute -top-3 -right-3 flex flex-col items-end space-y-2">
+	<div class="absolute -top-3 -right-3 flex flex-col items-end space-y-2 z-10">
 		{#if product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount}
 			{@html showTag({content: "Sale", type: "sale"})}
 		{/if}

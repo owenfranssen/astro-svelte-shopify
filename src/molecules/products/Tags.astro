@@ -14,7 +14,7 @@ compareDate.setDate(compareDate.getDate()-21);
  *   - Type: Predefined label type (new, sale, green), or Tailwind CSS colour (e.g. yellow-500)
  */
 ---
-<div class="absolute -top-3 -right-3 flex flex-col items-end space-y-2">
+<div class="absolute right-3 top-3 flex flex-col items-end space-y-2 z-10">
 	{/* Sale tag */}
 	{ product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount && <Tag type="sale">Sale</Tag>}
 

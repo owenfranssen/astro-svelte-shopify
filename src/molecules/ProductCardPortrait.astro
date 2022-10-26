@@ -1,4 +1,5 @@
 ---
+import ColourVariant from '../molecules/products/ColourVariant.astro';
 import Price from '../atoms/Price.astro';
 import Image from '../atoms/Image.astro';
 import Tags from '../molecules/products/Tags.astro';
@@ -8,7 +9,11 @@ const { product } = Astro.props
 /* TODO: Color swatches
 */
 
-console.log({product});
+// for( const p of product.variants.edges) {
+// console.log(p.node.selectedOptions);
+// }
+
+console.log(product.variants.edges.forEach(option => console.log(option.node)));
 
 
 ---
@@ -23,4 +28,10 @@ console.log({product});
     <Price price={product.priceRange} compare={product.compareAtPriceRange} />
   </div>
   <p class="mt-1 text-sm italic text-gray-500">Black</p>
+	{product.variants.edges.filter(option => option.node.name == 'Colour' || option.node.name == 'Color').length}
+	{ product.variants.edges.length > 1 && product.variants.edges.map( (option, index) => {
+    if (option.node.name == 'Colour' || option.node.name == 'Color') {
+      return <ColourVariant option={ option.node } optionIndex={index} />
+		}
+	}) }
 </a>

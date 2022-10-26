@@ -63,6 +63,25 @@ export const getProductsInCollection = async (handle, limit = 10) => {
                         height
                   }
 									tags
+                  variants (first: 20) {
+                    edges {
+                      node {
+                        id
+                        title
+                        availableForSale
+                        image {
+                          url
+                          altText
+                          height
+                          width
+                        }
+                        selectedOptions {
+                          value
+                          name
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

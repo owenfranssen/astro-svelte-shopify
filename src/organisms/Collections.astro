@@ -3,7 +3,7 @@ import { getCollectionDetails } from '../routes/api/get-collection-details';
 import { collectionUrl } from '../routes/api/utils/makeUrl.js';
 import Image from '../atoms/Image.astro';
 
-const { collections: collectionHandles } = Astro.props as Props;
+const { collections: collectionHandles, title } = Astro.props as Props;
 let collections = [];
 await Promise.all( collectionHandles.map( async (handle) => {
 	const collection = await getCollectionDetails(handle);
@@ -13,7 +13,7 @@ await Promise.all( collectionHandles.map( async (handle) => {
 <section aria-labelledby="category-heading" class="bg-gray-50">
   <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-baseline sm:justify-between">
-      <h2 id="category-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">Shop by Category</h2>
+      <h2 id="category-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">{ title }</h2>
       <a href="#" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">Browse all categories<span aria-hidden="true"> &rarr;</span></a>
     </div>
 

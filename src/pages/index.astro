@@ -11,11 +11,13 @@ import Instagram from '../organisms/Instagram.svelte';
 	<main>
     <Banner />
 
-    <FeaturedCollection collection="frontpage" limit=4 />
+    <FeaturedCollection title="Popular products" collection="frontpage" limit=4 />
 
     <Collections collections={['apparel', 'tools', 'accessories']} />
 
+		<!--
     <LogoCloud brands={['united-by-blue', 'ursa-major', 'snow-peak']} />
+		-->
 
     <Instagram title="Our Instagram" client:load limit=4 />
 

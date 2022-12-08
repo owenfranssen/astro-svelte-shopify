@@ -57,7 +57,7 @@ const featuredProducts = await getFeaturedProducts(product);
 <Layout title={ product.title }>
 	<main data-product-handle={productHandle}>
 		<div class="bg-white pt-6">
-      <Breadcrumbs />
+      <!-- <Breadcrumbs page={product} /> -->
 
       {product.images.edges.length <= 1 && <SingleImageLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}
       {product.images.edges.length > 1 && <GalleryLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}

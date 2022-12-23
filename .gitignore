@@ -18,3 +18,13 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+###> symfony/framework-bundle ###
+server/.env.local
+server/.env.local.php
+server/.env.*.local
+server/config/secrets/prod/prod.decrypt.private.php
+server/public/bundles/
+server/var/
+server/vendor/
+###< symfony/framework-bundle ###

@@ -1,6 +1,6 @@
 ---
 const { type, cssClass } = Astro.props as Props;
-const style = `rounded bg-${type || 'primary-300'} text-white p-2 w-fit ${cssClass || ''}`;
+const style = `rounded bg-${type || 'primary-300'} text-white p-2 w-fit z-1 ${cssClass || ''}`;
 /* For Tailwind JIT: bg-primary-300 bg-sale bg-new bg-green bg-orange-500 bg-emerald-600 */
 ---
 <span class={style}>

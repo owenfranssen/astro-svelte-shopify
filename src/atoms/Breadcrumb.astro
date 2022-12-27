@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+
+export interface Props {
+  label: string;
+	url: string;
+	icon: string;
+	isLast: boolean;
+	showLabel: boolean;
+	showIcon: boolean;
+}
+
+let { label, url, icon, isLast = false, showLabel = true, showIcon = false } = Astro.props;
+
+const checkBoolean = (value) => typeof value == 'boolean' ? value : value == "true";
+
+showIcon = checkBoolean(showIcon);
+showLabel = checkBoolean(showLabel);
+---
+
+<li class="breadcrumb-item">
+	<div class="flex items-center">
+		<a href={url} class="mr-2 text-sm font-medium text-gray-900">
+			{showIcon && <Icon name={icon} />}
+			{showLabel && label}
+		</a>
+		{!isLast && <Icon class="text-gray-300" name="chevron-right" />}
+	</div>
+</li>

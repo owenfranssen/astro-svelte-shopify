@@ -22,7 +22,6 @@ export const postToShopifyStorefrontAPI = async ({query, variables}) => {
 		if (result.errors) {
 			console.log({errors: result.errors});
 		} else if (!result || !result.data) {
-			console.log({result});
 			return 'No results found.';
 		}
 
@@ -50,7 +49,6 @@ export const postToShopifyAdminAPI = async ({query, variables}) => {
 		if (result.errors) {
 			console.log({errors: result.errors});
 		} else if (!result || !result.data) {
-			console.log({result});
 			return 'No results found.';
 		}
 

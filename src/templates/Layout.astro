@@ -18,7 +18,8 @@ const { title: pageTitle, description, socialImage, socialImageAlt, header } = A
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site),
 	siteName = canonicalUrl.pathname,
 	title = `${pageTitle} - ${siteName}`,
-	currentPath = Astro.url.pathname.slice(1);
+	currentPath = Astro.url.pathname.slice(1),
+	currentTemplate = currentPath.includes('products') ? 'product' : currentPath.includes('collections') ? 'collection' : 'page';
 ---
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site),
 <head>
 	<Head {title} {description} {canonicalUrl} {siteName} {socialImage} {socialImageAlt} />
 </head>
-<body class="min-h-screen w-screen" data-current-path={currentPath}>
+<body class="min-h-screen w-screen" data-current-template={currentTemplate} data-current-path={currentPath}>
   <div class="bg-gray-50">
     <div>
 			{ header=='index' ? <HeaderIndex currentPage={Astro.request.url.pathname} /> : <Header currentPage={Astro.request.url.pathname} /> }
@@ -37,7 +38,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site),
   <Toasts client:visible />
 </body>
 </html>
-{currentPath}
+
 <script>
 	import Theme from '../assets/scripts/theme-settings.js';
 	if (!Object.prototype.hasOwnProperty.call(window, 'Theme')) {

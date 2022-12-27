@@ -17,7 +17,7 @@ const formId = product.id;
 
 <form class="mt-10" data-product-form={formId} data-product-url={productUrl(product.handle)} data-product-option-count={product.options.length}>
   { product.options.length > 1 && product.options.map( (option, index) => {
-    if (option.name == 'Colour')
+    if (option.name == 'Colour' || option.name == 'Color')
       return <ColourVariant option={ option } optionIndex={index} />
     else
       return <Variant option={ option } optionIndex={index} />
@@ -31,6 +31,7 @@ const formId = product.id;
 	<ProductFormError client:only />
 
 	{/* All variant selector for product ids to send to cart - also no-js fallback */}
+	{/* TODO: Variant options should be hydrated...? */}
 	<div class="product-form__input product-form__input--dropdown hidden no-js" id="all-variant-ids">
 		<label for="quantity-0" class="sr-only">Product variants</label>
 		<select name="id"
@@ -62,6 +63,7 @@ const formId = product.id;
 	</div>
 
 	{/* Master quantity input to send to cart - also no-js fallback */}
+	{/* TODO: Product availability needs to be hydrated... */}
 	<div class="product-form__quantity-selector--dropdown product-form__input product-form__input--dropdown hidden no-js">
 		<label for="quantity-0" class="form__label{% unless form_settings.show_labels %} sr-only{% endunless %}">{Theme.Settings.locale.product_form.quantity}</label>
 		<select name="quantity"
@@ -73,6 +75,7 @@ const formId = product.id;
 	</div>
 </form>
 
+{/* TODO: Make this json data hydrated */}
 <script type="application/json" data-product-id={formId} is:inline set:html={JSON.stringify(product.variants.edges)}></script>
 
 <script>

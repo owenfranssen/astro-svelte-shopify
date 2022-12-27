@@ -6,10 +6,12 @@ const formatMoney = (amount) => new Intl.NumberFormat('en-IE', { style: 'currenc
 
 const showTag = ({content, type, cssClass}) => {
 	/* ../atoms/Tag.astro */
-	const style = `rounded bg-${type || 'blue-700'} text-white p-2 w-fit ${cssClass || ''}`;
+	const style = `rounded bg-${type || 'primary-300'} text-white p-2 w-fit ${cssClass || ''}`;
 	return `<span class="${style}">${content}</span>`;
 }
 
+const productTags = product.tags.filter( tag => tag.startsWith('tag:'))
+				.map( tag => tag.split(':')[1]);
 const publishedDate = new Date(product.publishedAt);
 let compareDate = new Date();
 compareDate.setDate(compareDate.getDate()-21);
@@ -23,26 +25,23 @@ compareDate.setDate(compareDate.getDate()-21);
  * - ../molecules/products/Tags.astro
  */
 
-console.log(product);
+/* Tailwind classes: bg-primary-300 */
 </script>
 
 <div class="group relative">
 	<!-- ../atoms/Tags.astro -->
-	<div class="absolute -top-3 -right-3 flex flex-col items-end space-y-2">
+	<div class="absolute -top-3 -right-3 flex flex-col items-end space-y-2 z-10">
 		{#if product.compareAtPriceRange.minVariantPrice.amount > product.priceRange.minVariantPrice.amount}
-			{showTag({content: "Sale", type: "sale"})}
+			{@html showTag({content: "Sale", type: "sale"})}
 		{/if}
 
 		{#if publishedDate.getTime() > compareDate.getTime()}
-			{showTag({content: "New", type: "new"})}
+			{@html showTag({content: "New", type: "new"})}
 		{/if}
 
-		{ product.tags.filter( tag => tag.startsWith('tag:'))
-				.map( tag => {
-					const content = tag.split(':');
-					return showTag({content: content[1]});
-			})
-		}
+		{#each productTags as tag}
+			{@html showTag({content: tag})}
+		{/each}
 	</div>
 	<!-- /Tags -->
 

@@ -25,8 +25,8 @@ const { product } = Astro.props
     <h3>{ product.title }</h3>
     <Price price={product.priceRange} compare={product.compareAtPriceRange} />
   </div>
-  <p class="mt-1 text-sm italic text-gray-500">Black</p>
-	{product.variants.edges.filter(option => option.node.name == 'Colour' || option.node.name == 'Color').length}
+  <!-- <p class="mt-1 text-sm italic text-gray-500">Black</p> -->
+	{/* {product.variants.edges.filter(option => option.node.name == 'Colour' || option.node.name == 'Color').length} */}
 	{ product.variants.edges.length > 1 && product.variants.edges.map( (option, index) => {
     if (option.node.name == 'Colour' || option.node.name == 'Color') {
       return <ColourVariant option={ option.node } optionIndex={index} />

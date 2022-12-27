@@ -9,7 +9,6 @@ export const postToShopify = async ({query, variables, api = 'storefront'}) => {
 export const postToShopifyStorefrontAPI = async ({query, variables}) => {
 	try {
 		const url = import.meta.env.API_ENDPOINT;
-    console.log({url})
 		// @ts-ignore
 		const result = await fetch(url, {
 			method: 'POST',

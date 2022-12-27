@@ -1,0 +1,74 @@
+# Workflow for building and deploying an Astro site to FTP
+#
+# To get started with Astro see: https://docs.astro.build/en/getting-started/
+#
+name: Deploy Emerald-MTB/Store Astro site
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - develop
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+env:
+  BUILD_PATH: "." # default value when not using subfolders
+  # BUILD_PATH: subfolder
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest version
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: 'npm'
+          cache-dependency-path: ${{ env.BUILD_PATH }}/package-lock.json
+
+      - name: Install Dependencies
+        run: |
+          npm install
+      - name: 🔨 Build Project
+        run: |
+          npm run build
+        working-directory: ${{ env.BUILD_PATH }}
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-code
+          retention-days: 30
+          path: |
+            dist
+            
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-code
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: public_html/
+          timeout: 60000

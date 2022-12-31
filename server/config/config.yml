@@ -1,0 +1,12 @@
+code_cloud_shopify:
+    store_manager_id: "emeraldmtb-store.myshopify.com"
+    oauth:
+        api_key: "f66e181fa0715d955fbf2223afe2f4fd"
+        shared_secret: "862a821cdd0b5871b6586d6047d1e6e7"
+        scope: "read_customers,read_orders,read_products"
+        redirect_route: "admin_dashboard"
+    webhooks:
+        - orders/create
+        - customers/update
+        - products/create
+        - products/update

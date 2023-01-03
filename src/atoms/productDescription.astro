@@ -1,0 +1,47 @@
+---
+const { content } = Astro.props;
+---
+
+<div class="product-description-wrapper" set:html={ content }></div>
+
+<style is:global>
+  .product-description-wrapper {
+    @apply text-base text-gray-900;
+
+    p, ul {
+      @apply my-2;
+    }
+
+    li {
+      @apply list-disc list-inside;
+    }
+
+    .size-table {
+      @apply inline-flex lg:flex-row lg:items-center min-w-full py-2 align-middle md:px-6 lg:px-8;
+    }
+
+    .size-table-wrapper {
+      @apply flex-1;
+    }
+
+    table {
+      @apply min-w-full divide-y divide-gray-300;
+    }
+
+    thead {
+      @apply bg-gray-50;
+    }
+
+    tbody {
+      @apply divide-y divide-gray-200 bg-white;
+    }
+
+    tr {
+      @apply divide-x divide-gray-200;
+    }
+
+    td {
+      @apply py-2 px-4;
+    }
+  }
+</style>

@@ -4,6 +4,7 @@ import Price from '../../../atoms/Price.astro';
 import ProductForm from '../../../molecules/products/ProductForm.astro';
 import ProductStockStatus from '../../../molecules/products/ProductStockStatus.svelte';
 import Reviews from '../../../molecules/products/Reviews.astro';
+import ProductDescription from '../../../atoms/productDescription.astro';
 
 const { product, selectedOrFirstAvailableVariant } = Astro.props
 ---
@@ -18,10 +19,10 @@ const { product, selectedOrFirstAvailableVariant } = Astro.props
       <section aria-labelledby="information-heading" class="mt-4">
         <h2 id="information-heading" class="sr-only">Product information</h2>
         <Price id={product.id} price={product.priceRange} compare={product.compareAtPriceRange} />
-        <Reviews product={ product } />
+        {/*<Reviews product={ product } />*/}
 
         <div class="mt-4 space-y-6">
-          <p class="text-base text-gray-500">{ product.description }</p>
+          <ProductDescription content={product.descriptionHtml} />
         </div>
 
 				<ProductStockStatus product={ product } selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} client:only/>

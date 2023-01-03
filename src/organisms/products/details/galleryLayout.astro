@@ -4,9 +4,9 @@ import ProductForm from '../../../molecules/products/ProductForm.astro';
 import ProductStockStatus from '../../../molecules/products/ProductStockStatus.svelte';
 import Price from '../../../atoms/Price.astro';
 import Reviews from '../../../molecules/products/Reviews.astro';
+import ProductDescription from '../../../atoms/productDescription.astro';
 
 const { product, selectedOrFirstAvailableVariant } = Astro.props;
-
 ---
 
 <Gallery images={product.images.edges} />
@@ -34,8 +34,9 @@ const { product, selectedOrFirstAvailableVariant } = Astro.props;
     <div>
       <h3 class="sr-only">Description</h3>
 
-      <div class="space-y-6">
-        <p class="text-base text-gray-900">{ product.description }</p>
+      <div class="space-y-6 text-base" >
+        <ProductDescription content={product.descriptionHtml} />
+      </div>
       </div>
     </div>
   </div>

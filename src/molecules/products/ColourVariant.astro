@@ -19,7 +19,6 @@ let label = `${option.name}-choice-`;
       { option.values.map( (value, index) => {
           let colour = 'background-color: ' + value.toLowerCase().split(' ').reverse()[0];
 					let option_label = `${label.toLowerCase()}${index}-label`;
-          console.log({value, index});
           return (
             <input type="radio" id={`input__${option_label}`} name="color-choice" value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
 						<label for={`input__${option_label}`} class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400 hover:ring-2">

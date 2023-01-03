@@ -3,13 +3,15 @@
  *
  * - Variant selection
  *     - Update prices
- *     - Update avialability
- *     - update images
+ *     - Update availability
+ *     - Update images
  * - Add to cart
  *     - https://shopify.dev/api/examples/cart
- *
- * TODO: set quantity selector state on first page load
  */
+
+/* FIX: If one option combo is out of stock, all options are disabled */
+/* TODO: set quantity selector state on first page load */
+/* TODO: Update images */
 import Theme from './theme-settings.js';
 import {
 	cartItems,
@@ -134,8 +136,8 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			this.updateVariantOptions(
 				event.target.closest('fieldset').dataset.optionIndex
 			);
-			// this.updateURL();
-			//this.updateMedia();
+			// TODO: this.updateURL();
+			// TODO: this.updateMedia();
 
 			if (!this.currentVariant) {
 				this.toggleAddtocart(
@@ -179,19 +181,9 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 					}"`
 				).textContent
 			);
-			// const inventoryData = JSON.parse(
-			// 	this.getForm()
-			// 		.querySelector(
-			// 			`[type="application/json"][data-product-stock="${
-			// 				this.getForm().dataset.id
-			// 			}"`
-			// 		)
-			// 		.textContent.replace('},]', '}]')
-			// );
 			for (const index in variantData) {
 				variantData[index] = {
-					...variantData[index],
-					// ...inventoryData[index],
+					...variantData[index]
 				};
 			}
 			return (this.variantData = variantData);

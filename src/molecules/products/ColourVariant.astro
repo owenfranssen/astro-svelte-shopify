@@ -24,7 +24,7 @@ let label = `${option.name}-choice-`;
             <input type="radio" id={`input__${option_label}`} name="color-choice" value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
 						<label for={`input__${option_label}`} class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400 hover:ring-2">
 							<span id={ option_label } class="sr-only"> { value } </span>
-							<span aria-hidden="true" class="h-8 w-8 border border-black border-opacity-10 rounded-full" style={ colour }></span>
+							<span aria-hidden="true" class="h-8 w-8 border border-black border-opacity-10 rounded-full" style={ colour } title={ value }></span>
 						</label>
 						)
         }

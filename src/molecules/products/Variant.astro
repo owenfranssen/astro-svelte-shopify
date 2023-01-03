@@ -17,13 +17,11 @@ let label = `${option.name}-choice-`;
   <fieldset class="mt-4" data-option-index={optionIndex}>
     <legend class="sr-only">Choose a { option.name }</legend>
     <div class="flex items-center space-x-3">
-          <!-- Active: "ring-2 ring-indigo-500" -->
-          <!-- disabled  -->
       { option.values.map( (value, index) => {
 					let option_label = `${label.toLowerCase()}${index}-label`;
           return (
             <input type="radio" id={`input__${option_label}`} name=`${option.name}-choice` value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
-						<label for={`input__${option_label}`} class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer hover:ring-2">
+						<label for={`input__${option_label}`} class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer hover:ring-2" title={`${option.name}: ${value}`}>
 							<span id={ option_label }> { value } </span>
 						</label>
 					)

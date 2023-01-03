@@ -5,6 +5,8 @@ export interface Props {
 }
 const { option, optionIndex } = Astro.props as Props;
 let label = `${option.name}-choice-`;
+
+// TODO: change images based on selected (colour) variant
 ---
 <div class="mb-8 last:mb-0" data-product-option-set>
   <h3 class="text-sm text-gray-900 font-medium">{ option.name }</h3>

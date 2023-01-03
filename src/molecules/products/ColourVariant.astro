@@ -17,13 +17,23 @@ let label = `${option.name}-choice-`;
           Not Active and Checked: "ring-2"
         -->
       { option.values.map( (value, index) => {
-          let colour = 'background-color: ' + value.toLowerCase().split(' ').reverse()[0];
+          let colour = value.toLowerCase().split(' ').reverse()[0],
+              cssColour = 'background-color: ' + colour,
+              secondColour = '';
+          if(value.includes('/')) {
+            colour = value.split('/').map( c => c.toLowerCase().split(' ').reverse()[0] );
+            cssColour = 'background-color: ' + colour[0];
+            secondColour = colour[1];
+          }
 					let option_label = `${label.toLowerCase()}${index}-label`;
           return (
             <input type="radio" id={`input__${option_label}`} name="color-choice" value={ value } class="hidden" aria-labelledby={ option_label } data-product-option={optionIndex}>
 						<label for={`input__${option_label}`} class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400 hover:ring-2">
 							<span id={ option_label } class="sr-only"> { value } </span>
-							<span aria-hidden="true" class="h-8 w-8 border border-black border-opacity-10 rounded-full" style={ colour } title={ value }></span>
+							<span aria-hidden="true" class="h-8 w-8 border border-black border-opacity-10 rounded-full" style={ cssColour } title={ value }></span>
+              { secondColour != '' && (
+                <span class="inline-block w-8 h-4 rounded-b-full absolute bottom-1 left-2 -rotate-45" style={`background-color:${colour[1]}`} title={ value }></span>
+              )}
 						</label>
 						)
         }

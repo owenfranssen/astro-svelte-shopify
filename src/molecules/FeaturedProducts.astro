@@ -5,15 +5,19 @@ export interface Props {
   title: string;
   products?: object;
 }
-const { title, products } = Astro.props;
+const { title, products, max = 3 } = Astro.props;
 /**
  * TODO:
- * Load products based on somedynamic criteria:
+ * Load products based on some dynamic criteria:
  * - tags
  * - metafields - list of products, or name of collection
  * Add slideshow/carousel for products > 3
  */
 ---
 
+<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-6 sm:gap-x-6 lg:gap-x-8 lg:gap-y-8">
 {/* TODO: Hydrate this section */}
-{ products.map( product => <ProductCard product={product.node} /> )}
+{ products
+  .slice(0, max)
+  .map( product => <ProductCard product={product.node} /> )}
+</div>

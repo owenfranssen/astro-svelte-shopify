@@ -41,6 +41,8 @@ onMount( async () => {
 // });
 </script>
 
+<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
 {#each items as item, index}
 	<ProductCard product={item} />
 {/each}
+</div>

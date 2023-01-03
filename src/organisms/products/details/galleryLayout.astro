@@ -22,7 +22,7 @@ const { product, selectedOrFirstAvailableVariant } = Astro.props;
     <h2 id="information-heading" class="sr-only">Product information</h2>
     <Price id={product.id} price={product.priceRange} compare={product.compareAtPriceRange} />
 
-    <Reviews product={ product } />
+    {/* <Reviews product={ product } /> */}
 
     <ProductStockStatus inStock={product.availableForSale} client:load/>
 

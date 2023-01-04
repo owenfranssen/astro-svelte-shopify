@@ -8,6 +8,12 @@ module.exports = {
 			gridTemplateRows: {
 				'[auto,auto,1fr]': 'auto auto 1fr',
 			},
+			gridTemplateColumns: {
+				'gallery-5': 'repeat(5, minmax(25%, 1fr)',
+				'gallery-6': 'repeat(6, minmax(25%, 1fr)',
+				'gallery-7': 'repeat(7, minmax(25%, 1fr)',
+				'gallery-8': 'repeat(8, minmax(25%, 1fr)',
+			},
 			colors: {
 				primary: {
 					DEFAULT: 'rgb(0 100 150 / <alpha-value>)',

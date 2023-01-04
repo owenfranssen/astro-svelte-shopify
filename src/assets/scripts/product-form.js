@@ -10,7 +10,7 @@
  */
 
 /* TODO: set quantity selector state on first page load */
-/* TODO: Update images */
+
 import Theme from './theme-settings.js';
 import {
 	cartItems,

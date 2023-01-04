@@ -6,4 +6,4 @@ export interface Props {
 const { image, cssClass = null } = Astro.props as Props;
 
 ---
-<img src={image?.src} alt={image?.altText} height={image?.height} width={image?.width} class={cssClass}>
+<img src={image?.src} alt={image?.altText} height={image?.height} width={image?.width} class={cssClass} id={image?.id}>

@@ -1,11 +1,6 @@
 ---
 import Image from '../../atoms/Image.astro';
-const { images } = Astro.props
-
-console.log(images)
-
-/* TODO:  Mobile layout - stacked or scroll...
- */
+const { images } = Astro.props;
 
 let columnCount = 3;
 if(images.length < 3) columnCount = 2;
@@ -13,21 +8,21 @@ if(images.length > 4) columnCount = images.length - Math.ceil(images.length / 4)
 
 ---
 <!-- lg:grid-cols-gallery-5 -->
-<div class="product-gallery overflow-x-auto max-w-2xl lg:max-w-7xl">
+<div class:list={["product-gallery max-w-2xl lg:max-w-7xl", (images.length > 2 ? " overflow-x-auto" : '')]}>
 <div class:list={["w-full mt-6 mx-auto sm:px-6 lg:px-8 grid gap-x-6 lg:gap-x-8"]}  data-images={images.length} data-columns={columnCount}>
-  <div class:list={["rounded-lg overflow-hidden", (images.length < 4 ? "aspect-square" : "block aspect-w-3 aspect-h-4") ]}>
+  <div class:list={["jsFrame rounded-lg overflow-hidden", (images.length < 4 ? "aspect-square" : "block aspect-w-3 aspect-h-4") ]}>
 		{/* If 2x image gallery aspect doesnt work with production images, try: `(images.length < 4 ? "aspect-w-3 aspect-h-4" : "aspect-w-3 aspect-h-4")` */}
     <Image image={images[0]?.node} cssClass="w-full h-full object-center object-cover" />
     </div>
     { images.length == 2 &&
-      <div class="rounded-lg overflow-hidden aspect-square">
+      <div class="jsFrame rounded-lg overflow-hidden aspect-square">
         <Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
       </div>
     }
     { images.length >= 3 &&
-      <div class="grid grid-cols-2 col-span-2 gap-x-6 lg:gap-x-0 lg:col-span-1 lg:grid-cols-1 lg:gap-y-8">
+      <div class="jsFrame grid grid-cols-2 col-span-2 gap-x-6 lg:gap-x-0 lg:col-span-1 lg:grid-cols-1 lg:gap-y-8">
         <div class:list={["rounded-lg overflow-hidden", (images.length == 3 ? "aspect-w-2 aspect-h-1" : "aspect-w-3 aspect-h-2") ]}>
-          <Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" />
+          <Image image={images[1]?.node} cssClass="w-full h-full object-center object-cover" id="image-2" />
         </div>
         <div class:list={["rounded-lg overflow-hidden", (images.length == 3 ? "aspect-w-2 aspect-h-1" : "aspect-w-3 aspect-h-2") ]}>
           <Image image={images[2]?.node} cssClass="w-full h-full object-center object-cover" />
@@ -35,12 +30,12 @@ if(images.length > 4) columnCount = images.length - Math.ceil(images.length / 4)
       </div>
     }
     { images.length >= 4 &&
-      <div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+      <div class="jsFrame aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
         <Image image={images[3]?.node} cssClass="w-full h-full object-center object-cover" />
       </div>
     }
     { images.length >= 5 &&
-      <div class="grid grid-cols-2 col-span-2 gap-x-6 lg:gap-x-0 lg:col-span-1 lg:grid-cols-1 lg:gap-y-8">
+      <div class="jsFrame grid grid-cols-2 col-span-2 gap-x-6 lg:gap-x-0 lg:col-span-1 lg:grid-cols-1 lg:gap-y-8">
         <div class:list={["rounded-lg overflow-hidden", (images.length == 3 ? "aspect-w-2 aspect-h-1" : "aspect-w-3 aspect-h-2") ]}>
           <Image image={images[4]?.node} cssClass="w-full h-full object-center object-cover" />
         </div>
@@ -50,8 +45,8 @@ if(images.length > 4) columnCount = images.length - Math.ceil(images.length / 4)
       </div>
     }
     { images.length >= 7 &&
-      <div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
-        <Image image={images[3]?.node} cssClass="w-full h-full object-center object-cover" />
+      <div class="jsFrame aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+        <Image image={images[6]?.node} cssClass="w-full h-full object-center object-cover" />
       </div>
     }
   </div>

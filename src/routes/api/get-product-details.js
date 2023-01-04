@@ -82,6 +82,9 @@ export const getProductDetails = async (handle) => {
 							edges {
 								node {
 									id
+                  image {
+                    id
+                  }
 									availableForSale
 									title
 									quantityAvailable

@@ -38,27 +38,27 @@ const formId = product.id;
 				class="form__dropdown"
 				form={formId}
 				data-variant-selected>
-				{ product.variants.edges.map( (variant) => {
-						variant = variant.node;
-						if(variant.availableForSale) {
-							if(variant.id == selectedOrFirstAvailableVariant.id) {
-								return <option
-									value={variant.id}
-									selected
-								>
-									{variant.title}
-									- {variant.priceV2.currencyCode}{variant.priceV2.amount}
-								</option>
-							}
-							return <option
-								value={variant.id}
-							>
-								{variant.title}
-								- {variant.priceV2.currencyCode}{variant.priceV2.amount}
-							</option>
-						}
-					}
-				)}
+      { product.variants.edges.map( (variant) => {
+          variant = variant.node;
+          if(variant.availableForSale) {
+            if(variant.id == selectedOrFirstAvailableVariant.id) {
+              return <option
+                value={variant.id}
+                selected
+              >
+                {variant.title}
+                - {variant.priceV2.currencyCode}{variant.priceV2.amount}
+              </option>
+            }
+            return <option
+              value={variant.id}
+            >
+              {variant.title}
+              - {variant.priceV2.currencyCode}{variant.priceV2.amount}
+            </option>
+          }
+        }
+      )}
 		</select>
 	</div>
 

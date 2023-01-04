@@ -136,8 +136,8 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			this.updateVariantOptions(
 				event.target.closest('fieldset').dataset.optionIndex
 			);
+			this.setVariantImage(this.currentVariant.node.image.id);
 			// TODO: this.updateURL();
-			// TODO: this.updateMedia();
 
 			if (!this.currentVariant) {
 				this.toggleAddtocart(
@@ -232,6 +232,14 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			}
 		},
 
+		setVariantImage(imageId) {
+			const imageDomObject = document.getElementById(imageId),
+				imagePosition = imageDomObject.closest('.jsFrame').offsetLeft,
+				gallery = document.querySelector('.product-gallery');
+			gallery.scrollTo({left: imagePosition, behaviour: 'smooth'});
+			gallery.dispatchEvent(new Event('change', {bubbles: true}));
+		},
+
 		toggleAddtocart(disable = true, text, form) {
 			const addToCart = (form || this.getForm()).querySelector(
 				'[data-add-to-cart]'
@@ -284,6 +292,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 						return searchString == this.currentVariant.node.title;
 					}
 				);
+
 				if (validOptions.length) {
 					masterSelect.value = validOptions[0].value;
 					masterSelect.dataset.variantSelected = validOptions[0].value;
@@ -383,7 +392,6 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 
 		updateURL() {
 			// if (!this.currentVariant) return;
-			// console.log(this.currentVariant);
 			// window.history.replaceState(
 			// 	{},
 			// 	'',

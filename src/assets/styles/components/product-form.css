@@ -11,7 +11,7 @@ form[data-product-form] {
     }
 
     input[type="radio"]:disabled + label {
-      @apply bg-gray-50 text-gray-200 cursor-not-allowed shadow-none;
+      @apply bg-gray-50 text-gray-200 cursor-not-allowed shadow-none opacity-30;
     }
   }
 }

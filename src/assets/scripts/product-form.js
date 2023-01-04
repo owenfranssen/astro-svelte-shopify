@@ -9,9 +9,6 @@
  *     - https://shopify.dev/api/examples/cart
  */
 
-/* FIX: If one option combo is out of stock, all options are disabled */
-    /* FIX: On initial load, sizes are not disabled if option put of stock */
-    /* FIX: selecting out of stock size, disables colours */
 /* TODO: set quantity selector state on first page load */
 /* TODO: Update images */
 import Theme from './theme-settings.js';

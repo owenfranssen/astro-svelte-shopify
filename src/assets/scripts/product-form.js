@@ -10,6 +10,8 @@
  */
 
 /* FIX: If one option combo is out of stock, all options are disabled */
+    /* FIX: On initial load, sizes are not disabled if option put of stock */
+    /* FIX: selecting out of stock size, disables colours */
 /* TODO: set quantity selector state on first page load */
 /* TODO: Update images */
 import Theme from './theme-settings.js';
@@ -32,6 +34,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 				this.listen();
 
 				Array.from(forms).forEach((form) => this.setInitialSelection(form));
+        // TODO: set initial availability
 			}
 		},
 
@@ -209,7 +212,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 		},
 
 		setInitialSelection(form) {
-			// TODO: Check logic - some page loads disabled add to cart...
+			// TODO: Check logic - some page loads disabled add to cart... selectedVariant...
 			if (form) {
 				const masterSelect = form.querySelector('[name="id"]');
 				if (masterSelect.options.length > 0) {
@@ -391,27 +394,27 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			// );
 		},
 
-		updateVariantOptions(optionIndex) {
-			const selected = this.getForm().querySelector(
-				`fieldset[data-option-index="${optionIndex}"] [data-product-option]:checked, select[data-product-option="${optionIndex}"]`
+		updateVariantOptions(selectedOptionIndex) {
+			const selectedOptionValue = this.getForm().querySelector(
+				`fieldset[data-option-index="${selectedOptionIndex}"] [data-product-option]:checked, select[data-product-option="${selectedOptionIndex}"]`
 			).value;
 
 			let searchString = Array();
-			searchString[optionIndex] = selected;
+			searchString[selectedOptionIndex] = selectedOptionValue;
 
 			const validMasterOptions = Array.from(
 				this.getForm().querySelector('select[name="id"]').options
-			).filter((option) => option.textContent.includes(selected));
+			).filter((option) => option.textContent.includes(selectedOptionValue));
 
-			const options = Array.from(
+			const allOptions = Array.from(
 				this.getForm().querySelectorAll(
-					`fieldset[data-option-index]:not([data-option-index="${optionIndex}"]) [data-product-option], select[data-option-index]:not([data-product-option="${optionIndex}"]) option`
+					`fieldset[data-option-index]:not([data-option-index="${selectedOptionIndex}"]) [data-product-option], select[data-option-index]:not([data-product-option="${selectedOptionIndex}"]) option`
 				)
 			);
 
-			for (let option of options) {
-				const index = option.closest('[data-option-index]').dataset.optionIndex;
-				searchString[index] = option.value;
+			for (let option of allOptions) {
+				const optionIndex = option.closest('[data-option-index]').dataset.optionIndex;
+				searchString[optionIndex] = option.value;
 				option.disabled = !validMasterOptions.some((masterOption) =>
 					masterOption.textContent.includes(searchString.join(' / '))
 				);

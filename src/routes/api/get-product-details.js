@@ -60,7 +60,7 @@ export const getProductDetails = async (handle) => {
 							width
 							height
 						}
-						images(first:10) {
+						images(first:20) {
 							edges {
 								node {
 									id
@@ -78,7 +78,7 @@ export const getProductDetails = async (handle) => {
               values
             }
 						totalInventory
-						variants(first: 10) {
+						variants(first: 100) {
 							edges {
 								node {
 									id

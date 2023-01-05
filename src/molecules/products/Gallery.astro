@@ -8,8 +8,8 @@ if(images.length > 4) columnCount = images.length - Math.ceil(images.length / 4)
 
 ---
 <!-- lg:grid-cols-gallery-5 -->
-<div class:list={["product-gallery max-w-2xl lg:max-w-7xl", (images.length > 2 ? " overflow-x-auto" : '')]}>
-<div class:list={["w-full mt-6 mx-auto sm:px-6 lg:px-8 grid gap-x-6 lg:gap-x-8"]}  data-images={images.length} data-columns={columnCount}>
+<div class:list={["product-gallery max-w-2xl mx-auto lg:max-w-7xl", (images.length > 2 ? " overflow-x-auto" : '')]}>
+<div class:list={["w-full mt-6 sm:px-6 lg:px-8 grid gap-x-6 lg:gap-x-8"]}  data-images={images.length} data-columns={columnCount}>
   <div class:list={["jsFrame rounded-lg overflow-hidden", (images.length < 4 ? "aspect-square" : "block aspect-w-3 aspect-h-4") ]}>
 		{/* If 2x image gallery aspect doesnt work with production images, try: `(images.length < 4 ? "aspect-w-3 aspect-h-4" : "aspect-w-3 aspect-h-4")` */}
     <Image image={images[0]?.node} cssClass="w-full h-full object-center object-cover" />

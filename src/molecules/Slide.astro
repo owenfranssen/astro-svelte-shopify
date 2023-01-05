@@ -1,0 +1,11 @@
+---
+import SlideImage from './SlideImage.astro';
+import SlideCollectionProducts from './SlideCollectionProducts.astro';
+
+const { content, index } = Astro.props;
+---
+
+<article class:list={["keen-slider__slide", `number-slide${index}`]}>
+  { content.type == 'image' && <SlideImage {content} />}
+  { content.type == 'collectionproducts' && <SlideCollectionProducts {content} />}
+</article>

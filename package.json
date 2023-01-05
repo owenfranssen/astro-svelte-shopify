@@ -90,5 +90,8 @@
     "bracketSpacing": false,
     "tabWidth": 2,
     "useTabs": true
+  },
+  "dependencies": {
+    "keen-slider": "^6.8.5"
   }
 }

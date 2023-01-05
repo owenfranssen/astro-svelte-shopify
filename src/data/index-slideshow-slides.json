@@ -1,0 +1,30 @@
+{
+  "slides": [
+    {
+      "active": true,
+      "type": "image",
+      "image": "",
+      "background_color": "bg-gray-800",
+      "title": "Slide title",
+      "subtitle": "Slide sub heading",
+      "paragraph": "We're committed to responsible, sustainable, and ethical manufacturing. Our small-scale approach allows us to focus on quality and reduce our impact. We're doing our best to delay the inevitable heat-death of the universe.",
+      "button_text": "Shop now",
+      "button_link": "/collections/apparel/"
+    },
+    {
+      "active": true,
+      "type": "collectionproducts",
+      "background_color": "bg-gray-800",
+      "title": "Final Sale",
+      "subtitle": "Up to 30% off",
+      "button_text": "Shop now",
+      "button_link": "/collections/apparel/",
+      "collection": "collection_handle",
+      "products": [
+        {
+          "handle": "product_handle"
+        }
+      ]
+    }
+  ]
+}

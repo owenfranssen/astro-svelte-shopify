@@ -8,7 +8,9 @@ import json from '../data/index-slideshow-slides.json';
 <section class="slideshow">
   <div class="w-full max-w-7xl mx-auto pt-32 overflow-hidden sm:pt-14">
     <div class="w-full keen-slider">
-      { json.slides.map( (slide, index) => <Slide content={slide} {index} /> )}
+      { json.slides
+          .filter( slide => slide.active)
+          .map( (slide, index) => <Slide content={slide} {index} /> )}
     </div>
   </div>
 </section>

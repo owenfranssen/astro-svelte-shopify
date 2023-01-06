@@ -1,220 +1,95 @@
-<!-- <nav>
-  <div class="nav__wrapper">
-    <a class="brand" href="/">Emerald MTB</a>
-    <button class="navbar-toggler text-white"
-      type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-      aria-expanded="false" aria-label="Toggle navigation"><span class="fas fa-bars"></span></button>
-    <div class="nav__menu">
-      <ul class="nav__list">
-        <li class="nav__item dropdown megamenu-fw">
-          <a class="nav__link dropdown-toggle" data-toggle="dropdown"
-            role="button" aria-expanded="false" href="#">Features</a>
-          <div class="hidden dropdown-menu megamenu-content" role="menu">
-            <h5><a href="/features/">Show All Features</a></h5>
-            <div class="megamenu-columns">
-              <div class="megamenu-column"><a href="/events/"><img src="/images/posts/250x150/munster-gravity.jpg"
-                    alt="Munster Gravity Champs 2019">
-                  <h6 class="mt-2 mb-0 text-center">Events &amp; Races</h6>
-                </a></div>
-              <div class="megamenu-column"><a href="/interviews/"><img
-                    src="/images/posts/250x150/three-rock-components.jpg" alt="Three Rock Components">
-                  <h6 class="mt-2 mb-0 text-center">Interviews</h6>
-                </a></div>
-              <div class="megamenu-column"><a href="/lifestyle/"><img
-                    src="/images/posts/250x150/planning-post-lockdown-trip.jpg"
-                    alt="Planning A Post-Lockdown Mountain Biking Trip: The Only Guide You Need">
-                  <h6 class="mt-2 mb-0 text-center">Lifestyle</h6>
-                </a></div>
-              <div class="megamenu-column"><a href="/trails/"><img
-                    src="/images/posts/250x150/bikes-through-the-ages.jpg" alt="My Mountain Bike Ownership Journey">
-                  <h6 class="mt-2 mb-0 text-center">Trails</h6>
-                </a></div>
-              <div class="megamenu-column"><a href="/videos/"><img
-                    src="/images/posts/250x150/mucoff-rainproof-essentials.jpg" alt="Muc-Off Rainproof Essentials Case">
-                  <h6 class="mt-2 mb-0 text-center">Videos</h6>
-                </a></div>
-            </div>
-          </div>
-        </li>
-        <li class="nav__item"><a class="nav__link" href="/fitness/">Fitness &amp; Nutrition</a></li>
-        <li class="nav__item"><a class="nav__link" href="/reviews/">Gear Reviews</a></li>
-        <li class="nav__item"><a class="nav__link" href="/calendar/">Events Calendar</a></li>
-        <li class="nav__item"><a class="nav__link" href="https://shop.spreadshirt.ie/emerald-mtb/"
-            target="_blank">Shop</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
+---
+import { getCollectionDetails } from '../routes/api/get-collection-details';
+import { collectionUrl } from '../routes/api/utils/makeUrl.js';
+import navigation from '../data/navigation.json';
 
+---
 <div class="hidden h-full lg:flex">
   <!-- Flyout menus -->
   <div class="px-4 bottom-0 inset-x-0">
     <div class="h-full flex justify-center space-x-8">
-      <div class="flex">
-        <div class="relative flex">
-          <!-- Item active: "text-indigo-600", Item inactive: "text-gray-700 hover:text-gray-800" -->
-          <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium" aria-expanded="false">
-            Women
-            <!-- Open: "bg-indigo-600", Closed: "" -->
-            <span class="absolute z-30 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200" aria-hidden="true"></span>
-          </button>
-        </div>
+      { navigation.items.map( menuitem => {
+        if(menuitem.items) {
+          return (
+            <div class="flex">
+              <div class="relative flex">
+                <!-- Item active: "text-indigo-600", Item inactive: "text-gray-700 hover:text-gray-800" -->
+                <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium" aria-expanded="false">
+                  { menuitem.label }
+                  <!-- Open: "bg-indigo-600", Closed: "" -->
+                  <span class="absolute z-30 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200" aria-hidden="true"></span>
+                </button>
+              </div>
 
-        <!--
-          'Women' flyout menu, show/hide based on flyout menu state.
+              <!--
+                'Women' flyout menu, show/hide based on flyout menu state.
 
-          Entering: "transition ease-out duration-200"
-            From: "opacity-0"
-            To: "opacity-100"
-          Leaving: "transition ease-in duration-150"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
-        <div class="absolute z-20 top-full inset-x-0 bg-white text-sm text-gray-500 hidden">
-          <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-          <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
-          <!-- Fake border when menu is open -->
-          <div class="absolute inset-0 top-0 h-px max-w-7xl mx-auto px-8" aria-hidden="true">
-            <!-- Open: "bg-gray-200", Closed: "bg-transparent" -->
-            <div class="bg-transparent w-full h-px transition-colors ease-out duration-200"></div>
-          </div>
-
-          <div class="relative">
-            <div class="max-w-7xl mx-auto px-8">
-              <div class="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg" alt="Models sitting back to back, wearing Basic Tee in black and bone." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    New Arrivals
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
+                Entering: "transition ease-out duration-200"
+                  From: "opacity-0"
+                  To: "opacity-100"
+                Leaving: "transition ease-in duration-150"
+                  From: "opacity-100"
+                  To: "opacity-0"
+              -->
+              <div class="absolute z-20 top-full inset-x-0 bg-white text-sm text-gray-500 hidden">
+                <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
+                <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
+                <!-- Fake border when menu is open -->
+                <div class="absolute inset-0 top-0 h-px max-w-7xl mx-auto px-8" aria-hidden="true">
+                  <!-- Open: "bg-gray-200", Closed: "bg-transparent" -->
+                  <div class="bg-transparent w-full h-px transition-colors ease-out duration-200"></div>
                 </div>
 
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg" alt="Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Basic Tees
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
+                <div class="relative">
+                  <div class="max-w-7xl mx-auto px-8">
+                    <div class="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
+                      { menuitem.items.map( async item => {
+                        let navitem = [];
+                        if(item?.collection) {
+                          const collection = await getCollectionDetails(item.collection);
+                          console.log({collection});
 
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg" alt="Model wearing minimalist watch with black wristband and white watch face." class="object-center object-cover">
+                          navitem = {
+                            "label": collection.title,
+                            "url": collectionUrl(collection.handle),
+                            "image": collection.image.src
+                          };
+                        } else {
+                          navitem = item;
+                        }
+                        return (
+                          <div class="group relative">
+                            <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
+                              { navitem?.image && (
+                                <img src={ navitem.image } alt={ navitem?.label ?? 'image' } class="object-center object-cover">
+                              )}
+                            </div>
+                            <a href={ navitem?.url ?? '#' } class="mt-4 block font-medium text-gray-900">
+                              <span class="absolute z-10 inset-0" aria-hidden="true"></span>
+                              { navitem?.label ?? 'Menu item' }
+                            </a>
+                            <p aria-hidden="true" class="mt-1">Shop now</p>
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Accessories
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
-
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg" alt="Model opening tan leather long wallet with credit card pockets and cash pouch." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Carry
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex">
-        <div class="relative flex">
-          <!-- Item active: "text-indigo-600", Item inactive: "text-gray-700 hover:text-gray-800" -->
-          <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium" aria-expanded="false">
-            Men
-            <!-- Open: "bg-indigo-600", Closed: "" -->
-            <span class="absolute z-30 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <!--
-          'Women' flyout menu, show/hide based on flyout menu state.
-
-          Entering: "transition ease-out duration-200"
-            From: "opacity-0"
-            To: "opacity-100"
-          Leaving: "transition ease-in duration-150"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
-        <div class="absolute z-20 top-full inset-x-0 bg-white text-sm text-gray-500 hidden">
-          <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-          <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
-          <!-- Fake border when menu is open -->
-          <div class="absolute inset-0 top-0 h-px max-w-7xl mx-auto px-8" aria-hidden="true">
-            <!-- Open: "bg-gray-200", Closed: "bg-transparent" -->
-            <div class="bg-transparent w-full h-px transition-colors ease-out duration-200"></div>
-          </div>
-
-          <div class="relative">
-            <div class="max-w-7xl mx-auto px-8">
-              <div class="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg" alt="Hats and sweaters on wood shelves next to various colors of t-shirts on hangers." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    New Arrivals
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
-
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg" alt="Model wearing light heather gray t-shirt." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Basic Tees
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
-
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg" alt="Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Accessories
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
-
-                <div class="group relative">
-                  <div class="aspect-w-1 aspect-h-1 rounded-md bg-gray-100 overflow-hidden group-hover:opacity-75">
-                    <img src="https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg" alt="Model putting folded cash into slim card holder olive leather wallet with hand stitching." class="object-center object-cover">
-                  </div>
-                  <a href="#" class="mt-4 block font-medium text-gray-900">
-                    <span class="absolute z-10 inset-0" aria-hidden="true"></span>
-                    Carry
-                  </a>
-                  <p aria-hidden="true" class="mt-1">Shop now</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Company</a>
-
-      <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Stores</a>
+            </div>)
+        }
+        else {
+          return (
+            <a href={menuitem.url} class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{menuitem.label}</a>
+          )
+        }
+      })}
     </div>
   </div>
 </div>
+
+<script>
+// Handlers for mega menus
+// 'button' on click, open associated menu and close any other open menus
+// on mouse out, with delay (hover intent) close associated menu
+</script>

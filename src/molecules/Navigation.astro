@@ -8,13 +8,13 @@ import navigation from '../data/navigation.json';
   <!-- Flyout menus -->
   <div class="px-4 bottom-0 inset-x-0">
     <div class="h-full flex justify-center space-x-8">
-      { navigation.items.map( menuitem => {
+      { navigation.items.map( (menuitem, index) => {
         if(menuitem.items) {
           return (
             <div class="flex">
               <div class="relative flex">
                 <!-- Item active: "text-indigo-600", Item inactive: "text-gray-700 hover:text-gray-800" -->
-                <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium" aria-expanded="false">
+                <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium jsMenuButton" aria-expanded="false" data-menu=`menu-${index}`>
                   { menuitem.label }
                   <!-- Open: "bg-indigo-600", Closed: "" -->
                   <span class="absolute z-30 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200" aria-hidden="true"></span>
@@ -31,7 +31,7 @@ import navigation from '../data/navigation.json';
                   From: "opacity-100"
                   To: "opacity-0"
               -->
-              <div class="absolute z-20 top-full inset-x-0 bg-white text-sm text-gray-500 hidden">
+              <div class="absolute z-20 top-full inset-x-0 bg-white text-sm text-gray-500 hidden jsMenu" id=`menu-${index}`>
                 <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
                 <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
                 <!-- Fake border when menu is open -->
@@ -92,4 +92,27 @@ import navigation from '../data/navigation.json';
 // Handlers for mega menus
 // 'button' on click, open associated menu and close any other open menus
 // on mouse out, with delay (hover intent) close associated menu
+const buttons = document.querySelectorAll('.jsMenuButton');
+buttons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    Array.from(document.querySelectorAll('.jsMenu:not(.hidden)')).forEach( (menu) => menu.classList.add('hidden'));
+    document.querySelector(`#${event.currentTarget.dataset.menu}`).classList.remove('hidden');
+  });
+});
+
+const menus = document.querySelectorAll('.jsMenu');
+menus.forEach( (menu) => {
+  let timeout = false;
+  menu.addEventListener('mouseout', (event) => {
+    timeout = setTimeout(() => {
+      menu.classList.add('hidden');
+    }, 500);
+  });
+
+  menu.addEventListener('mouseover', (event) => {
+    if(timeout !== false) {
+      clearTimeout(timeout);
+    }
+  })
+})
 </script>

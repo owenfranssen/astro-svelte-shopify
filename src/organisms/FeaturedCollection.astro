@@ -9,8 +9,6 @@ const { collection: collectionHandle, limit, title } = Astro.props as Props;
 
 const collection = await getProductsInCollection(collectionHandle, +limit);
 
-console.log(limit, collection.products.edges.length);
-
 ---
 <section>
   <div class="bg-white">
@@ -57,7 +55,7 @@ console.log(limit, collection.products.edges.length);
     {
       loop: true,
       created: () => {
-        console.log('created')
+        //console.log('created')
       },
     },
     [

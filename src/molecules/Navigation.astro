@@ -47,7 +47,6 @@ import navigation from '../data/navigation.json';
                         let navitem = [];
                         if(item?.collection) {
                           const collection = await getCollectionDetails(item.collection);
-                          console.log({collection});
 
                           navitem = {
                             "label": collection.title,

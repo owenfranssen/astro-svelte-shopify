@@ -23,6 +23,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "keen-slider": "^6.8.5",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
@@ -90,8 +91,5 @@
     "bracketSpacing": false,
     "tabWidth": 2,
     "useTabs": true
-  },
-  "dependencies": {
-    "keen-slider": "^6.8.5"
   }
 }

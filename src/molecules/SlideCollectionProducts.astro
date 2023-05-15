@@ -20,7 +20,8 @@ if(content?.collection) {
       <div>
         <h2 id="sale-heading" class:list={["text-4xl font-extrabold tracking-tight md:text-5xl", content?.text_colour ?? 'text-white']}>
           { content.title }
-          { content?.subtitle && (<br>{ content.subtitle } )}
+          { content?.subtitle && <br> &&  content.subtitle }
+
         </h2>
         { content?.button_text && (<div class="mt-6 text-base">
           <a href={ content?.button_link ?? content?.collection } class={["font-semibold", content?.text_colour ?? 'text-white']}>{ content.button_text }<span aria-hidden="true"> &rarr;</span></a>

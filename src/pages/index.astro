@@ -1,11 +1,11 @@
 ---
 import Layout from '../templates/Layout.astro';
 
-import Banner from '../organisms/Banner.astro';
+// import Banner from '../organisms/Banner.astro';
 import FeaturedCollection from '../organisms/FeaturedCollection.astro';
 import Collections from '../organisms/Collections.astro';
 //import LogoCloud from '../organisms/LogoCloud.astro';
-import Instagram from '../organisms/Instagram.svelte';
+// import Instagram from '../organisms/Instagram.svelte';
 import Slideshow from '../organisms/Slideshow.astro';
 ---
 <Layout header="index" title="Welcome to Astro.">
@@ -15,15 +15,6 @@ import Slideshow from '../organisms/Slideshow.astro';
     <FeaturedCollection title="Popular products" collection="popular" limit="12" />
 
     <Collections title="Shop by Category" collections={['coffee', 'apparel', 'tools']} />
-
-		<!--
-    <LogoCloud brands={['united-by-blue', 'ursa-major', 'snow-peak']} />
-		-->
-
-    {/*
-    <!-- issue with instagram token/connection -->
-    <Instagram title="Our Instagram" client:load limit="4" />
-    */}
 
 	</main>
 </Layout>

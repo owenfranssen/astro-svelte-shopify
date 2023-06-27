@@ -12,7 +12,7 @@ import { getProductDetails } from '../../routes/api/get-product-details';
 
 export async function getStaticPaths({paginate}) {
 	const result = await getAllProducts();
-	const products = result.products.edges;
+	const products = result?.products.edges;
 	return await Promise.all( products.map( async (p) => {
     const product = await getProductDetails(p.node.handle);
 		return {
@@ -45,7 +45,7 @@ const getFeaturedProducts = async (product) => {
 
   if(product.collections.edges.length > 0) {
     const products =  await getProductsInCollection(product.collections.edges[0].node.handle, 6);
-    return await products.products.edges;
+    return await products?.products.edges;
   }
   return [];
 }

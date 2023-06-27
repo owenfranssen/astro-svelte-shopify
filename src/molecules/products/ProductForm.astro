@@ -70,7 +70,7 @@ const formId = product.id;
 				class="form__dropdown"
 				id="quantity-0"
 				form={formId}>
-			{ [...Array(product.totalInventory)].map((i, index) => <option value={index+1}>{index+1}</option>)}
+			{ Array.from(product.totalInventory).map((i, index) => <option value={index+1}>{index+1}</option>)}
 		</select>
 	</div>
 </form>

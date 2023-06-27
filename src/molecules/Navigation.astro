@@ -13,10 +13,10 @@ import navigation from '../data/navigation.json';
           return (
             <div class="flex">
               <div class="relative flex">
-                <!-- Item active: "text-indigo-600", Item inactive: "text-gray-700 hover:text-gray-800" -->
+                <!-- Item active: "text-primary", Item inactive: "text-gray-700 hover:text-gray-800" -->
                 <button type="button" class="text-gray-700 hover:text-gray-800 relative flex items-center justify-center transition-colors ease-out duration-200 text-sm font-medium jsMenuButton" aria-expanded="false" data-menu=`menu-${index}`>
                   { menuitem.label }
-                  <!-- Open: "bg-indigo-600", Closed: "" -->
+                  <!-- Open: "bg-primary", Closed: "" -->
                   <span class="absolute z-30 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200" aria-hidden="true"></span>
                 </button>
               </div>
@@ -45,7 +45,7 @@ import navigation from '../data/navigation.json';
                     <div class="grid grid-cols-4 gap-y-10 gap-x-8 py-16">
                       { menuitem.items.map( async item => {
                         let navitem = [];
-                        if(item?.collection) {
+                        if(0 && item?.collection) {
                           const collection = await getCollectionDetails(item.collection);
 
                           navitem = {

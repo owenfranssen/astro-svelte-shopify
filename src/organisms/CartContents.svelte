@@ -70,7 +70,7 @@ const removeItem = async (event) => {
                   <p class="text-gray-500">Qty {item.quantity}</p>
 
                   <div class="flex">
-                    <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500" data-line-id={item.id} on:click={removeItem}>Remove</button>
+                    <button type="button" class="font-medium text-primary hover:text-indigo-500" data-line-id={item.id} on:click={removeItem}>Remove</button>
                   </div>
                 </div>
               </div>

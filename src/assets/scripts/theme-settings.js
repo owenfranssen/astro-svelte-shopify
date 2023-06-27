@@ -1,16 +1,3 @@
-// Theme.routes = {
-// 	cart_add: "{{ routes.cart_add_url }}",
-// 	cart_change: '{{ routes.cart_change_url }}',
-// 	cart_update: '{{ routes.cart_update_url }}',
-// 	predictive_search_url: '{{ routes.predictive_search_url }}'
-// };
-
-// Theme.settings = {
-// 	cart_action: "{{ settings.cart_action }}",
-// 	cart_message: "{{ settings.cart_message }}",
-// 	display_special_instructions: "{{ settings.display_special_instructions }}",
-// };
-
 const Theme = {
 	Settings: {
 		locale: {

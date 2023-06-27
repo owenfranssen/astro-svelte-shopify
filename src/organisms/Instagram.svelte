@@ -21,7 +21,7 @@ onMount( async () => {
     <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div class="md:flex md:items-center md:justify-between">
         <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">{ title }</h2>
-        <a href="https://instagram.com/{username}" class="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block">Follow us<span aria-hidden="true"> &rarr;</span></a>
+        <a href="https://instagram.com/{username}" class="hidden text-sm font-medium text-primary hover:text-indigo-500 md:block">Follow us<span aria-hidden="true"> &rarr;</span></a>
       </div>
 
       <div class="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
@@ -43,7 +43,7 @@ onMount( async () => {
       </div>
 
       <div class="mt-8 text-sm md:hidden">
-        <a href="https://instagram.com/{username}" class="font-medium text-indigo-600 hover:text-indigo-500">Follow us<span aria-hidden="true"> &rarr;</span></a>
+        <a href="https://instagram.com/{username}" class="font-medium text-primary hover:text-indigo-500">Follow us<span aria-hidden="true"> &rarr;</span></a>
       </div>
     </div>
   </div>

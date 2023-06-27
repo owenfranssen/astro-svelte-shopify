@@ -15,11 +15,11 @@ const collection = await getProductsInCollection(collectionHandle, +limit);
     <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div class="md:flex md:items-center md:justify-between">
         <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">{ title }</h2>
-        <a href={collectionUrl(collectionHandle)} class="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block">More { title.toLowerCase() }<span aria-hidden="true"> &rarr;</span></a>
+        <a href={collectionUrl(collectionHandle)} class="hidden text-sm font-medium text-primary hover:text-indigo-500 md:block">More { title.toLowerCase() }<span aria-hidden="true"> &rarr;</span></a>
       </div>
 
       <div class="keen-slider mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-        { collection.products.edges.map( product => {
+        { collection?.products.edges.map( product => {
           product = product.node;
           return <div class="group relative">
             <div class="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
@@ -42,7 +42,7 @@ const collection = await getProductsInCollection(collectionHandle, +limit);
       </div>
 
       <div class="mt-8 text-sm md:hidden">
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">More { title.toLowerCase() }<span aria-hidden="true"> &rarr;</span></a>
+        <a href="#" class="font-medium text-primary hover:text-indigo-500">More { title.toLowerCase() }<span aria-hidden="true"> &rarr;</span></a>
       </div>
     </div>
   </div>

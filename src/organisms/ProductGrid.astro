@@ -18,7 +18,7 @@ const { title, products, productHandle } = Astro.props;
   <div class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-baseline sm:justify-between">
       <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">{ title || "Our Favorites" }</h2>
-      <a href="#" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">Browse all {title}<span aria-hidden="true"> &rarr;</span></a>
+      <a href="#" class="hidden text-sm font-semibold text-primary hover:text-indigo-500 sm:block">Browse all {title}<span aria-hidden="true"> &rarr;</span></a>
     </div>
 
     <div class="mt-6">
@@ -29,7 +29,7 @@ const { title, products, productHandle } = Astro.props;
     </div>
 
     <div class="mt-6 sm:hidden">
-      <a href="#" class="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">Browse all favorites<span aria-hidden="true"> &rarr;</span></a>
+      <a href="#" class="block text-sm font-semibold text-primary hover:text-indigo-500">Browse all favorites<span aria-hidden="true"> &rarr;</span></a>
     </div>
   </div>
 </div>

@@ -38,7 +38,7 @@
 
   {#if type === "cart"}
     <div class="flex border-l border-gray-200">
-      <button type="button" class="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-drawer-control="mini-cart">Open cart</button>
+      <button type="button" class="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-primary hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-drawer-control="mini-cart">Open cart</button>
     </div>
   {/if}
 </div>

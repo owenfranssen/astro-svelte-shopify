@@ -12,7 +12,7 @@
       "button_link": "/collections/apparel/"
     },
     {
-      "active": true,
+      "active": false,
       "type": "collectionproducts",
       "background_colour": "bg-gray-200",
       "text_colour": "text-gray-800",

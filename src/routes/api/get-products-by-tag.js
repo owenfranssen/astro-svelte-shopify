@@ -63,6 +63,6 @@ export const getProductsByTag = async (query, limit = 10, after = null) => {
 		products.set(shopifyResponse.products);
 		return shopifyResponse.products;
 	} catch (error) {
-		console.log('getProductsInCollection error: ', error);
+		console.log('getProductsByTag error: ', error);
 	}
 };

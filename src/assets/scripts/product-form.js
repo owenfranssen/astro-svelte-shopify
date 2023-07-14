@@ -146,6 +146,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 				);
 				this.toggleQuantitySelector(true);
 			} else {
+				console.log(this.currentVariant);
 				this.toggleAddtocart(
 					!this.currentVariant.node.availableForSale,
 					!this.currentVariant.node.availableForSale
@@ -359,7 +360,7 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 			);
 			quantityInput.disabled = disabled;
 			if (!disabled) {
-				const max = this.currentVariant.node.quantityAvailable ?? 0;
+				const max = 10;
 				quantityInput.setAttribute('max', max);
 				if (max < 1) {
 					quantityInput.disabled = true;

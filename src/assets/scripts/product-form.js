@@ -146,7 +146,6 @@ if (!Object.prototype.hasOwnProperty.call(Theme, 'jsProductForm')) {
 				);
 				this.toggleQuantitySelector(true);
 			} else {
-				console.log(this.currentVariant);
 				this.toggleAddtocart(
 					!this.currentVariant.node.availableForSale,
 					!this.currentVariant.node.availableForSale

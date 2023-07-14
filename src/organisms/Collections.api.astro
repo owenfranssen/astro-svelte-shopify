@@ -1,18 +1,14 @@
 ---
-import { getCollectionDetails } from '../routes/api/get-collection-details.json';
+import { getCollectionDetails } from '../routes/api/get-collection-details';
 import { collectionUrl } from '../routes/api/utils/makeUrl.js';
 import Image from '../atoms/Image.astro';
 
 const { collections: collectionHandles, title } = Astro.props as Props;
 let collections = [];
-collectionHandles.map( (handle) => {
-	const collection = getCollectionDetails(handle);
-	if (collection !== false) {
-		collections.push(collection);
-	}
-} );
-
-console.log({collections});
+await Promise.all( collectionHandles.map( async (handle) => {
+	const collection = await getCollectionDetails(handle);
+	collections.push(await collection);
+} ));
 ---
 <section aria-labelledby="category-heading" class="bg-gray-50">
   <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">

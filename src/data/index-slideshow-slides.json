@@ -12,15 +12,15 @@
       "button_link": "/collections/apparel/"
     },
     {
-      "active": false,
+      "active": true,
       "type": "collectionproducts",
       "background_colour": "bg-gray-200",
       "text_colour": "text-gray-800",
-      "title": "Outdoor wearables",
+      "title": "T-shirts",
       "subtitle": "New range",
       "button_text": "Shop now",
-      "button_link": "/collections/apparel/",
-      "collection": "apparel",
+      "button_link": "/collections/tshirts/",
+      "collection": "tshirts",
       "products": []
     }
   ]

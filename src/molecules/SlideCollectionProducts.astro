@@ -1,5 +1,5 @@
 ---
-import { getProductsInCollection } from '../routes/api/get-products-by-tag.js';
+import { getProductsByTag } from '../routes/api/get-products-by-tag.js';
 
 const { content } = Astro.props;
 
@@ -8,8 +8,9 @@ if(content?.products.length) {
   products = content.products;
 }
 if(content?.collection) {
-  const collection = await getProductsInCollection(content.collection, 4);
-  products = collection.products.edges;
+  const query = `tag:'collection:${content.collection}'`,
+		result = await getProductsByTag(query, 4);
+	products = await result.edges;
 }
 
 /* bg-gray-400 text-gray-800 */
@@ -28,8 +29,8 @@ if(content?.collection) {
         </div>) }
       </div>
 
-      {/* TODO: load product images from selected collection, or array of selected products */}
-      { products && (
+      {/* TODO: alternate layout if not enough products */}
+      { products.length >= 4 && (
         <div class="absolute -top-32 left-1/2 transform -translate-x-1/2 sm:top-6 sm:translate-x-0">
           <div class="ml-24 flex space-x-6 min-w-max sm:ml-3 lg:space-x-8">
             <div class="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">

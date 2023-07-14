@@ -7,7 +7,7 @@ import GalleryLayout from '../../organisms/products/details/galleryLayout.astro'
 import ProductGrid from '../../organisms/ProductGrid.astro';
 
 // https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
-import { getProductsInCollection, getAllProducts } from '../../routes/api/get-products';
+import { getAllProducts } from '../../routes/api/get-products';
 import { getProductDetails } from '../../routes/api/get-product-details';
 
 export async function getStaticPaths({paginate}) {
@@ -37,20 +37,20 @@ const getSelectedOrFirstAvaialableVariant = (product) => {
 const selectedOrFirstAvailableVariant = getSelectedOrFirstAvaialableVariant(product);
 
 /* Featured products logic */
-const getFeaturedProducts = async (product) => {
-	// TODO: Check metafields.product.custom.featured_products
-  // if(products.length > 0) {
-  //   return products;
-  // }
+// const getFeaturedProducts = async (product) => {
+// 	// TODO: Check metafields.product.custom.featured_products
+//   // if(products.length > 0) {
+//   //   return products;
+//   // }
 
-  if(product.collections.edges.length > 0) {
-    const products =  await getProductsInCollection(product.collections.edges[0].node.handle, 6);
-    return await products?.products.edges;
-  }
-  return [];
-}
+//   if(product.collections.edges.length > 0) {
+//     const products =  await getProductsInCollection(product.collections.edges[0].node.handle, 6);
+//     return await products?.products.edges;
+//   }
+//   return [];
+// }
 
-const featuredProducts = await getFeaturedProducts(product);
+const featuredProducts = []; //await getFeaturedProducts(product);
 ---
 
 <Layout title={ product.title }>
@@ -62,10 +62,10 @@ const featuredProducts = await getFeaturedProducts(product);
       {product.images.edges.length > 1 && <GalleryLayout product={product} selectedOrFirstAvailableVariant={selectedOrFirstAvailableVariant} />}
 
 			{/* TODO: Should be hydrated - control products from Shopify without needing site rebuild */}
-      <ProductGrid title="Our Favourites" products={featuredProducts} />
+      {/*<ProductGrid title="Our Favourites" products={featuredProducts} />*/}
 
-			{/* TODO: Secondary grid - alternbate style showing Recently Viewed products (based on cookie stored). Also Hydrated, update as products viewed per user */}
-      <ProductGrid title="Recently Viewed" productHandle={productHandle} />
+			{/* TODO: Secondary grid - alternate style showing Recently Viewed products (based on cookie stored). Also Hydrated, update as products viewed per user */}
+      {/*<ProductGrid title="Recently Viewed" productHandle={productHandle} />*/}
 		</div>
 	</main>
 </Layout>

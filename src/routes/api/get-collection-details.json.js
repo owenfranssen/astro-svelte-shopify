@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import json from '../../config/collections.json';
+import json from '../../data/collections.json';
 
 export const collectionDetails = writable([]);
 

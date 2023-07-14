@@ -27,9 +27,9 @@ const { product } = Astro.props
   </div>
   <!-- <p class="mt-1 text-sm italic text-gray-500">Black</p> -->
 	{/* {product.variants.edges.filter(option => option.node.name == 'Colour' || option.node.name == 'Color').length} */}
-	{ product.variants.edges.length > 1 && product.variants.edges.map( (option, index) => {
+	{/* product.variants.edges.length > 1 && product.variants.edges.map( (option, index) => {
     if (option.node.name == 'Colour' || option.node.name == 'Color') {
       return <ColourVariant option={ option.node } optionIndex={index} />
 		}
-	}) }
+	})*/}
 </a>

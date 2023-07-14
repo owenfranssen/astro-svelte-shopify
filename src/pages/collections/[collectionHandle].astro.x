@@ -7,7 +7,7 @@ import ProductCard from '../../molecules/ProductCardPortrait.astro';
 //import { getCollections } from '../../routes/api/get-collections.js';
 import { getProductsInCollection } from '../../routes/api/get-products.js';
 
-import json from '../../config/collections.json';
+import json from '../../data/collections.json';
 //import { getProductsInCollection } from '../../routes/api/get-collection-list.js';
 
 export async function getStaticPaths({paginate}) {

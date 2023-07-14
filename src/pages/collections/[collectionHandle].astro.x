@@ -3,9 +3,12 @@ import Layout from '../../templates/Layout.astro';
 import Filters from '../../molecules/collections/Filters.astro';
 import MobileFilters from '../../molecules/collections/MobileFilters.astro';
 import ImageTextBanner from '../../molecules/ImageTextBanner.astro';
-import ProductCard from '../../molecules/ProductCard.astro';
+import ProductCard from '../../molecules/ProductCardPortrait.astro';
+//import { getCollections } from '../../routes/api/get-collections.js';
+import { getProductsInCollection } from '../../routes/api/get-products.js';
+
 import json from '../../config/collections.json';
-import { getProductsInCollection } from '../../routes/api/get-collection-list.js';
+//import { getProductsInCollection } from '../../routes/api/get-collection-list.js';
 
 export async function getStaticPaths({paginate}) {
 	const collections = json.collections;
@@ -25,16 +28,21 @@ export async function getStaticPaths({paginate}) {
 const { collectionHandle } = Astro.params;
 const { collection } = Astro.props;
 
-/*
-Uses a hard coded json config to define collections and handles
-If the starter plan DOES allow collections, change this to use a GraphQL collections query to use collections defined in Shopify
-*/
+console.log({collection});
+
+
+/**
+ * TODO:
+ * - Pagination
+ * - Lazy load:
+ *     - Show first page, load second pag eon scroll down. if more than 2 pages 'Show more...' button to load page 3, auto load page 4, etc etc
+ */
 ---
 
 <Layout title={ collection.title } description={ collection.description }>
   <MobileFilters />
 
-  <main>
+  <main class="mb-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div class="py-24 text-center">
         <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">{ collection.title }</h1>
@@ -48,12 +56,13 @@ If the starter plan DOES allow collections, change this to use a GraphQL collect
         <h2 id="products-heading" class="sr-only">Products</h2>
 
         <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8">
-          { collection.products.edges.map( product => {
+          { collection?.products.edges.map( product => {
             return <ProductCard product={product.node} />
           }) }
         </div>
       </section>
 
+      {/*
       <ImageTextBanner />
 
       <section aria-labelledby="more-products-heading" class="mt-16 pb-24">
@@ -87,6 +96,7 @@ If the starter plan DOES allow collections, change this to use a GraphQL collect
           <!-- More products... -->
         </div>
       </section>
+      */}
     </div>
   </main>
 </Layout>
